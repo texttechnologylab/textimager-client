@@ -30,7 +30,7 @@ A CLI of TextImager-Client is in development and will be available soon.
 ```java
 TextImagerClient client = new TextImagerClient();
 client.setConfigFile("src/main/resources/services.xml");
-CAS output = client.process("Das ist ein Test. Das ist ein Test.",  new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger", "FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesService", "FastTextDDC3LemmaNoPunctPOSNoFunctionwordsWithCategoriesService", "FastTextDDCMulService"});
+CAS output = client.process("Das ist ein Test. Das ist ein Test.",  new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger"});
 System.out.println(XmlFormatter.getPrettyString(output));
 ```
 1. Instanciate an instance of TextImagerClient

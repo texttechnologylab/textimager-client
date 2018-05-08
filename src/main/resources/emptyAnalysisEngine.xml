@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+	<primitive>false</primitive>
+	<delegateAnalysisEngineSpecifiers>
+	</delegateAnalysisEngineSpecifiers>
+	<flowController key="HucomputeFixedFlowController">
+		<import
+			location="HucomputeFixedFlowController.xml" />
+	</flowController>
+	<analysisEngineMetaData>
+		<name>UIMA demonstration</name>
+		<version>2.0</version>
+		<configurationParameters>
+			<configurationParameter>
+				<name>Flow</name>
+				<description>Specifies the flow. This is an array of strings where
+					each string is either a single Analysis
+					Engine key or a
+					comma-separated list of Analysis Engine keys that can be
+					executed in
+					parallel.
+				</description>
+				<type>String</type>
+				<multiValued>false</multiValued>
+				<mandatory>true</mandatory>
+				<overrides>
+					<parameter>HucomputeFixedFlowController/Flow</parameter>
+				</overrides>
+			</configurationParameter>
+			<configurationParameter>
+				<name>AllowContinueOnFailure</name>
+				<description>Specifies for which AnalysisEngines the Flow should
+					continue when an exception occurs. This
+					parameter takes an array of
+					Strings as its value. Each String is the key of
+					AnalysisEngine for
+					which
+					continuing on failure should be allowed.
+				</description>
+				<type>String</type>
+				<multiValued>true</multiValued>
+				<mandatory>false</mandatory>
+				<overrides>
+					<parameter>HucomputeFixedFlowController/AllowContinueOnFailure
+					</parameter>
+				</overrides>
+			</configurationParameter>
+		</configurationParameters>
+		<configurationParameterSettings>
+			<nameValuePair>
+				<name>Flow</name>
+				<value>
+					<string></string>
+				</value>
+			</nameValuePair>
+			<nameValuePair>
+				<name>AllowContinueOnFailure</name>
+				<value>
+					<array />
+				</value>
+			</nameValuePair>
+		</configurationParameterSettings>
+		<capabilities />
+		<operationalProperties>
+			<modifiesCas>true</modifiesCas>
+			<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+			<outputsNewCASes>false</outputsNewCASes>
+		</operationalProperties>
+	</analysisEngineMetaData>
+	<resourceManagerConfiguration />
+</analysisEngineDescription>

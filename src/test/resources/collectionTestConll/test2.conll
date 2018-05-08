@@ -1,0 +1,5 @@
+1	Das	der	der	PDS	PDS	_	case=nom|number=sg|gender=neut	2	2	SB	SB	_	_
+2	ist	sein	sein	VAFIN	VAFIN	_	number=sg|person=3|tense=pres|mood=ind	0	0	--	--	_	_
+3	ein	ein	ein	ART	ART	_	case=nom|number=sg|gender=masc	4	4	NK	NK	_	_
+4	Test	test	test	NN	NN	_	case=nom|number=sg|gender=masc	2	2	PD	PD	_	_
+5	.	--	--	$.	$.	_	_	4	4	--	--	_	_

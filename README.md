@@ -39,6 +39,7 @@ System.out.println(XmlFormatter.getPrettyString(output));
 4. get [CAS](https://uima.apache.org/downloads/releaseDocs/2.3.0-incubating/docs/api/org/apache/uima/cas/CAS.html) output.
 
 ### TODO
+- [ ] Documentation
 - [ ] Add input/output support for different formats
 - [ ] CLI
 

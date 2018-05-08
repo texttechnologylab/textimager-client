@@ -23,7 +23,7 @@ mvn install
 ### Running
 
 #### CLI API
-A CLI of TextImager-Client will is in development and will be available soon.
+A CLI of TextImager-Client is in development and will be available soon.
 
 #### Java Project
 

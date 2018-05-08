@@ -190,7 +190,7 @@ public class TextImagerClient {
 			deployFile.deleteOnExit();
 
 			deploymentDescription.toXML(deployFile);
-			//deploymentDescription.toXML(System.out);
+			deploymentDescription.toXML(System.out);
 
 			// preparing map for use in deploying services
 			clientCtx.put(UimaAsynchronousEngine.DD2SpringXsltFilePath, ConfigDataholder.getDd2SpringPath());

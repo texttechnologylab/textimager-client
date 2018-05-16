@@ -15,7 +15,7 @@
 
 <flowControllerDescription xmlns="http://uima.apache.org/resourceSpecifier">
 	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-	<implementationName>org.hucompute.textimager.flow.HucomputeFixedFlowController
+	<implementationName>org.hucompute.services.flow.HucomputeFixedFlowController
 	</implementationName>
 	<processingResourceMetaData>
 		<name>Advanced Fixed Flow Controller</name>

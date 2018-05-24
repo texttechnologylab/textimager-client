@@ -23,7 +23,16 @@ mvn install
 ### Running
 
 #### CLI API
-A CLI of TextImager-Client is in development and will be available soon.
+After ```mvn install``` the CLI script will be generated in ```target/textimager-CLI.jar```.
+
+Instructions and help will be printed with:  ```java -jar target/textimager-CLI.jar -h```
+
+Example client call:
+```
+java -jar target/textimager-CLI.jar -I "This is a test." -p "StanfordSegmenter,StanfordPosTagger" -o "test.xmi"
+```
+
+The above example will parse the input document defined in ```-I``` with the pipeline defined in ```-p``` and writes the output as XMI defined in ```-o```
 
 #### Java Project
 
@@ -41,5 +50,5 @@ System.out.println(XmlFormatter.getPrettyString(output));
 ### TODO
 - [ ] Documentation
 - [ ] Add input/output support for different formats
-- [ ] CLI
+- [x] CLI
 

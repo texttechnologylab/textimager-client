@@ -36,7 +36,7 @@ public class TextImagerClientCLI {
 
 		options.addOption(Option.builder("s")
 				.longOpt(SERVICES_FILE_OPTION)
-				.required(true)
+				.required(false)
 				.hasArg(true)
 				.desc("XML file containing the services info.")
 				.build());
@@ -120,9 +120,15 @@ public class TextImagerClientCLI {
 			printHelp(options);
 			System.exit(0);
 		}
-
-		File servicesXmlFile = new File(commandLine.getOptionValue(SERVICES_FILE_OPTION));
-		System.out.println("services file:" + servicesXmlFile.getAbsolutePath());
+		
+		String servicesXmlFile = null;
+		if (commandLine.hasOption(SERVICES_FILE_OPTION)) {
+			servicesXmlFile = new File(commandLine.getOptionValue(SERVICES_FILE_OPTION)).getAbsolutePath();
+			System.out.println("services file:" + servicesXmlFile);
+		} else {
+			servicesXmlFile = TextImagerClientCLI.class.getResource("/services.xml").getFile();
+			System.out.println("using internal services file");
+		}
 		
 		String pipelineArg = commandLine.getOptionValue(PIPELINE_OPTION);
 		String[] pipeline = null;
@@ -202,9 +208,9 @@ public class TextImagerClientCLI {
 		}
 	}
 	
-	private static void processWithText(File servicesXmlFile, String[] pipeline, File outputFile, String inputText) {
+	private static void processWithText(String servicesXmlFilename, String[] pipeline, File outputFile, String inputText) {
 		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile(servicesXmlFile.getAbsolutePath());
+		client.setConfigFile(servicesXmlFilename);
 		try {
 			CAS output = client.process(inputText, pipeline);
 			PrintWriter writer = new PrintWriter(outputFile);

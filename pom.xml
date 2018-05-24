@@ -64,6 +64,11 @@
 	</repositories>
 	
 	<dependencies>
+	<dependency>
+			<groupId>org.hucompute.services</groupId>
+			<artifactId>services-types</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimaj-as-core</artifactId>
@@ -122,11 +127,7 @@
 			<version>1.8.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hucompute.services</groupId>
-			<artifactId>services-types</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		
 		
 		<dependency>
 			<groupId>org.hucompute.services</groupId>

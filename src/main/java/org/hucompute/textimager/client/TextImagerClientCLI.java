@@ -130,16 +130,12 @@ public class TextImagerClientCLI {
 			System.out.println("using internal services file");
 		}
 		
-		String pipelineArg = commandLine.getOptionValue(PIPELINE_OPTION);
-		String[] pipeline = null;
-		try {
-			pipeline = pipelineArg.split(" ", -1);
-		} catch (Exception ex) {
-			System.err.println("error parsing pipeline: " + ex.getMessage());
-			ex.printStackTrace();
+		if (!commandLine.hasOption(PIPELINE_OPTION)) {
+			System.err.println("error getting pipeline argument.");
 			System.exit(1);
 		}
-		System.out.println("pipeline: " + pipelineArg);
+		String pipeline = commandLine.getOptionValue(PIPELINE_OPTION);
+		System.out.println("pipeline: " + pipeline);
 		
 		boolean allowOverwrite = commandLine.hasOption(OUTPUT_OVERWRITE_OPTION);
 		System.out.println("allow overwriting output: " + allowOverwrite);
@@ -208,7 +204,7 @@ public class TextImagerClientCLI {
 		}
 	}
 	
-	private static void processWithText(String servicesXmlFilename, String[] pipeline, File outputFile, String inputText) {
+	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, String inputText) {
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {

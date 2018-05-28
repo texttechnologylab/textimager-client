@@ -68,7 +68,7 @@ public class ConfigDataholder {
 	}
 
 	public ServiceDataholder getService(String groupName,String classname,String language) throws MalformedURLException, SAXException, IOException, ParserConfigurationException, XPathExpressionException,NullPointerException {
-//		try {
+		try {
 			if(classname == null)
 				return getDefaultWebserviceByGroup(groupName,language);
 			Document doc = getPropertiesDoc();
@@ -80,10 +80,10 @@ public class ConfigDataholder {
 			Element node = (Element)  ((NodeList)expr.evaluate(doc, XPathConstants.NODESET)).item(0);
 			ServiceDataholder holder = new ServiceDataholder(node);
 			return holder;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return null;
+		} catch (Exception e) {
+			throw new NullPointerException("could not find service " + classname + " (" + groupName + "): " + e.getMessage());
+		}
+		//return null;
 	}
 	
 

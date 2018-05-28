@@ -24,6 +24,7 @@ public class TextImagerClientCLI {
 	private final static String OUTPUT_OPTION = "output";
 	private final static String OUTPUT_OVERWRITE_OPTION = "output-overwrite";
 	private final static String OUTPUT_PRETTY_OPTION = "output-pretty";
+	private final static String OUTPUT_PRINT_OPTION = "output-print";
 
 	private static Options createOptionsProcessSingle() {
 		final Options options = new Options();
@@ -31,7 +32,7 @@ public class TextImagerClientCLI {
 		options.addOption(Option.builder("h")
 				.longOpt(HELP_OPTION)
 				.required(false)
-				.hasArg(true)
+				.hasArg(false)
 				.desc("Print this help.")
 				.build());
 
@@ -39,6 +40,7 @@ public class TextImagerClientCLI {
 				.longOpt(SERVICES_FILE_OPTION)
 				.required(false)
 				.hasArg(true)
+				.argName("path")
 				.desc("XML file containing the services info.")
 				.build());
 
@@ -46,6 +48,7 @@ public class TextImagerClientCLI {
 				.longOpt(PIPELINE_OPTION)
 				.required(true)
 				.hasArg(true)
+				.argName("annotators")
 				.desc("The annotators, comma separated.")
 				.build());
 
@@ -53,6 +56,7 @@ public class TextImagerClientCLI {
 				.longOpt(INPUT_OPTION)
 				.required(false)
 				.hasArg(true)
+				.argName("path")
 				.desc("Input file or directory to be processed.")
 				.build());
 		
@@ -60,6 +64,7 @@ public class TextImagerClientCLI {
 				.longOpt(INPUT_TEXT_OPTION)
 				.required(false)
 				.hasArg(true)
+				.argName("text")
 				.desc("Input text to be processed.")
 				.build());
 
@@ -67,6 +72,7 @@ public class TextImagerClientCLI {
 				.longOpt(OUTPUT_OPTION)
 				.required(true)
 				.hasArg(true)
+				.argName("path")
 				.desc("Output file or directory.")
 				.build());
 
@@ -81,7 +87,14 @@ public class TextImagerClientCLI {
 				.longOpt(OUTPUT_PRETTY_OPTION)
 				.required(false)
 				.hasArg(false)
-				.desc("Pretty pring output.")
+				.desc("Pretty print output.")
+				.build());
+		
+		options.addOption(Option.builder()
+				.longOpt(OUTPUT_PRINT_OPTION)
+				.required(false)
+				.hasArg(false)
+				.desc("Print output.")
 				.build());
 
 		return options;
@@ -151,80 +164,102 @@ public class TextImagerClientCLI {
 		boolean prettyPrint = commandLine.hasOption(OUTPUT_PRETTY_OPTION);
 		System.out.println("pretty print: " + prettyPrint);
 		
+		boolean printOutput = commandLine.hasOption(OUTPUT_PRINT_OPTION);
+		System.out.println("print output: " + printOutput);
+		
 		if (commandLine.hasOption(INPUT_TEXT_OPTION)) {
+			// 1) input is direct text -> output must be file
 			String inputText = commandLine.getOptionValue(INPUT_TEXT_OPTION);
 			System.out.println("input text: " + inputText);
 			
 			File outputFile = null;
 			try {
 				outputFile = new File(commandLine.getOptionValue(OUTPUT_OPTION));
-				if (outputFile.isDirectory()) {
-					throw new Exception("output can not be a directory.");
-				} else if (outputFile.exists()) {
-					if (allowOverwrite) {
-						System.out.println("overwriting output file :" + outputFile.getAbsolutePath());
-					} else {
-						throw new Exception("output already exists.");
-					}
-				}
-				System.out.println("output file: " + outputFile.getAbsolutePath());
+				checkOutputFile(outputFile, allowOverwrite);
 			} catch (Exception ex) {
 				System.err.println("error getting output: " + ex.getMessage());
 				ex.printStackTrace();
 				System.exit(1);
 			}
 
-			processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, inputText);
+			processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, printOutput, inputText);
 			
-		} else if (commandLine.hasOption(INPUT_OPTION)) {
-			
-			// TODO cleanup, add collection processing
+		} else if (commandLine.hasOption(INPUT_OPTION) && commandLine.hasOption(OUTPUT_OPTION)) {
 			File inputFile = null;
 			File outputFile = null;
 			try {
 				inputFile = new File(commandLine.getOptionValue(INPUT_OPTION));
 				outputFile = new File(commandLine.getOptionValue(OUTPUT_OPTION));
-				if (!inputFile.isDirectory() && !outputFile.isDirectory()) {
-					if (outputFile.exists()) {
-						if (allowOverwrite) {
-							System.out.println("overwriting output file :" + outputFile.getAbsolutePath());
-						} else {
-							throw new Exception("output already exists.");
-						}
-					}
-					System.out.println("output file: " + outputFile.getAbsolutePath());
-
-					System.out.println("input text from file: " + inputFile.getAbsolutePath());
-					String inputText = FileUtils.readAllText(inputFile);
-					
-					processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, inputText);
-				} else {
-					throw new Exception("input or output can not be a directory.");
-				}
 			} catch (Exception ex) {
 				System.err.println("error getting output: " + ex.getMessage());
 				ex.printStackTrace();
 				System.exit(1);
 			}
-
 			
+			if (inputFile.isFile() && outputFile.isFile()) {
+				// 1) input and output is file -> process input to output file
+				try {
+					checkOutputFile(outputFile, allowOverwrite);
+				} catch (Exception ex) {
+					System.err.println("error getting output: " + ex.getMessage());
+					ex.printStackTrace();
+					System.exit(1);
+				}
+
+				System.out.println("input text from file: " + inputFile.getAbsolutePath());
+				String inputText = FileUtils.readAllText(inputFile);
+
+				processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, printOutput, inputText);
+
+			} else if (inputFile.isDirectory() && outputFile.isDirectory()) {
+				// 2) input and output is directory -> process collections
+				System.err.println("not yet implemented.");
+				printHelp(options);
+				System.exit(1);
+
+			} else {
+				System.err.println("input and output must either both be a file or directory.");
+				printHelp(options);
+				System.exit(1);
+			}
 		} else {
-			System.err.println("please specify some input.");
+			System.err.println("please specify some input and output.");
 			printHelp(options);
 			System.exit(1);
 		}
 	}
+
+	private static void checkOutputFile(File outputFile, boolean allowOverwrite) throws Exception {
+		if (outputFile.isDirectory()) {
+			throw new Exception("output can not be a directory.");
+		} else if (outputFile.exists()) {
+			if (allowOverwrite) {
+				System.out.println("overwriting output file :" + outputFile.getAbsolutePath());
+			} else {
+				throw new Exception("output already exists.");
+			}
+		}
+		System.out.println("output file: " + outputFile.getAbsolutePath());
+	}
 	
-	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, String inputText) {
+	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, boolean printOutput, String inputText) {
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			CAS output = client.process(inputText, pipeline);
 			PrintWriter writer = new PrintWriter(outputFile);
 			if (prettyPrint) {
-				writer.print(XmlFormatter.getPrettyString(output));
+				String outputString = XmlFormatter.getPrettyString(output);
+				writer.print(outputString);
+				if (printOutput) {
+					System.out.println(outputString);
+				}
 			} else {
-				writer.print(XmlFormatter.getString(output));
+				String outputString = XmlFormatter.getString(output);
+				writer.print(outputString);
+				if (printOutput) {
+					System.out.println(outputString);
+				}
 			}
 			writer.flush();
 			writer.close();

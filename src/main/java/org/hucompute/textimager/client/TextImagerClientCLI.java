@@ -23,6 +23,7 @@ public class TextImagerClientCLI {
 	private final static String INPUT_TEXT_OPTION = "input-text";
 	private final static String OUTPUT_OPTION = "output";
 	private final static String OUTPUT_OVERWRITE_OPTION = "output-overwrite";
+	private final static String OUTPUT_PRETTY_OPTION = "output-pretty";
 
 	private static Options createOptionsProcessSingle() {
 		final Options options = new Options();
@@ -74,6 +75,13 @@ public class TextImagerClientCLI {
 				.required(false)
 				.hasArg(false)
 				.desc("Override output file (does not apply to collection).")
+				.build());
+
+		options.addOption(Option.builder()
+				.longOpt(OUTPUT_PRETTY_OPTION)
+				.required(false)
+				.hasArg(false)
+				.desc("Pretty pring output.")
 				.build());
 
 		return options;
@@ -140,6 +148,9 @@ public class TextImagerClientCLI {
 		boolean allowOverwrite = commandLine.hasOption(OUTPUT_OVERWRITE_OPTION);
 		System.out.println("allow overwriting output: " + allowOverwrite);
 		
+		boolean prettyPrint = commandLine.hasOption(OUTPUT_PRETTY_OPTION);
+		System.out.println("pretty print: " + prettyPrint);
+		
 		if (commandLine.hasOption(INPUT_TEXT_OPTION)) {
 			String inputText = commandLine.getOptionValue(INPUT_TEXT_OPTION);
 			System.out.println("input text: " + inputText);
@@ -163,7 +174,7 @@ public class TextImagerClientCLI {
 				System.exit(1);
 			}
 
-			processWithText(servicesXmlFile, pipeline, outputFile, inputText);
+			processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, inputText);
 			
 		} else if (commandLine.hasOption(INPUT_OPTION)) {
 			
@@ -186,7 +197,7 @@ public class TextImagerClientCLI {
 					System.out.println("input text from file: " + inputFile.getAbsolutePath());
 					String inputText = FileUtils.readAllText(inputFile);
 					
-					processWithText(servicesXmlFile, pipeline, outputFile, inputText);
+					processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, inputText);
 				} else {
 					throw new Exception("input or output can not be a directory.");
 				}
@@ -204,13 +215,17 @@ public class TextImagerClientCLI {
 		}
 	}
 	
-	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, String inputText) {
+	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, String inputText) {
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			CAS output = client.process(inputText, pipeline);
 			PrintWriter writer = new PrintWriter(outputFile);
-			writer.print(XmlFormatter.getPrettyString(output));
+			if (prettyPrint) {
+				writer.print(XmlFormatter.getPrettyString(output));
+			} else {
+				writer.print(XmlFormatter.getString(output));
+			}
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {

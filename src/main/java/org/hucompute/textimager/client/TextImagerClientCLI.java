@@ -12,7 +12,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.uima.cas.CAS;
 import org.hucompute.textimager.util.XmlFormatter;
-import org.parboiled.common.FileUtils;
 
 public class TextImagerClientCLI {
 
@@ -170,7 +169,6 @@ public class TextImagerClientCLI {
 		if (commandLine.hasOption(INPUT_TEXT_OPTION)) {
 			// 1) input is direct text -> output must be file
 			String inputText = commandLine.getOptionValue(INPUT_TEXT_OPTION);
-			System.out.println("input text: " + inputText);
 			
 			File outputFile = null;
 			try {
@@ -196,7 +194,7 @@ public class TextImagerClientCLI {
 				System.exit(1);
 			}
 			
-			if (inputFile.isFile() && outputFile.isFile()) {
+			if (!inputFile.isDirectory() && !outputFile.isDirectory()) {
 				// 1) input and output is file -> process input to output file
 				try {
 					checkOutputFile(outputFile, allowOverwrite);
@@ -206,10 +204,7 @@ public class TextImagerClientCLI {
 					System.exit(1);
 				}
 
-				System.out.println("input text from file: " + inputFile.getAbsolutePath());
-				String inputText = FileUtils.readAllText(inputFile);
-
-				processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, printOutput, inputText);
+				processWithFile(servicesXmlFile, pipeline, outputFile, prettyPrint, printOutput, inputFile);
 
 			} else if (inputFile.isDirectory() && outputFile.isDirectory()) {
 				// 2) input and output is directory -> process collections
@@ -241,8 +236,40 @@ public class TextImagerClientCLI {
 		}
 		System.out.println("output file: " + outputFile.getAbsolutePath());
 	}
+
+	private static void processWithFile(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, boolean printOutput, File inputFile) {
+		System.out.println("processing input file: " + inputFile.getAbsolutePath());
+		
+		TextImagerClient client = new TextImagerClient();
+		client.setConfigFile(servicesXmlFilename);
+		try {
+			CAS output = client.process(inputFile, pipeline);
+			PrintWriter writer = new PrintWriter(outputFile);
+			if (prettyPrint) {
+				String outputString = XmlFormatter.getPrettyString(output);
+				writer.print(outputString);
+				if (printOutput) {
+					System.out.println(outputString);
+				}
+			} else {
+				String outputString = XmlFormatter.getString(output);
+				writer.print(outputString);
+				if (printOutput) {
+					System.out.println(outputString);
+				}
+			}
+			writer.flush();
+			writer.close();
+		} catch (Exception e) {
+			System.err.println("error processing: " + e.getMessage());
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 	
 	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, boolean printOutput, String inputText) {
+		System.out.println("processing input text.");
+		
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {

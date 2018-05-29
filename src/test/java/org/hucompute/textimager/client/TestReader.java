@@ -11,11 +11,12 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.hucompute.textimager.util.XmlFormatter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TestReader extends JCasCollectionReader_ImplBase {
-	
+
 	/**
 	 * Name of configuration parameter that contains the character encoding used by the input files.
 	 */
@@ -30,10 +31,10 @@ public class TestReader extends JCasCollectionReader_ImplBase {
 	@ConfigurationParameter(name = PARAM_MY_FANCY_PARAM_2, mandatory = true, defaultValue = "2")
 	private int my_fancy_param_int;
 
-	
+
 	private int counter = 0;
-	private int total = 1;
-	
+	private int total = 2;
+
 	@Override
 	public void initialize(UimaContext context) throws ResourceInitializationException {
 		super.initialize(context);
@@ -52,7 +53,6 @@ public class TestReader extends JCasCollectionReader_ImplBase {
 
 	@Override
 	public void getNext(JCas jCas) throws IOException, CollectionException {
-		if (counter < total) {
 			counter++;
 			//cas.reset();
 
@@ -62,11 +62,10 @@ public class TestReader extends JCasCollectionReader_ImplBase {
 			docMetaData.setDocumentTitle(Integer.toString(counter));
 			docMetaData.setDocumentUri(Integer.toString(counter));
 			docMetaData.setDocumentId(Integer.toString(counter));
-			docMetaData.setLanguage("de");
+			//		docMetaData.setLanguage("de");
 
 			jCas.setDocumentLanguage("de");
 			jCas.setDocumentText(lText);
-		}				
 	}
-	
+
 };

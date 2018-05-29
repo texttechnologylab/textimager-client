@@ -1,13 +1,26 @@
 package org.hucompute.textimager.client;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -16,6 +29,7 @@ import org.apache.uima.aae.client.UimaASProcessStatus;
 import org.apache.uima.aae.client.UimaAsBaseCallbackListener;
 import org.apache.uima.aae.client.UimaAsynchronousEngine;
 import org.apache.uima.adapter.jms.client.BaseUIMAAsynchronousEngine_impl;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.EntityProcessStatus;
@@ -28,7 +42,11 @@ import org.hucompute.textimager.client.TextImagerOptions.IOFormat;
 import org.hucompute.textimager.client.TextImagerOptions.Language;
 import org.hucompute.textimager.config.ConfigDataholder;
 import org.hucompute.textimager.config.ServiceDataholder;
-import org.hucompute.textimager.util.XmlFormatter;
+import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsAnalysisEngineDescription;
@@ -46,16 +64,6 @@ import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsDeploymentDescription;
 public class TextImagerClient {
 	final static Logger logger = Logger.getLogger(TextImagerClient.class);
 
-	public static void main(String...args) throws Exception{
-		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile("src/main/resources/services.xml");
-		CAS output3 = client.process("Das ist ein Test vom 18. August 1990.",  "ParagraphSplitter,LanguageToolSegmenter,MarMoTTagger,MarMoTLemma,HeidelTime,MateParser,MateMorphTagger");
-		//System.out.println(XmlFormatter.getPrettyString(output3));
-//		List<CAS> output = client.processCollection(new File("/home/ahemati/can_be_deleted/testfiles"), IOFormat.TXT, "de", new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"}, 10);
-//		System.out.println(output.size());
-//		System.out.println(XmlFormatter.getPrettyString(output.get(10)));
-	}
-	
 	private String serverUrl = "tcp://alba.hucompute.org:61617";
 	private String configFile;
 	private int timeout = 100000;
@@ -67,7 +75,7 @@ public class TextImagerClient {
 	public void setConfigFile(String configFile){
 		this.configFile = configFile;
 	}
-	
+
 	/**
 	 * Process CAS with defined annotatores in a pipeline. 
 	 * @param inputCAS 
@@ -149,16 +157,20 @@ public class TextImagerClient {
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options) throws Exception{
 		return getUimaAsEngine(options, 1);
 	}
-	
+
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize) throws Exception{
 		return getUimaAsEngine(options, casPoolSize,null,null);
 	}
 
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize,CollectionReader collectionReader,UimaAsBaseCallbackListener listener) throws Exception{
+		return getUimaAsEngine(options, casPoolSize,collectionReader,listener,null);
+	}
+
+	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize,CollectionReader collectionReader,UimaAsBaseCallbackListener listener,AnalysisEngineDescription casConsumer) throws Exception{
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = new BaseUIMAAsynchronousEngine_impl();
 		Pipeline pipelineAPI = new Pipeline();
 		HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline = pipelineAPI.constructPipeline(options,null, configFile);
-		
+
 		Map<String, Object> clientCtx = new HashMap<String, Object>();
 
 		//Falls die Pipeline nur aus einem Annotator besteht
@@ -195,7 +207,11 @@ public class TextImagerClient {
 			// preparing map for use in deploying services
 			clientCtx.put(UimaAsynchronousEngine.DD2SpringXsltFilePath, ConfigDataholder.getDd2SpringPath());
 			clientCtx.put(UimaAsynchronousEngine.SaxonClasspath, "file:" + ConfigDataholder.getSaxonPath());
-			
+			if(casConsumer != null){
+				addAnalysisEngine(deployFile,casConsumer);
+			}
+			System.out.println(deployFile);
+
 			// creating aggregate analysis engine
 			uimaAsEngine.deploy(deployFile.getAbsolutePath(), clientCtx);
 			//System.out.println(FileUtils.readFileToString(deployFile.getAbsoluteFile(),"UTF-8"));
@@ -216,13 +232,75 @@ public class TextImagerClient {
 		if(listener != null){
 			uimaAsEngine.addStatusCallbackListener(listener);
 		}
-		
+
 		// Initialize the client
 		uimaAsEngine.initialize(clientCtx);
-		
+
 		return uimaAsEngine;
 	}
 
+
+	private static void addAnalysisEngine(File deploymentDescription,AnalysisEngineDescription desciption) throws ParserConfigurationException, SAXException, IOException, ResourceInitializationException{
+		//adding to delegets list of remoteDeploymentDescriptor
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(deploymentDescription);
+		Element delegates = (Element)doc.getElementsByTagName("delegates").item(0);
+		Element casConsumerElement = doc.createElement("analysisEngine");
+		String newAnnotatorName = desciption.getAnnotatorImplementationName().replaceAll(".*\\.", "");
+		casConsumerElement.setAttribute("key", newAnnotatorName);
+		delegates.appendChild(casConsumerElement);
+
+		String locationDescriptor = ((Element)((Element)doc.getElementsByTagName("topDescriptor").item(0)).getElementsByTagName("import").item(0)).getAttribute("location");
+
+		File casConsumerFile = new File("/tmp/" + newAnnotatorName + ".xml");
+		desciption.toXML(new FileWriter(casConsumerFile));
+		DocumentBuilderFactory dbFactory1 = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder1 = dbFactory1.newDocumentBuilder();
+		Document doc1 = dBuilder1.parse(new File(locationDescriptor));
+		Element delegateAnalysisEngineSpecifiers = (Element)doc1.getElementsByTagName("delegateAnalysisEngineSpecifiers").item(0);
+		Element delegateAnalysisEngine = doc1.createElement("delegateAnalysisEngine");
+		delegateAnalysisEngine.setAttribute("key", newAnnotatorName);
+		Element importElement = doc1.createElement("import");
+		importElement.setAttribute("location", casConsumerFile.getAbsolutePath());
+		delegateAnalysisEngine.appendChild(importElement);
+		delegateAnalysisEngineSpecifiers.appendChild(delegateAnalysisEngine);
+
+		NodeList configurationParameterSettings = doc1.getElementsByTagName("nameValuePair");
+		for (int i = 0; i < configurationParameterSettings.getLength(); i++) {
+			Element nameValuePair = (Element)configurationParameterSettings.item(i);
+			String name = nameValuePair.getElementsByTagName("name").item(0).getTextContent().trim();
+			if(name.equals("Flow")){
+				String stringValue = ((Element)nameValuePair.getElementsByTagName("string").item(0)).getTextContent().trim();
+				JSONObject pipeline = new JSONObject(stringValue.replace("=", ":"));
+				for (String object : pipeline.keySet()) {
+					pipeline.getJSONArray(object).put(Arrays.asList(new String[]{newAnnotatorName}));
+				}
+				((Element)nameValuePair.getElementsByTagName("string").item(0)).setTextContent(pipeline.toString().replace(":", "="));
+			}
+		}
+		FileUtils.writeStringToFile(new File(locationDescriptor), asString(doc1));
+		FileUtils.writeStringToFile(deploymentDescription, asString(doc));
+	}
+
+	private static String asString(Node node) {
+		StringWriter writer = new StringWriter();
+		try {
+			Transformer trans = TransformerFactory.newInstance().newTransformer();
+			// @checkstyle MultipleStringLiterals (1 line)
+			trans.setOutputProperty(OutputKeys.INDENT, "yes");
+			trans.setOutputProperty(OutputKeys.VERSION, "1.0");
+			if (!(node instanceof Document)) {
+				trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			}
+			trans.transform(new DOMSource(node), new StreamResult(writer));
+		} catch (final TransformerConfigurationException ex) {
+			throw new IllegalStateException(ex);
+		} catch (final TransformerException ex) {
+			throw new IllegalArgumentException(ex);
+		}
+		return writer.toString();
+	}
 
 	private CAS parseInputText(CAS emptyCas, File inputFile) throws UIMAException, IOException, SAXException {
 		String fileExtension = inputFile.getName().split("\\.")[inputFile.getName().split("\\.").length-1];
@@ -240,8 +318,8 @@ public class TextImagerClient {
 			return new org.hucompute.services.inputreader.PdfReader().init(input).getCas();
 		case "json":
 			return new org.hucompute.services.inputreader.JSONReader().init(input).getCas();
-//		case "becalm":
-//			return new org.hucompute.services.inputreader.BecalmReader().init(input).getCas();
+			//		case "becalm":
+			//			return new org.hucompute.services.inputreader.BecalmReader().init(input).getCas();
 		case "txt":
 			emptyCas.setDocumentText(FileUtils.readFileToString(inputFile,"UTF-8"));
 			return emptyCas;
@@ -256,7 +334,7 @@ public class TextImagerClient {
 		int processed = 0;
 
 		private HashMap<String, Integer> processedBy = new HashMap<>();
-		
+
 		/**
 		 * This will be called once the text is processed.
 		 */
@@ -334,18 +412,18 @@ public class TextImagerClient {
 				else
 					options.put(inputLanguage.name(), string);
 		}
-		
+
 		CallbackListenerCollection asyncListener = new CallbackListenerCollection();
-		
-		
-	    BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,
-	    		TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage)
-	    		,asyncListener);
+
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage)
+				,asyncListener);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 		return asyncListener.output;
 	}
-	
+
 
 	/**
 	 * Process collection with callback listener
@@ -367,15 +445,44 @@ public class TextImagerClient {
 				else
 					options.put(inputLanguage.name(), string);
 		}
-		
-	    BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,
-	    		TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage)
-	    		,callbackListener);
-	    
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage)
+				,callbackListener);
+
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
 	
+	/**
+	 * Process collection with into outputformat
+	 * @param collectionPath Collection base directory
+	 * @param inputFormant
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param numberOfCases
+	 * @param callbackListener
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(File collectionPath, IOFormat inputFormant, Language inputLanguage,String []annotators,IOFormat outputFormat, String outputLocation) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation));
+
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+
 	/**
 	 * Process collection with callback listener and custom collection reader.
 	 * @param reader
@@ -395,8 +502,57 @@ public class TextImagerClient {
 				else
 					options.put(inputLanguage.name(), string);
 		}
-		
-	    BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,callbackListener);
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,callbackListener);
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+
+	/**
+	 * Process collection with cas consumer and custom collection reader.
+	 * @param reader
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param numberOfCases
+	 * @param callbackListener
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(CollectionReader reader,Language inputLanguage,String []annotators, int numberOfCases, AnalysisEngineDescription casConsumer) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,null,casConsumer);
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+
+	/**
+	 * Process collection with cas consumer and custom collection reader.
+	 * @param reader
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param callbackListener
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(CollectionReader reader,Language inputLanguage,String []annotators, AnalysisEngineDescription casConsumer) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,reader,null,casConsumer);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}

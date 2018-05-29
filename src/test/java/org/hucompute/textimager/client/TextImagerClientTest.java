@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.aae.client.UimaAsBaseCallbackListener;
@@ -96,34 +97,34 @@ public class TextImagerClientTest {
 						TestReader.class, 
 						TestReader.PARAM_MY_FANCY_PARAM, new String[]{"das ist ein param","hier noch einer"},
 						TestReader.PARAM_MY_FANCY_PARAM_2,42),
-		Language.de,
-		new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger","FastTextDDC3LemmaNoPunctPOSNoFunctionwordsWithCategoriesService"},
-		10,
-		new UimaAsBaseCallbackListener() {
-			@Override
-			public void entityProcessComplete(CAS aCas, EntityProcessStatus aStatus) {
-				super.entityProcessComplete(aCas, aStatus);
-				System.out.println(XmlFormatter.getPrettyString(aCas));
-				try {
-					Collection<CategoryCoveredTagged> ddcs = JCasUtil.select(aCas.getJCas(), CategoryCoveredTagged.class);
-					Iterator<CategoryCoveredTagged> i = ddcs.iterator();
-					if (i.hasNext()) {
-						CategoryCoveredTagged lCategoryCoveredTagged = i.next();
-						System.out.println(lCategoryCoveredTagged.getBegin()+"-"+lCategoryCoveredTagged.getEnd()+"\t"+lCategoryCoveredTagged.getValue());
+				Language.de,
+				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger","FastTextDDC3LemmaNoPunctPOSNoFunctionwordsWithCategoriesService"},
+				10,
+				new UimaAsBaseCallbackListener() {
+					@Override
+					public void entityProcessComplete(CAS aCas, EntityProcessStatus aStatus) {
+						super.entityProcessComplete(aCas, aStatus);
+						System.out.println(XmlFormatter.getPrettyString(aCas));
+						try {
+							Collection<CategoryCoveredTagged> ddcs = JCasUtil.select(aCas.getJCas(), CategoryCoveredTagged.class);
+							Iterator<CategoryCoveredTagged> i = ddcs.iterator();
+							if (i.hasNext()) {
+								CategoryCoveredTagged lCategoryCoveredTagged = i.next();
+								System.out.println(lCategoryCoveredTagged.getBegin()+"-"+lCategoryCoveredTagged.getEnd()+"\t"+lCategoryCoveredTagged.getValue());
+							}
+
+						} catch (CASException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 
-				} catch (CASException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-			@Override
-			public void collectionProcessComplete(EntityProcessStatus aStatus) {
-				super.collectionProcessComplete(aStatus);
-				System.out.println("collection complete");
-			};
-		});
+					@Override
+					public void collectionProcessComplete(EntityProcessStatus aStatus) {
+						super.collectionProcessComplete(aStatus);
+						System.out.println("collection complete");
+					};
+				});
 	}
 
 
@@ -140,8 +141,8 @@ public class TextImagerClientTest {
 		assertEquals("Das", JCasUtil.select(output.getJCas(), Token.class).iterator().next().getCoveredText());
 		System.out.println(XmlFormatter.getPrettyString(output));
 	}
-	
-	
+
+
 	@Test
 	public void testCASInput() throws Exception{
 		CAS inputCas = JCasFactory.createJCas().getCas();
@@ -224,26 +225,44 @@ public class TextImagerClientTest {
 		assertEquals("Das", JCasUtil.select(output.get(1).getJCas(), Token.class).iterator().next().getCoveredText());
 	}
 
-//	@Test
-//	public void testCollectionProcessCustomReader() throws Exception{
-//		//Test txt collection
-//		TextImagerClient client = new TextImagerClient();
-//		client.processCollection(
-//				CollectionReaderFactory.createCollectionReader(TextReader.class, TextReader.PARAM_PATH,"src/test/resources/collectionTest",TextReader.PARAM_LANGUAGE,Language.de,TextReader.PARAM_PATTERNS,"[+]**/*.txt"),
-//				Language.de,
-//				new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"},10,new UimaAsBaseCallbackListener() {
-//				});
-//
-//		//		client.processCollection(
-//		////				new Resoucecollectionre,
-//		//				Language.de,
-//		//				new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"},10,new UimaAsBaseCallbackListener() {
-//		//				});
-//		//		assertEquals(14, output.size());
-//		//		assertEquals("de", output.get(1).getDocumentLanguage());
-//		//		assertEquals(5, JCasUtil.select(output.get(1).getJCas(), Token.class).size());
-//		//		assertEquals("Das", JCasUtil.select(output.get(1).getJCas(), Token.class).iterator().next().getCoveredText());	
-//
-//
-//	}
+	@Test
+	public void testCollectionProcessWithOutput() throws Exception{
+		TextImagerClient client = new TextImagerClient();
+		File outputFolder = new File("src/test/resources/collectionTxtTestOutput");
+		FileUtils.deleteDirectory(outputFolder);
+		client.processCollection(new File("src/test/resources/collectionTxtTest"), IOFormat.TXT, TextImagerOptions.Language.de, new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"}, IOFormat.CONLL2000,outputFolder.getPath());
+		File[]outputFiles = outputFolder.listFiles();
+		assertEquals(2, outputFiles.length);
+		assertEquals("ein _ O", FileUtils.readLines(new File(outputFolder,"test1.txt.conll")).get(2));
+
+		client.processCollection(new File("src/test/resources/collectionTxtTest"), IOFormat.TXT, TextImagerOptions.Language.de, new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"}, IOFormat.XMI,outputFolder.getPath()+"XMI");
+		File[]outputFilesXMI = new File(outputFolder.getAbsolutePath()+"XMI").listFiles();
+		assertEquals(3, outputFilesXMI.length);
+		
+		FileUtils.deleteDirectory(outputFolder);
+		FileUtils.deleteDirectory(new File(outputFolder.getAbsolutePath()+"XMI"));
+	}
+
+	//	@Test
+	//	public void testCollectionProcessCustomReader() throws Exception{
+	//		//Test txt collection
+	//		TextImagerClient client = new TextImagerClient();
+	//		client.processCollection(
+	//				CollectionReaderFactory.createCollectionReader(TextReader.class, TextReader.PARAM_PATH,"src/test/resources/collectionTest",TextReader.PARAM_LANGUAGE,Language.de,TextReader.PARAM_PATTERNS,"[+]**/*.txt"),
+	//				Language.de,
+	//				new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"},10,new UimaAsBaseCallbackListener() {
+	//				});
+	//
+	//		//		client.processCollection(
+	//		////				new Resoucecollectionre,
+	//		//				Language.de,
+	//		//				new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"},10,new UimaAsBaseCallbackListener() {
+	//		//				});
+	//		//		assertEquals(14, output.size());
+	//		//		assertEquals("de", output.get(1).getDocumentLanguage());
+	//		//		assertEquals(5, JCasUtil.select(output.get(1).getJCas(), Token.class).size());
+	//		//		assertEquals("Das", JCasUtil.select(output.get(1).getJCas(), Token.class).iterator().next().getCoveredText());	
+	//
+	//
+	//	}
 }

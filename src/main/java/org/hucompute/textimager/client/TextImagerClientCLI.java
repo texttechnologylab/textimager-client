@@ -11,6 +11,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.uima.cas.CAS;
+import org.hucompute.textimager.client.TextImagerOptions.IOFormat;
+import org.hucompute.textimager.client.TextImagerOptions.Language;
 import org.hucompute.textimager.util.XmlFormatter;
 
 public class TextImagerClientCLI {
@@ -19,8 +21,11 @@ public class TextImagerClientCLI {
 	private final static String SERVICES_FILE_OPTION = "services-file";
 	private final static String PIPELINE_OPTION = "pipeline";
 	private final static String INPUT_OPTION = "input";
+	private final static String INPUT_FORMAT_OPTION = "input-format";
+	private final static String INPUT_LANG_OPTION = "input-language";
 	private final static String INPUT_TEXT_OPTION = "input-text";
 	private final static String OUTPUT_OPTION = "output";
+	private final static String OUTPUT_FORMAT_OPTION = "output-format";
 	private final static String OUTPUT_OVERWRITE_OPTION = "output-overwrite";
 	private final static String OUTPUT_PRETTY_OPTION = "output-pretty";
 	private final static String OUTPUT_PRINT_OPTION = "output-print";
@@ -96,6 +101,30 @@ public class TextImagerClientCLI {
 				.desc("Print output.")
 				.build());
 
+		options.addOption(Option.builder()
+				.longOpt(OUTPUT_FORMAT_OPTION)
+				.required(false)
+				.hasArg(true)
+				.argName("format")
+				.desc("Output file format")
+				.build());
+
+		options.addOption(Option.builder()
+				.longOpt(INPUT_FORMAT_OPTION)
+				.required(false)
+				.hasArg(true)
+				.argName("format")
+				.desc("Input file format.")
+				.build());
+		
+		options.addOption(Option.builder()
+				.longOpt(INPUT_LANG_OPTION)
+				.required(false)
+				.hasArg(true)
+				.argName("language")
+				.desc("Input language.")
+				.build());
+		
 		return options;
 	}
 
@@ -165,6 +194,39 @@ public class TextImagerClientCLI {
 		
 		boolean printOutput = commandLine.hasOption(OUTPUT_PRINT_OPTION);
 		System.out.println("print output: " + printOutput);
+
+		IOFormat inputFormat = IOFormat.TXT;
+		if (commandLine.hasOption(INPUT_FORMAT_OPTION)) {
+			try {
+				inputFormat = IOFormat.valueOf(commandLine.getOptionValue(INPUT_FORMAT_OPTION));
+			} catch (IllegalArgumentException ex) {
+				System.err.println("error setting input format: " + ex.getMessage());
+				System.exit(1);
+			}
+		}
+		System.out.println("input format: " + inputFormat);
+		
+		IOFormat outputFormat = IOFormat.TXT;
+		if (commandLine.hasOption(OUTPUT_FORMAT_OPTION)) {
+			try {
+				outputFormat = IOFormat.valueOf(commandLine.getOptionValue(OUTPUT_FORMAT_OPTION));
+			} catch (IllegalArgumentException ex) {
+				System.err.println("error setting output format: " + ex.getMessage());
+				System.exit(1);
+			}
+		}
+		System.out.println("output format: " + outputFormat);
+		
+		Language inputLanguage = Language.unknown;
+		if (commandLine.hasOption(INPUT_LANG_OPTION)) {
+			try {
+				inputLanguage = Language.valueOf(commandLine.getOptionValue(INPUT_LANG_OPTION));
+			} catch (IllegalArgumentException ex) {
+				System.err.println("error setting input language: " + ex.getMessage());
+				System.exit(1);
+			}
+		}
+		System.out.println("input language: " + inputLanguage);
 		
 		if (commandLine.hasOption(INPUT_TEXT_OPTION)) {
 			// 1) input is direct text -> output must be file
@@ -180,7 +242,7 @@ public class TextImagerClientCLI {
 				System.exit(1);
 			}
 
-			processWithText(servicesXmlFile, pipeline, outputFile, prettyPrint, printOutput, inputText);
+			processWithText(servicesXmlFile, pipeline, outputFile, outputFormat, prettyPrint, printOutput, inputText);
 			
 		} else if (commandLine.hasOption(INPUT_OPTION) && commandLine.hasOption(OUTPUT_OPTION)) {
 			File inputFile = null;
@@ -204,14 +266,23 @@ public class TextImagerClientCLI {
 					System.exit(1);
 				}
 
-				processWithFile(servicesXmlFile, pipeline, outputFile, prettyPrint, printOutput, inputFile);
+				processWithFile(servicesXmlFile, pipeline, outputFile, outputFormat, prettyPrint, printOutput, inputFile);
 
-			} else if (inputFile.isDirectory() && outputFile.isDirectory()) {
+			} else if (inputFile.isDirectory() && (!outputFile.exists() || outputFile.isDirectory())) {
 				// 2) input and output is directory -> process collections
-				System.err.println("not yet implemented.");
-				printHelp(options);
-				System.exit(1);
-
+				try {
+					if (!outputFile.exists()) {
+						System.out.println("creatig output directory: " + outputFile.getAbsolutePath());
+						outputFile.mkdirs();
+					}
+				} catch (Exception ex) {
+					System.err.println("error creating output directory: " + ex.getMessage());
+					ex.printStackTrace();
+					System.exit(1);
+				}
+				
+				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage);
+				
 			} else {
 				System.err.println("input and output must either both be a file or directory.");
 				printHelp(options);
@@ -236,8 +307,23 @@ public class TextImagerClientCLI {
 		}
 		System.out.println("output file: " + outputFile.getAbsolutePath());
 	}
+	
+	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage) {
+		System.out.println("processing collection: " + inputFile.getAbsolutePath());
+		
+		TextImagerClient client = new TextImagerClient();
+		client.setConfigFile(servicesXmlFilename);
+		try {
+			String[] annotators = pipeline.split(",");
+			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath());
+		} catch (Exception e) {
+			System.err.println("error processing: " + e.getMessage());
+			e.printStackTrace();
+			System.exit(1);
+		}	
+	}
 
-	private static void processWithFile(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, boolean printOutput, File inputFile) {
+	private static void processWithFile(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, boolean prettyPrint, boolean printOutput, File inputFile) {
 		System.out.println("processing input file: " + inputFile.getAbsolutePath());
 		
 		TextImagerClient client = new TextImagerClient();
@@ -267,7 +353,7 @@ public class TextImagerClientCLI {
 		}
 	}
 	
-	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, boolean prettyPrint, boolean printOutput, String inputText) {
+	private static void processWithText(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, boolean prettyPrint, boolean printOutput, String inputText) {
 		System.out.println("processing input text.");
 		
 		TextImagerClient client = new TextImagerClient();

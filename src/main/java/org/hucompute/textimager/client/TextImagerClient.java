@@ -460,8 +460,8 @@ public class TextImagerClient {
 	 * @param inputFormant
 	 * @param inputLanguage
 	 * @param annotators
-	 * @param numberOfCases
-	 * @param callbackListener
+	 * @param outputFormat
+	 * @param outputLocation
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */
@@ -514,7 +514,7 @@ public class TextImagerClient {
 	 * @param inputLanguage
 	 * @param annotators
 	 * @param numberOfCases
-	 * @param callbackListener
+	 * @param casConsumer
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */
@@ -538,7 +538,7 @@ public class TextImagerClient {
 	 * @param reader
 	 * @param inputLanguage
 	 * @param annotators
-	 * @param callbackListener
+	 * @param casConsumer
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */

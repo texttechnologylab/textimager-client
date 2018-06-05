@@ -49,6 +49,6 @@ System.out.println(XmlFormatter.getPrettyString(output));
 
 ### TODO
 - [ ] Documentation
-- [ ] Add input/output support for different formats
+- [x] Add input/output support for different formats
 - [x] CLI
 

@@ -9,10 +9,12 @@ import org.apache.uima.collection.CasConsumer;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 //import org.hucompute.services.inputreader.TeiReader;
 import org.hucompute.services.uima.database.mongo.MongoWriter;
+import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 //
@@ -113,7 +115,8 @@ public class TextImagerOptions {
 		CONLL2012,
 		TEI,
 		BINARYCAS,
-		TXT
+		TXT,
+		MEDIAWIKI
 	}
 
 	protected static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
@@ -199,12 +202,13 @@ public class TextImagerOptions {
 		case BINARYCAS:
 			consumer = BinaryCasWriter.class;
 			break;
+		case MEDIAWIKI:
+			consumer = MediawikiWriter.class;
+			break;
 		default:
 			throw new UnsupportedOperationException("Output format not supported. Supported output formats are TCF, XMI, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}
 		return createEngineDescription(consumer,XmiWriter.PARAM_TARGET_LOCATION,outputDir,XmiWriter.PARAM_OVERWRITE,true);
 	}
-
-
 
 }

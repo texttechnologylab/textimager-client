@@ -40,6 +40,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.hucompute.textimager.config.ServiceDataholder;
 import org.w3c.dom.Document;
@@ -50,13 +51,13 @@ import javax.xml.parsers.DocumentBuilder;
 
 public class AsAnalysisEngineDescription
 {
-	
-	
-	
+
+
+
 	public static void toXML(File file,HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline) throws IOException, ParserConfigurationException, SAXException, TransformerException{
-//		AsAnalysisEngineDescription ae  = AnalysisEngineFactory.create
-		
-		
+		//		AsAnalysisEngineDescription ae  = AnalysisEngineFactory.create
+
+
 		File dest = new File(System.getProperty("java.io.tmpdir")+"/HucomputeFixedFlowController.xml");
 		if(!dest.exists()){
 			URL inputUrl = AsAnalysisEngineDescription.class.getClassLoader().getResource("HucomputeFixedFlowController.xml");
@@ -66,7 +67,7 @@ public class AsAnalysisEngineDescription
 
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(AsAnalysisEngineDescription.class.getClassLoader().getResourceAsStream("emptyAnalysisEngine.xml"));
-		
+
 		Element delegatesList = (Element) doc.getElementsByTagName("delegateAnalysisEngineSpecifiers").item(0);
 		((Element)doc.getElementsByTagName("configurationParameterSettings").item(0)).getElementsByTagName("string").item(0).setTextContent(pipeline.toString());;
 
@@ -89,14 +90,17 @@ public class AsAnalysisEngineDescription
 
 
 			Element importNode = doc.createElement("import");
-			importNode.setAttribute("location", remoteDescriptor.getPath());
+			if(SystemUtils.IS_OS_WINDOWS)
+				importNode.setAttribute("location", "file:/"+remoteDescriptor.getPath().replace("\\", "/"));
+			else
+				importNode.setAttribute("location", remoteDescriptor.getPath());
 
 			delegateAnalysisEngine.appendChild(importNode);
 			delegatesList.appendChild(delegateAnalysisEngine);
 			if(serviceDataholder.getCasMultiplierPoolsize()>0)
 				((Element)doc.getElementsByTagName("outputsNewCASes").item(0)).setTextContent("true");;
 
-				
+
 		}
 
 		//		for (ArrayList<ServiceDataholder> delegateName : uniquePipeline) {

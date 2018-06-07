@@ -1,9 +1,12 @@
 package org.hucompute.textimager.client;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,6 +26,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Logger;
 import org.apache.uima.UIMAException;
 import org.apache.uima.aae.client.UimaASProcessStatus;
@@ -205,8 +209,8 @@ public class TextImagerClient {
 			deploymentDescription.toXML(System.out);
 
 			// preparing map for use in deploying services
-			clientCtx.put(UimaAsynchronousEngine.DD2SpringXsltFilePath, ConfigDataholder.getDd2SpringPath());
-			clientCtx.put(UimaAsynchronousEngine.SaxonClasspath, "file:" + ConfigDataholder.getSaxonPath());
+			clientCtx.put(UimaAsynchronousEngine.DD2SpringXsltFilePath, ConfigDataholder.getDd2SpringPath().replace("\\", "/"));
+			clientCtx.put(UimaAsynchronousEngine.SaxonClasspath, "file:" + ConfigDataholder.getSaxonPath().replace("\\", "/"));
 			if(casConsumer != null){
 				addAnalysisEngine(deployFile,casConsumer);
 			}
@@ -253,16 +257,29 @@ public class TextImagerClient {
 
 		String locationDescriptor = ((Element)((Element)doc.getElementsByTagName("topDescriptor").item(0)).getElementsByTagName("import").item(0)).getAttribute("location");
 
-		File casConsumerFile = new File("/tmp/" + newAnnotatorName + ".xml");
-		desciption.toXML(new FileWriter(casConsumerFile));
+		File casConsumerFile = new File(System.getProperty("java.io.tmpdir") + "/" + newAnnotatorName + ".xml");
+		desciption.toXML(new FileOutputStream(casConsumerFile));
 		DocumentBuilderFactory dbFactory1 = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder1 = dbFactory1.newDocumentBuilder();
-		Document doc1 = dBuilder1.parse(new File(locationDescriptor));
+
+		Document doc1 = null;
+		if(SystemUtils.IS_OS_WINDOWS){
+			try {
+				System.out.println(new File(new URI(locationDescriptor)));
+				doc1 = dBuilder1.parse(new File(new URI(locationDescriptor)));
+				locationDescriptor = new File(new URI(locationDescriptor)).getPath();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			doc1 = dBuilder1.parse(new File(locationDescriptor));
+		}
 		Element delegateAnalysisEngineSpecifiers = (Element)doc1.getElementsByTagName("delegateAnalysisEngineSpecifiers").item(0);
 		Element delegateAnalysisEngine = doc1.createElement("delegateAnalysisEngine");
 		delegateAnalysisEngine.setAttribute("key", newAnnotatorName);
 		Element importElement = doc1.createElement("import");
-		importElement.setAttribute("location", casConsumerFile.getAbsolutePath());
+		importElement.setAttribute("location", "file:/"+casConsumerFile.getAbsolutePath().replace("\\", "/"));
 		delegateAnalysisEngine.appendChild(importElement);
 		delegateAnalysisEngineSpecifiers.appendChild(delegateAnalysisEngine);
 
@@ -453,7 +470,7 @@ public class TextImagerClient {
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
-	
+
 	/**
 	 * Process collection with into outputformat
 	 * @param collectionPath Collection base directory

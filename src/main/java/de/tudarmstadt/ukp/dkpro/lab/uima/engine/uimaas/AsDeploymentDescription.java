@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dom4j.Element;
 import org.dom4j.Namespace;
@@ -159,7 +160,7 @@ public class AsDeploymentDescription
 	 * </pre>
 	 *
 	 * This is the standard UIMA import element. Imports can be by name or by
-	 * location; see Section 2.2, “Imports” in UIMA References.
+	 * location; see Section 2.2, Imports in UIMA References.
 	 */
 	private AnalysisEngineDescription topDescriptor;
 	private File topDescriptorFile;
@@ -355,19 +356,23 @@ public class AsDeploymentDescription
 		.addAttribute(A_ENDPOINT,getEndpoint())
 		.addAttribute(A_BROKER_URL, getBrokerUrl())
 		.addAttribute(A_PREFETCH, getPrefetch());
-		service.addElement(E_TOP_DESCRIPTOR).addElement(E_IMPORT).addAttribute(
-				A_LOCATION, getTopDescriptorFile().getAbsolutePath());
-//				Element analyisEngine = service.addElement("analysisEngine").addAttribute("async", "true");
+		if(SystemUtils.IS_OS_WINDOWS)
+			service.addElement(E_TOP_DESCRIPTOR).addElement(E_IMPORT).addAttribute(
+					A_LOCATION, "file:/"+getTopDescriptorFile().getAbsolutePath().replace("\\", "/"));
+		else
+			service.addElement(E_TOP_DESCRIPTOR).addElement(E_IMPORT).addAttribute(
+					A_LOCATION, getTopDescriptorFile().getAbsolutePath());
+		//				Element analyisEngine = service.addElement("analysisEngine").addAttribute("async", "true");
 		//		service.addElement(E_SCALEOUT).addAttribute(A_NUMBER_OF_INSTANCES, Integer.toString(getNumberOfInstances()));
 		if((aggregateDelegates!=null && aggregateDelegates.size() > 0) || getNumberOfInstances() > 1){
 			Element analyisEngine = service.addElement("analysisEngine").addAttribute("async", "true");
 			if(getNumberOfInstances()>1)
 				analyisEngine.addElement("scaleout").addAttribute("numberOfInstances", Integer.toString(getNumberOfInstances()));
 			else{
-//				deployment.addElement("casPool").addAttribute("numberOfCASes", "500");
-//			    <casPool numberOfCASes="xxx" initialFsHeapSize="nnn"/>
+				//				deployment.addElement("casPool").addAttribute("numberOfCASes", "500");
+				//			    <casPool numberOfCASes="xxx" initialFsHeapSize="nnn"/>
 
-//				analyisEngine.addAttribute("async", "false");
+				//				analyisEngine.addAttribute("async", "false");
 				Element delegates = analyisEngine.addElement("delegates");
 				for (ServiceDataholder serviceDataholder : aggregateDelegates) {
 					Element remoteA = delegates.addElement("remoteAnalysisEngine").addAttribute("key", serviceDataholder.getName());

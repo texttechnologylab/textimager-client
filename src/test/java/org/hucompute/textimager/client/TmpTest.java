@@ -101,10 +101,10 @@ public class TmpTest {
 				);
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile("src/main/resources/services.xml");
-		client.processCollection(TextImagerOptions.getReader(IOFormat.TXT, "src/test/resources/collectionTest", TextImagerOptions.Language.de),
-				Language.de, 
-				new String[]{"LanguageToolSegmenter","LanguageToolLemmatizer","StanfordPosTagger"}, 
-				casConsumer);
-//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2000, "src/test/resources/collectionTestConllOutput");
+//		client.processCollection(TextImagerOptions.getReader(IOFormat.TXT, "src/test/resources/collectionTest", TextImagerOptions.Language.de),
+//				Language.de, 
+//				new String[]{"LanguageToolSegmenter","LanguageToolLemmatizer","StanfordPosTagger"}, 
+//				casConsumer);
+		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2000, "src/test/resources/collectionTestConllOutput");
 	}
 }

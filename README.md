@@ -29,7 +29,7 @@ Instructions and help will be printed with:  ```java -jar target/textimager-CLI
 
 Example client call:
 ```
-java -jar target/textimager-CLI.jar -I "This is a test." -p "StanfordSegmenter,StanfordPosTagger" -o "test.xmi"
+java -Dfile.encoding=UTF-8 -jar target/textimager-CLI.jar -I "This is a test." -p "StanfordSegmenter,StanfordPosTagger" -o "test.xmi"
 ```
 
 The above example will parse the input document defined in ```-I``` with the pipeline defined in ```-p``` and writes the output as XMI defined in ```-o```
@@ -51,4 +51,5 @@ System.out.println(XmlFormatter.getPrettyString(output));
 - [ ] Documentation
 - [x] Add input/output support for different formats
 - [x] CLI
+- [x] Support for Windows
 

@@ -12,6 +12,7 @@ public class TextImagerClientCLITest {
 
 	@Test
 	public void testProcessText() throws ResourceInitializationException, Exception{
+		new File("testOutput.xmi").delete();
 		//Test simple CLI
 		String[]args = new String[]{
 				"-I","This is a test.",
@@ -38,12 +39,11 @@ public class TextImagerClientCLITest {
 		};		
 		TextImagerClientCLI.main(args);
 		new File("testOutput.xmi").delete();
-
-		
 	}
 	
 	@Test
 	public void testProcessTextConll() throws Exception{
+		new File("testOutput.conll").delete();
 		//Test conll output
 		String[]argsConll = new String[]{
 				"-I","This is a test.",

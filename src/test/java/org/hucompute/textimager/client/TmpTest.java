@@ -34,9 +34,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.EntityProcessStatus;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.hucompute.services.type.CategoryCoveredTagged;
 import org.hucompute.textimager.client.TextImagerClient;
@@ -58,7 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsAnalysisEngineDescription;
 import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsDeploymentDescription;
-
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 public class TmpTest {
 
 	public static void main(String[] args) throws ResourceInitializationException, Exception {
@@ -94,17 +98,34 @@ public class TmpTest {
 
 		File outputFolder = new File("src/test/resources/wikiOutput");
 
-		outputFolder.mkdirs();
-		AnalysisEngineDescription casConsumer = AnalysisEngineFactory.createEngineDescription(
-				MediawikiWriter.class,
-				MediawikiWriter.PARAM_TARGET_LOCATION,outputFolder.getPath()
-				);
+//		outputFolder.mkdirs();
+//		AnalysisEngineDescription casConsumer = AnalysisEngineFactory.createEngineDescription(
+//				MediawikiWriter.class,
+//				MediawikiWriter.PARAM_TARGET_LOCATION,outputFolder.getPath()
+//				);
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile("src/main/resources/services.xml");
 //		client.processCollection(TextImagerOptions.getReader(IOFormat.TXT, "src/test/resources/collectionTest", TextImagerOptions.Language.de),
 //				Language.de, 
 //				new String[]{"LanguageToolSegmenter","LanguageToolLemmatizer","StanfordPosTagger"}, 
 //				casConsumer);
-		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2000, "src/test/resources/collectionTestConllOutput");
+//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2000, "src/test/resources/collectionTestConllOutput");
+//		CAS cas = client.process("Das ist ein Test.", "SpaCySentenceSegmenter,SpaCyTokenizer,MarMoTLemma,MarMoTTagger");
+//		JCas cas = JCasFactory.createJCas();
+//		cas.setDocumentLanguage("en");
+//		cas.setDocumentText("This is a simple test.");
+//		AggregateBuilder builder = new AggregateBuilder();
+//		builder.add(createEngineDescription(UDPipeSegmenter.class));
+//		SimplePipeline.runPipeline(cas,builder.createAggregate());
+//		System.out.println(XmlFormatter.getPrettyString(cas));
+//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2002, "test");
+		
+		args = new String[]{
+				"-I","This is a test.",
+				"-p","StanfordSegmenter,StanfordPosTagger", 
+				"-o","testOutput.conll",
+				"--output-format","CONLL2009"
+		};
+		TextImagerClientCLI.main(args);
 	}
 }

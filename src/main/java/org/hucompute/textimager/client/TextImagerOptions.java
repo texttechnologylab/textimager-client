@@ -16,6 +16,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.hucompute.services.uima.database.mongo.MongoWriter;
 import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 //
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
@@ -172,7 +173,12 @@ public class TextImagerOptions {
 				ResourceCollectionReaderBase.PARAM_LANGUAGE,language);
 	}
 //
+	
 	protected static AnalysisEngineDescription getWriter(IOFormat format,String outputDir) throws ResourceInitializationException{
+		return getWriter(format, outputDir, false);
+	}
+	
+	protected static AnalysisEngineDescription getWriter(IOFormat format,String outputDir, boolean singularTarget) throws ResourceInitializationException{
 		Class<? extends JCasConsumer_ImplBase> consumer = null;
 		switch (format) {
 		case TCF:
@@ -208,7 +214,7 @@ public class TextImagerOptions {
 		default:
 			throw new UnsupportedOperationException("Output format not supported. Supported output formats are TCF, XMI, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}
-		return createEngineDescription(consumer,XmiWriter.PARAM_TARGET_LOCATION,outputDir,XmiWriter.PARAM_OVERWRITE,true);
+		return createEngineDescription(consumer,XmiWriter.PARAM_TARGET_LOCATION,outputDir,XmiWriter.PARAM_OVERWRITE,true, JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,singularTarget);
 	}
 
 }

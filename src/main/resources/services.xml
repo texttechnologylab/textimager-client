@@ -160,6 +160,23 @@
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
+			<webservice name="UDPipeParser" group="parser">
+				<remoteDeployInfo>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>tokenizer</item>
+					<item>languageSplitter</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>en</language>
+					<language>no</language>
+				</supportedLanguages>
+				<parallel>false</parallel>
+			</webservice>
 		</webserviceGroup>
 
 		<webserviceGroup name="ner">
@@ -678,6 +695,27 @@
 				</output>
 				<parallel>false</parallel>
 			</webservice>
+
+			<webservice name="UDPipePosTagger" group="pos">
+				<remoteDeployInfo>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<timeout>5000000</timeout>
+					<getmetatimeout>5000000</getmetatimeout>
+					<cpctimeout>5000000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>tokenizer</item>
+					<item>languageSplitter</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>en</language>
+					<language>no</language>
+				</supportedLanguages>
+				<output>
+					<item>Pos</item>
+				</output>
+				<parallel>false</parallel>
+			</webservice>
 			<webservice name="MatePosTagger" group="pos">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
@@ -1041,7 +1079,24 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
+			<webservice name="SpaCySentenceSegmenter" group="sentenceBoundary">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>languageDetection</item>
+					<item>tokenizer</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>en</language>
+					<language>de</language>
+				</supportedLanguages>
+			</webservice>
 		</webserviceGroup>
+		
 		<webserviceGroup name="tokenizer">
 			<webservice name="BreakIteratorSegmenter" group="tokenizer">
 				<remoteDeployInfo>
@@ -1097,7 +1152,22 @@
 				</supportedLanguages>
 			</webservice>
 
-
+			<webservice name="UDPipeSegmenter" group="tokenizer">
+				<remoteDeployInfo>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>languageDetection</item>
+					<item>paragraphSplitter</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>de</language>
+					<language>no</language>
+				</supportedLanguages>
+			</webservice>
 
 			<webservice name="StanfordSegmenter" group="tokenizer">
 				<remoteDeployInfo>
@@ -1220,6 +1290,21 @@
 				</pipeline>
 				<supportedLanguages>
 					<language>fr</language>
+				</supportedLanguages>
+			</webservice>
+			<webservice name="SpaCyTokenizer" group="tokenizer">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>languageDetection</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>en</language>
+					<language>de</language>
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
@@ -1935,7 +2020,7 @@
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
-		<webserviceGroup name="ddcmul" >
+		<webserviceGroup name="ddcmul">
 			<webservice name="FastTextDDCMulService" group="ddcmul">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>

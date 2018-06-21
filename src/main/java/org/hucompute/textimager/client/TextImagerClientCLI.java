@@ -109,7 +109,7 @@ public class TextImagerClientCLI {
 				.required(false)
 				.hasArg(true)
 				.argName("format")
-				.desc("Output file format")
+				.desc("Output file format. Supported output formats are TCF, XMI, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS")
 				.build());
 
 		options.addOption(Option.builder()

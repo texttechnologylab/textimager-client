@@ -128,10 +128,11 @@ public class TmpTest {
 //		};
 //		TextImagerClientCLI.main(args);
 		
-		String outputConll = FileUtils.readFileToString(new File("testOutput.conll"),"UTF-8");
-		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.conll"),"UTF-8");
+		String outputConll = FileUtils.readFileToString(new File("testOutput.xmi"),"UTF-8");
+		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.xmi"),"UTF-8");
 		
 		System.out.println(outputConll.trim().equals(outputGoldConll.trim()));
 		System.out.println(outputGoldConll.trim().length());
+		System.out.println(outputConll.trim().length());
 	}
 }

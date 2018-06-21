@@ -120,12 +120,18 @@ public class TmpTest {
 //		System.out.println(XmlFormatter.getPrettyString(cas));
 //		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2002, "test");
 		
-		args = new String[]{
-				"-I","This is a test.",
-				"-p","StanfordSegmenter,StanfordPosTagger", 
-				"-o","testOutput.conll",
-				"--output-format","CONLL2009"
-		};
-		TextImagerClientCLI.main(args);
+//		args = new String[]{
+//				"-I","This is a test.",
+//				"-p","StanfordSegmenter,StanfordPosTagger", 
+//				"-o","testOutput.conll",
+//				"--output-format","CONLL2009"
+//		};
+//		TextImagerClientCLI.main(args);
+		
+		String outputConll = FileUtils.readFileToString(new File("testOutput.conll"),"UTF-8");
+		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.conll"),"UTF-8");
+		
+		System.out.println(outputConll.trim().equals(outputGoldConll.trim()));
+		System.out.println(outputGoldConll.trim().length());
 	}
 }

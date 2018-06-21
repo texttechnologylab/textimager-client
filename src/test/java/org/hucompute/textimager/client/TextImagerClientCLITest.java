@@ -19,8 +19,8 @@ public class TextImagerClientCLITest {
 				"-o","testOutput.xmi"
 		};
 		TextImagerClientCLI.main(args);
-		String output = FileUtils.readFileToString(new File("testOutput.xmi"));
-		String outputGold = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.xmi"));
+		String output = FileUtils.readFileToString(new File("testOutput.xmi"),"UTF-8");
+		String outputGold = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.xmi"),"UTF-8");
 		assertEquals(output, outputGold);
 
 		//Test if file exists
@@ -39,6 +39,11 @@ public class TextImagerClientCLITest {
 		TextImagerClientCLI.main(args);
 		new File("testOutput.xmi").delete();
 
+		
+	}
+	
+	@Test
+	public void testProcessTextConll() throws Exception{
 		//Test conll output
 		String[]argsConll = new String[]{
 				"-I","This is a test.",
@@ -47,11 +52,9 @@ public class TextImagerClientCLITest {
 				"--output-format","CONLL2009"
 		};
 		TextImagerClientCLI.main(argsConll);
-		String outputConll = FileUtils.readFileToString(new File("testOutput.conll"));
-		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.conll"));
-		assertEquals(outputConll, outputGoldConll);
+		String outputConll = FileUtils.readFileToString(new File("testOutput.conll"),"UTF-8");
+		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.conll"),"UTF-8");
+		assertEquals(outputConll.trim(), outputGoldConll.trim());
 		new File("testOutput.conll").delete();
-
-
 	}
 }

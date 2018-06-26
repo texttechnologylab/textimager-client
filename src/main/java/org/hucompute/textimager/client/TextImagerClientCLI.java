@@ -334,22 +334,27 @@ public class TextImagerClientCLI {
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			CAS output = client.process(inputFile, pipeline);
-			PrintWriter writer = new PrintWriter(outputFile);
-			if (prettyPrint) {
-				String outputString = XmlFormatter.getPrettyString(output);
-				writer.print(outputString);
-				if (printOutput) {
-					System.out.println(outputString);
+			DocumentMetaData.create(output).setDocumentId("Inline Document");
+			if(outputFormat == IOFormat.XMI){
+				PrintWriter writer = new PrintWriter(outputFile);
+				if (prettyPrint) {
+					String outputString = XmlFormatter.getPrettyString(output);
+					writer.print(outputString);
+					if (printOutput) {
+						System.out.println(outputString);
+					}
+				} else {
+					String outputString = XmlFormatter.getString(output);
+					writer.print(outputString);
+					if (printOutput) {
+						System.out.println(outputString);
+					}
 				}
-			} else {
-				String outputString = XmlFormatter.getString(output);
-				writer.print(outputString);
-				if (printOutput) {
-					System.out.println(outputString);
-				}
+				writer.flush();
+				writer.close();
 			}
-			writer.flush();
-			writer.close();
+			else
+				SimplePipeline.runPipeline(output, TextImagerOptions.getWriter(outputFormat, outputFile.getPath(),true));
 		} catch (Exception e) {
 			System.err.println("error processing: " + e.getMessage());
 			e.printStackTrace();

@@ -57,4 +57,21 @@ public class TextImagerClientCLITest {
 		assertEquals(outputConll.trim(), outputGoldConll.trim());
 		new File("testOutput.conll").delete();
 	}
+	
+	@Test
+	public void testProcessTxtFile() throws Exception{
+		new File("testTxtOutput.conll").delete();
+		//Test conll output
+		String[]argsConll = new String[]{
+				"-i","src/test/resources/testCLI/input.txt",
+				"-p","StanfordSegmenter,StanfordPosTagger", 
+				"-o","testTxtOutput.conll",
+				"--output-format","CONLL2009"
+		};
+		TextImagerClientCLI.main(argsConll);
+		String outputConll = FileUtils.readFileToString(new File("testTxtOutput.conll"),"UTF-8");
+		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.conll"),"UTF-8");
+		assertEquals(outputConll.trim(), outputGoldConll.trim());
+		new File("testTxtOutput.conll").delete();
+	}
 }

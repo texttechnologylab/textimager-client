@@ -279,7 +279,12 @@ public class TextImagerClient {
 		Element delegateAnalysisEngine = doc1.createElement("delegateAnalysisEngine");
 		delegateAnalysisEngine.setAttribute("key", newAnnotatorName);
 		Element importElement = doc1.createElement("import");
-		importElement.setAttribute("location", "file:/"+casConsumerFile.getAbsolutePath().replace("\\", "/"));
+		if(SystemUtils.IS_OS_WINDOWS){
+			importElement.setAttribute("location", "file:/"+casConsumerFile.getAbsolutePath().replace("\\", "/"));
+		}
+		else{
+			importElement.setAttribute("location", casConsumerFile.getAbsolutePath().replace("\\", "/"));
+		}
 		delegateAnalysisEngine.appendChild(importElement);
 		delegateAnalysisEngineSpecifiers.appendChild(delegateAnalysisEngine);
 

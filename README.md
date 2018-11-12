@@ -17,7 +17,7 @@ git clone https://github.com/texttechnologylab/textimager-client
 Navigate to the directory and build project
 ```
 cd ../some/dir/textimager-client
-mvn install
+mvn install -DskipTests
 ```
 
 ### Running

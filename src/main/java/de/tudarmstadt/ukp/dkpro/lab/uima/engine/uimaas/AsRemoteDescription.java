@@ -77,7 +77,6 @@ public class AsRemoteDescription
 
 	public static void toXML(OutputStream aOutput,ServiceDataholder simpleService) throws IOException
 	{
-		//System.out.println(simpleService);
 		Element root = createElement(E_ROOT);
 		root.addElement("resourceClassName").addText("org.apache.uima.aae.jms_adapter.JmsAnalysisEngineServiceAdapter");
 		Element parameters = root.addElement("parameters");

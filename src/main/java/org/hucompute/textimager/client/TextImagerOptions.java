@@ -2,19 +2,13 @@ package org.hucompute.textimager.client;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
-import java.io.File;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CasConsumer;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
-//import org.hucompute.services.inputreader.TeiReader;
-import org.hucompute.services.uima.database.mongo.MongoWriter;
 import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
+import org.hucompute.textimager.uima.io.tei.TeiReader;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -31,8 +25,11 @@ import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Writer;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
+//import de.tudarmstadt.ukp.dkpro.core.io.conll.ConllUReader;
+//import de.tudarmstadt.ukp.dkpro.core.io.conll.ConllUWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfWriter;
+//import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader;
@@ -114,13 +111,14 @@ public class TextImagerOptions {
 		CONLL2006,
 		CONLL2009,
 		CONLL2012,
+		CONLLU,
 		TEI,
 		BINARYCAS,
 		TXT,
 		MEDIAWIKI
 	}
 
-	protected static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
+	public static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
 		Class<? extends CollectionReader> reader = null;
 		String pattern = "[+]**/*.";
 		switch (format) {
@@ -136,10 +134,10 @@ public class TextImagerOptions {
 			reader = TextReader.class;
 			pattern = pattern + "txt";
 			break;
-//		case TEI:
-//			reader = TeiReader.class;
-//			pattern = pattern + "xml";
-//			break;
+		case TEI:
+			reader = TeiReader.class;
+			pattern = pattern + "xml";
+			break;
 		case CONLL2000:
 			reader = Conll2000Reader.class;
 			pattern = pattern + "conll";
@@ -160,6 +158,10 @@ public class TextImagerOptions {
 			reader = Conll2012Reader.class;
 			pattern = pattern + "conll";
 			break;
+//		case CONLLU:
+//			reader = ConllUReader.class;
+//			pattern = pattern + "conll";
+//			break;
 		case BINARYCAS:
 			reader = BinaryCasReader.class;
 			pattern = pattern + "bin";
@@ -167,17 +169,34 @@ public class TextImagerOptions {
 		default:
 			throw new UnsupportedOperationException("Input format not supported. Supported output formats are TCF, XMI, TXT, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}
-		return CollectionReaderFactory.createReader(reader,
-				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
-				ResourceCollectionReaderBase.PARAM_PATTERNS,pattern,
-				ResourceCollectionReaderBase.PARAM_LANGUAGE,language);
+		if(language == Language.unknown)
+			return CollectionReaderFactory.createReader(reader,
+					ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
+					ResourceCollectionReaderBase.PARAM_PATTERNS,pattern
+//					ConllUReader.PARAM_READ_CPOS,false,
+//					ConllUReader.PARAM_READ_DEPENDENCY,false,
+//					ConllUReader.PARAM_READ_LEMMA,false,
+//					ConllUReader.PARAM_READ_MORPH,false,
+//					ConllUReader.PARAM_READ_POS,false
+					);
+		else
+			return CollectionReaderFactory.createReader(reader,
+					ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
+					ResourceCollectionReaderBase.PARAM_PATTERNS,pattern,
+					ResourceCollectionReaderBase.PARAM_LANGUAGE,language
+//					ConllUReader.PARAM_READ_CPOS,false,
+//					ConllUReader.PARAM_READ_DEPENDENCY,false,
+//					ConllUReader.PARAM_READ_LEMMA,false,
+//					ConllUReader.PARAM_READ_MORPH,false,
+//					ConllUReader.PARAM_READ_POS,false
+					);
 	}
-//
-	
-	protected static AnalysisEngineDescription getWriter(IOFormat format,String outputDir) throws ResourceInitializationException{
+	//
+
+	public static AnalysisEngineDescription getWriter(IOFormat format,String outputDir) throws ResourceInitializationException{
 		return getWriter(format, outputDir, false);
 	}
-	
+
 	protected static AnalysisEngineDescription getWriter(IOFormat format,String outputDir, boolean singularTarget) throws ResourceInitializationException{
 		Class<? extends JCasConsumer_ImplBase> consumer = null;
 		switch (format) {
@@ -205,6 +224,9 @@ public class TextImagerOptions {
 		case CONLL2012:
 			consumer = Conll2012Writer.class;
 			break;
+//		case CONLLU:
+//			consumer = ConllUWriter.class;
+//			break;
 		case BINARYCAS:
 			consumer = BinaryCasWriter.class;
 			break;

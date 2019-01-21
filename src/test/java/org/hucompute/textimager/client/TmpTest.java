@@ -4,13 +4,18 @@ import static org.dom4j.DocumentHelper.createDocument;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -57,6 +62,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Writer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
@@ -96,43 +104,65 @@ public class TmpTest {
 		//					};
 		//				});
 
-		File outputFolder = new File("src/test/resources/wikiOutput");
+//		File outputFolder = new File("src/test/resources/wikiOutput");
 
-//		outputFolder.mkdirs();
-//		AnalysisEngineDescription casConsumer = AnalysisEngineFactory.createEngineDescription(
-//				MediawikiWriter.class,
-//				MediawikiWriter.PARAM_TARGET_LOCATION,outputFolder.getPath()
-//				);
+		//		outputFolder.mkdirs();
+		//		AnalysisEngineDescription casConsumer = AnalysisEngineFactory.createEngineDescription(
+		//				MediawikiWriter.class,
+		//				MediawikiWriter.PARAM_TARGET_LOCATION,outputFolder.getPath()
+		//				);
+		//		TextImagerClient client = new TextImagerClient();
+		//		CAS output = client.process("Das ist ein Test.", new String[]{"LanguageToolSegmenter","LanguageToolLemmatizer"});
+		//		System.out.println(XmlFormatter.getPrettyString(output));
+//
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile("src/main/resources/services.xml");
-//		client.processCollection(TextImagerOptions.getReader(IOFormat.TXT, "src/test/resources/collectionTest", TextImagerOptions.Language.de),
-//				Language.de, 
-//				new String[]{"LanguageToolSegmenter","LanguageToolLemmatizer","StanfordPosTagger"}, 
-//				casConsumer);
-//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2000, "src/test/resources/collectionTestConllOutput");
-//		CAS cas = client.process("Das ist ein Test.", "SpaCySentenceSegmenter,SpaCyTokenizer,MarMoTLemma,MarMoTTagger");
-//		JCas cas = JCasFactory.createJCas();
-//		cas.setDocumentLanguage("en");
-//		cas.setDocumentText("This is a simple test.");
-//		AggregateBuilder builder = new AggregateBuilder();
-//		builder.add(createEngineDescription(UDPipeSegmenter.class));
-//		SimplePipeline.runPipeline(cas,builder.createAggregate());
-//		System.out.println(XmlFormatter.getPrettyString(cas));
-//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2002, "test");
+//		client.process("Nos Petrus Dei et apostolice sedis gracia episcopus ecclesie Osiliensis, iudex et executor causarum causeque et causis ac partibus infrascriptis a gloriosissimo, serenissimo et invictissimo principe et domino, domino Frederico, divina favente clemencia Romanorum imperatore, semper Augusto etc., unacum reverendo patre, domino abbate in Padyß, Cisterciensis ordinis.", "CLTKSegmenter");
+		client.processCollection(TextImagerOptions.getReader(IOFormat.TEI, "/home/ahemati/Downloads/teiDatein", Language.de), Language.de, new String[]{"LanguageToolSegmenter", "ParagraphSplitter"}, TextImagerOptions.getWriter(IOFormat.TEI, "testTei"));
+		//		System.out.println(XmlFormatter.getPrettyString(client.process("This is a test.", new String[]{"StanfordSegmenter","StanfordPosTagger"})));		
+//		client.process(new File("/home/ahemati/Downloads/CoNLL Files/UD_German/de-ud-dev.conllu"), "LanguageToolLemmatizer,MarMoTTagger");
+//		client.processCollection(new File("/home/ahemati/Downloads/CoNLL Files/UD_German"), IOFormat.CONLLU, Language.de, new String[]{"HeidelTime"}, IOFormat.CONLLU,"test2");
+//		System.out.println(cases.size());
+//		for (CAS cas : cases) {
+//			System.out.println(XmlFormatter.getPrettyString(cas));
+//		}
+		//		client.processCollection(TextImagerOptions.getReader(IOFormat.TXT, "src/test/resources/test", TextImagerOptions.Language.de),
+		//				Language.de, 
+		//				new String[]{"LanguageToolSegmenter","MarMoTLemma","MarMoTTagger"}, 
+		//				TextImagerOptions.getWriter(IOFormat.CONLL2012, "test"));
+		//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2000, "src/test/resources/collectionTestConllOutput");
+		//		CAS cas = client.process("Das ist ein Test.", "SpaCySentenceSegmenter,SpaCyTokenizer,MarMoTLemma,MarMoTTagger");
+		//		JCas cas = JCasFactory.createJCas();
+		//		cas.setDocumentLanguage("en");
+		//		cas.setDocumentText("This is a simple test.");
+		//		AggregateBuilder builder = new AggregateBuilder();
+		//		builder.add(createEngineDescription(UDPipeSegmenter.class));
+		//		SimplePipeline.runPipeline(cas,builder.createAggregate());
+		//		System.out.println(XmlFormatter.getPrettyString(cas));
+		//		client.processCollection(new File("src/test/resources/collectionTestConll"), IOFormat.CONLL2009, Language.de, new String[]{"LanguageToolSegmenter"}, IOFormat.CONLL2002, "test");
+
+		//		args = new String[]{
+		//				"-I","This is a test.",
+		//				"-p","StanfordSegmenter,StanfordPosTagger", 
+		//				"-o","testOutput.conll",
+		//				"--output-format","CONLL2009"
+		//		};
+		//		TextImagerClientCLI.main(args);
+
+		//		String outputConll = FileUtils.readFileToString(new File("testOutput.xmi"),"UTF-8");
+		//		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.xmi"),"UTF-8");
+		//		
+		//		System.out.println(outputConll.trim().equals(outputGoldConll.trim()));
+		//		System.out.println(outputGoldConll.trim().length());
+		//		System.out.println(outputConll.trim().length());
 		
-//		args = new String[]{
-//				"-I","This is a test.",
-//				"-p","StanfordSegmenter,StanfordPosTagger", 
-//				"-o","testOutput.conll",
-//				"--output-format","CONLL2009"
+//		String[]argsConll = new String[]{
+//				"-i","src/test/resources/de-ud-train.txt",
+//				"-p","LanguageToolSegmenter,StanfordPosTagger,LanguageToolSegmenter", 
+//				"-o","our-de-ud-train2.conll",
+//				"--output-format","CONLL2012"
 //		};
-//		TextImagerClientCLI.main(args);
+//		TextImagerClientCLI.main(argsConll);
 		
-		String outputConll = FileUtils.readFileToString(new File("testOutput.xmi"),"UTF-8");
-		String outputGoldConll = FileUtils.readFileToString(new File("src/test/resources/testCLI/outputProcessText.xmi"),"UTF-8");
-		
-		System.out.println(outputConll.trim().equals(outputGoldConll.trim()));
-		System.out.println(outputGoldConll.trim().length());
-		System.out.println(outputConll.trim().length());
 	}
 }

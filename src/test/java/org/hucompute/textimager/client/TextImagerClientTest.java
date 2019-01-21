@@ -19,12 +19,23 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.hucompute.services.type.CategoryCoveredTagged;
 import org.hucompute.textimager.client.TextImagerOptions.IOFormat;
 import org.hucompute.textimager.client.TextImagerOptions.Language;
+import org.hucompute.textimager.uima.io.StringReader;
 import org.hucompute.textimager.util.XmlFormatter;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TextImagerClientTest {
+	
+	@Test
+	public void testStringArrayCasCallback() throws ResourceInitializationException, Exception{
+		String[] inputDocuments = new String[]{"Das ist ein Test.", "This is a test."};
+		TextImagerClient client = new TextImagerClient();
+		List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,inputDocuments),TextImagerOptions.Language.unknown, new String[]{"HucomputeLanguageDetection"}, 2);
+		assertEquals(output.get(0).getDocumentLanguage(), "de");
+		assertEquals(output.get(1).getDocumentLanguage(), "en");
+	}
+	
 
 	@Test
 	public void testCallbackListener() throws ResourceInitializationException, Exception{
@@ -101,7 +112,7 @@ public class TextImagerClientTest {
 	}
 
 
-	@Test
+//	@Test
 	public void testDDC() throws Exception{
 		CAS inputCas = JCasFactory.createJCas().getCas();
 		inputCas.setDocumentLanguage("de");
@@ -109,7 +120,7 @@ public class TextImagerClientTest {
 
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile("src/main/resources/services.xml");
-		CAS output = client.process(inputCas, new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger","FastTextDDC3LemmaNoPunctPOSNoFunctionwordsWithCategoriesService"});
+		CAS output = client.process(inputCas, new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTTagger", "MarMoTLemma"});
 		assertEquals("de", output.getDocumentLanguage());
 		assertEquals("Das", JCasUtil.select(output.getJCas(), Token.class).iterator().next().getCoveredText());
 		System.out.println(XmlFormatter.getPrettyString(output));

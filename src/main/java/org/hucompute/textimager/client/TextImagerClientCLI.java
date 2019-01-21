@@ -236,15 +236,15 @@ public class TextImagerClientCLI {
 			String inputText = commandLine.getOptionValue(INPUT_TEXT_OPTION);
 
 			File outputFile = null;
-//			try {
-				outputFile = new File(commandLine.getOptionValue(OUTPUT_OPTION));
-				//TODO:Check file
-				checkOutputFile(outputFile, allowOverwrite);
-//			} catch (Exception ex) {
-//				System.err.println("error getting output: " + ex.getMessage());
-//				ex.printStackTrace();
-//				System.exit(1);
-//			}
+			//			try {
+			outputFile = new File(commandLine.getOptionValue(OUTPUT_OPTION));
+			//TODO:Check file
+			checkOutputFile(outputFile, allowOverwrite);
+			//			} catch (Exception ex) {
+			//				System.err.println("error getting output: " + ex.getMessage());
+			//				ex.printStackTrace();
+			//				System.exit(1);
+			//			}
 
 			processWithText(servicesXmlFile, pipeline, outputFile, outputFormat, prettyPrint, printOutput, inputText);
 
@@ -369,7 +369,12 @@ public class TextImagerClientCLI {
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			CAS output = client.process(inputText, pipeline);
-			DocumentMetaData.create(output).setDocumentId("Inline Document");
+			try{
+				DocumentMetaData.create(output).setDocumentId("Inline Document");
+			}catch(IllegalStateException e){
+				e.printStackTrace();
+				DocumentMetaData.get(output).setDocumentId("Inline Document");
+			}
 			if(outputFormat == IOFormat.XMI){
 				PrintWriter writer = new PrintWriter(outputFile);
 				if (prettyPrint) {

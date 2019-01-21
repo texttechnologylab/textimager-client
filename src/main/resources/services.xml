@@ -369,6 +369,23 @@
 					<item>Entity</item>
 				</output>
 			</webservice>
+			<webservice name="NeuralNER" group="ner">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>tokenizer</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>de</language>
+				</supportedLanguages>
+				<output>
+					<item>Entity</item>
+				</output>
+			</webservice>
 		</webserviceGroup>
 
 		<webserviceGroup name="time">
@@ -635,10 +652,10 @@
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
 				</remoteDeployInfo>
-				<pipeline>
+ 				<pipeline>
 					<item>tokenizer</item>
 					<item>languageSplitter</item>
-				</pipeline>
+				</pipeline> 
 				<supportedLanguages>
 					<language>ar</language>
 					<language>en</language>
@@ -1171,7 +1188,7 @@
 
 			<webservice name="StanfordSegmenter" group="tokenizer">
 				<remoteDeployInfo>
-					<brokerURL>tcp://service.hucompute.org:61616</brokerURL>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -1307,11 +1324,36 @@
 					<language>de</language>
 				</supportedLanguages>
 			</webservice>
+			<webservice name="CLTKSegmenter" group="tokenizer">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>languageDetection</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>la</language>
+				</supportedLanguages>
+			</webservice>
 		</webserviceGroup>
 
 
 
 		<webserviceGroup name="languageDetection" visible="false">
+			<webservice name="LanguageIdentification" group="languageDetection">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<supportedLanguages>
+					<language>all</language>
+				</supportedLanguages>
+			</webservice>
 			<webservice name="HucomputeLanguageDetection" group="languageDetection">
 				<remoteDeployInfo>
 					<brokerURL>tcp://service.hucompute.org:61616</brokerURL>
@@ -1377,6 +1419,22 @@
 				group="advancedLanguageDetection">
 				<remoteDeployInfo>
 					<brokerURL>tcp://service.hucompute.org:61616</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>tokenizer</item>
+				</pipeline>
+				<parallel>false</parallel>
+				<supportedLanguages>
+					<language>all</language>
+				</supportedLanguages>
+			</webservice>
+			<webservice name="LanguageIdentificationPercentage"
+				group="advancedLanguageDetection">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -2033,6 +2091,57 @@
 					<item>pos</item>
 					<item>lemmatizer</item>
 					<item>ddc</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>de</language>
+					<language>en</language>
+				</supportedLanguages>
+			</webservice>
+			<webservice name="FastTextDDCMulLemmaNoPunctWithCategoriesTextImagerService" group="ddcmul">
+				<remoteDeployInfo>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>tokenizer</item>
+					<item>pos</item>
+					<item>lemmatizer</item>
+					<item>ddc</item>
+				</pipeline>
+				<supportedLanguages>
+					<language>de</language>
+					<language>en</language>
+				</supportedLanguages>
+			</webservice>
+		</webserviceGroup>
+	</webserviceGroups>
+	
+	<webserviceGroups>
+	<webserviceGroup name="misc">
+			<webservice name="FastTextAddLinesAsDivService" group="misc">
+				<remoteDeployInfo>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<supportedLanguages>
+					<language>de</language>
+					<language>en</language>
+				</supportedLanguages>
+			</webservice>
+			<webservice name="ColorAnnotator" group="misc">
+				<remoteDeployInfo>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<pipeline>
+					<item>tokenizer</item>
+					<item>lemmatizer</item>
 				</pipeline>
 				<supportedLanguages>
 					<language>de</language>

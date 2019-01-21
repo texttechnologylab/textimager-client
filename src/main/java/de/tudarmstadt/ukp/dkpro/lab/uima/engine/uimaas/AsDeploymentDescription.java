@@ -32,7 +32,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dom4j.Element;
 import org.dom4j.Namespace;

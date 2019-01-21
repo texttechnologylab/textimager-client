@@ -7,6 +7,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
+import org.hucompute.textimager.client.TextImagerClientCLI;
 
 public class TextImagerClientCLITest {
 
@@ -16,7 +17,7 @@ public class TextImagerClientCLITest {
 		//Test simple CLI
 		String[]args = new String[]{
 				"-I","This is a test.",
-				"-p","StanfordSegmenter,StanfordPosTagger", 
+				"-p","StanfordSegmenter", 
 				"-o","testOutput.xmi"
 		};
 		TextImagerClientCLI.main(args);
@@ -33,12 +34,12 @@ public class TextImagerClientCLITest {
 
 		args = new String[]{
 				"-I","This is a test.",
-				"-p","StanfordSegmenter,StanfordPosTagger", 
+				"-p","StanfordSegmenter", 
 				"-o","testOutput.xmi",
 				"--output-overwrite"
 		};		
 		TextImagerClientCLI.main(args);
-		new File("testOutput.xmi").delete();
+//		new File("testOutput.xmi").delete();
 	}
 	
 	@Test

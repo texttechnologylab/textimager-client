@@ -40,7 +40,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.hucompute.textimager.config.ServiceDataholder;
 import org.w3c.dom.Document;

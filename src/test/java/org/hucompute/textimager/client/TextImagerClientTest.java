@@ -127,7 +127,7 @@ public class TextImagerClientTest {
 	}
 
 
-	@Test
+//	@Test
 	public void testCASInput() throws Exception{
 		CAS inputCas = JCasFactory.createJCas().getCas();
 		inputCas.setDocumentLanguage("de");
@@ -153,7 +153,7 @@ public class TextImagerClientTest {
 		assertEquals("de", output.getDocumentLanguage());
 	}
 
-	@Test
+//	@Test
 	public void testSimplePipeline() throws Exception{
 		TextImagerClient client = new TextImagerClient();
 		CAS output = client.process("Das ist ein Test.", new String[]{"BreakIteratorSegmenter"});
@@ -184,7 +184,7 @@ public class TextImagerClientTest {
 		assertEquals("de", output.getDocumentLanguage());
 	}
 
-	@Test
+//	@Test
 	public void testSimpleFilePipeline() throws Exception{
 		TextImagerClient client = new TextImagerClient();
 		CAS output = client.process(new File("src/test/resources/testfile.txt"), new String[]{"BreakIteratorSegmenter"});

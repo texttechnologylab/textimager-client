@@ -9,6 +9,7 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
 import org.hucompute.textimager.uima.io.tei.TeiReader;
+import org.hucompute.textimager.uima.io.tei.TeiWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -30,7 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
 import de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfReader;
 import de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfWriter;
 //import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
-import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter;
+//import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;

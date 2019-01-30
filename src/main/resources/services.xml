@@ -1155,7 +1155,7 @@
 					<cpctimeout>500000</cpctimeout>
 				</remoteDeployInfo>
 				<pipeline>
-					<item>languageDetection</item>
+<!-- 					<item>languageDetection</item> -->
 					<item>paragraphSplitter</item>
 				</pipeline>
 				<supportedLanguages>	<!-- Supported language codes are: ast-ES, be-BY, br-FR, ca, ca-ES, ca-ES-valencia, 

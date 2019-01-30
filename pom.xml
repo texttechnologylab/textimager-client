@@ -37,33 +37,33 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-assembly-plugin</artifactId> -->
-<!-- 				<version>2.4.1</version> -->
-<!-- 				<configuration> -->
-<!-- 					<descriptorRefs> -->
-<!-- 						<descriptorRef>jar-with-dependencies</descriptorRef> -->
-<!-- 					</descriptorRefs> -->
-<!-- 					<finalName>textimager-CLI</finalName> -->
-<!-- 					<appendAssemblyId>false</appendAssemblyId> -->
-<!-- 					<archive> -->
-<!-- 						<manifest> -->
-<!-- 							<mainClass>org.hucompute.textimager.client.TextImagerClientCLI</mainClass> -->
-<!-- 						</manifest> -->
-<!-- 					</archive> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<finalName>textimager-CLI</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<archive>
+						<manifest>
+							<mainClass>org.hucompute.textimager.client.TextImagerClientCLI</mainClass>
+						</manifest>
+					</archive>
 
-<!-- 				</configuration> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<id>make-assembly</id> -->
-<!-- 						<phase>package</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>single</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -199,11 +199,11 @@
 		<!-- <artifactId>textimager-uima-types</artifactId> -->
 		<!-- <version>0.0.1-SNAPSHOT</version> -->
 		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
-		<!-- <artifactId>textimager-uima-io</artifactId> -->
-		<!-- <version>0.0.1-SNAPSHOT</version> -->
-		<!-- </dependency> -->
+<!-- 		<dependency> -->
+<!-- 		<groupId>org.hucompute.textimager.uima</groupId> -->
+<!-- 		<artifactId>textimager-uima-io</artifactId> -->
+<!-- 		<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
 		<!-- <artifactId>textimager-uima-io-mediawiki</artifactId> -->

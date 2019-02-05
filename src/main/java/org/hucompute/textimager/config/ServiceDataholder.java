@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.google.gson.GsonBuilder;
+
 public class ServiceDataholder {
 	final static Logger logger = Logger.getLogger(ServiceDataholder.class);
 

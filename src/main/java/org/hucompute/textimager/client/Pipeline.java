@@ -47,7 +47,7 @@ public class Pipeline {
 	 * @throws XPathExpressionException 
 	 * @throws MalformedURLException 
 	 */
-	public HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> constructPipeline(HashMap<String, String>options,JCas cas, String configFile) throws MalformedURLException, XPathExpressionException, NullPointerException, SAXException, IOException, ParserConfigurationException{
+	public HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> constructPipeline(HashMap<String, String>options,JCas cas, String configFile,boolean languageDefined) throws MalformedURLException, XPathExpressionException, NullPointerException, SAXException, IOException, ParserConfigurationException{
 		if(configFile !=null)
 			configDataholder = new ConfigDataholder(configFile);
 
@@ -89,19 +89,21 @@ public class Pipeline {
 
 				//potentiell parallel laufende werden ermittelt
 				for (ServiceDataholder element : next.getValue()) {
-//					if(alreadyTaggedWith(element, cas) && !processed.contains(element)){
-//						thisStepProcess.add(element);
-//						thisStepGroupProcess.add(element.getGroup());
-//						continue;
-//					}
-//					else
-						if(!processed.contains(element)){
-							if(groupProcessed.containsAll(element.getPipeline()) || element.getPipeline().size() == 0){
-								thisStepProcess.add(element);
-								thisStepGroupProcess.add(element.getGroup());
-								addToNonConflicting(nonconflicting, element);
-							}
+					//					if(alreadyTaggedWith(element, cas) && !processed.contains(element)){
+					//						thisStepProcess.add(element);
+					//						thisStepGroupProcess.add(element.getGroup());
+					//						continue;
+					//					}
+					//					else
+					
+					if(!processed.contains(element)){
+						if(groupProcessed.containsAll(element.getPipeline()) || element.getPipeline().size() == 0){
+							
+							thisStepProcess.add(element);
+							thisStepGroupProcess.add(element.getGroup());
+							addToNonConflicting(nonconflicting, element);
 						}
+					}
 				}	
 
 
@@ -120,7 +122,17 @@ public class Pipeline {
 					break;
 				}
 			}
-
+			if(languageDefined){
+				for (ArrayList<ServiceDataholder> serviceDataholder : pipeLine) {
+					ServiceDataholder toRemove = null;
+					for (ServiceDataholder serviceDataholder2 : serviceDataholder) {
+						if(serviceDataholder2.getGroup().equals("languageDetection"))
+							toRemove = serviceDataholder2;
+					}
+					serviceDataholder.remove(toRemove);
+				}
+			}
+			System.out.println(pipeLine);
 			if(options.size() == 1 && !options.containsValue("HucomputeLanguageDetectionPercentage"))
 				removeSplitter(pipeLine);
 			//			if(containsMerger){
@@ -218,6 +230,7 @@ public class Pipeline {
 		pipeLine.remove(mergerList);
 		pipeLine.remove(splitterList);
 		pipeLine.remove(advancedLangdetetList);
+		pipeLine.remove(new ArrayList<>());
 
 
 	}
@@ -271,8 +284,8 @@ public class Pipeline {
 		for (ServiceDataholder abstractNLP : pipeline) {
 			if(!uniquePipeline.contains(abstractNLP))
 				uniquePipeline.add(abstractNLP);
-//			if(abstractNLP !=null)
-				getUniqueNLPinPipeline(uniquePipeline,getPipeline(abstractNLP.getPipeline(),options,language),options,language);
+			//			if(abstractNLP !=null)
+			getUniqueNLPinPipeline(uniquePipeline,getPipeline(abstractNLP.getPipeline(),options,language),options,language);
 		}
 		return uniquePipeline;
 	}
@@ -322,7 +335,7 @@ public class Pipeline {
 		//		
 		//		return getUniqueNLPinPipeline(new ArrayList<>(), pipeline, options);
 	}
-	
+
 	public String constructPipelineName(HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline) {
 		String pipelineName = "";
 

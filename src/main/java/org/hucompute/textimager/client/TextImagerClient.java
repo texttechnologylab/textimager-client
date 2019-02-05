@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -141,7 +142,7 @@ public class TextImagerClient {
 		uimaAsEngine.stop();
 		return output;
 	}
-	
+
 	public CAS process(String inputString, String[] annotators) throws Exception{
 		return process(inputString,annotators,null);
 	}
@@ -150,7 +151,7 @@ public class TextImagerClient {
 		ArrayList<String> pipeline = new ArrayList<String>(Arrays.asList(annotators.split(",")).stream().map(x->x.trim()).collect(Collectors.toSet()));
 		return process(inputString,pipeline.toArray(new String[pipeline.size()]),null);
 	}
-	
+
 	public CAS process(String inputString, String annotators,String language) throws Exception{
 		ArrayList<String> pipeline = new ArrayList<String>(Arrays.asList(annotators.split(",")).stream().map(x->x.trim()).collect(Collectors.toSet()));
 		return process(inputString,pipeline.toArray(new String[pipeline.size()]),language);
@@ -194,24 +195,42 @@ public class TextImagerClient {
 	}
 
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize,CollectionReader collectionReader,UimaAsBaseCallbackListener listener,AnalysisEngineDescription casConsumer) throws Exception{
+		return getUimaAsEngine(options, casPoolSize, collectionReader, listener, casConsumer, false,false);
+	}
+
+	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize,CollectionReader collectionReader,UimaAsBaseCallbackListener listener,AnalysisEngineDescription casConsumer,boolean languageDefined, boolean forcePipeline) throws Exception{
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = new BaseUIMAAsynchronousEngine_impl();
 		Pipeline pipelineAPI = new Pipeline();
-		HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline = pipelineAPI.constructPipeline(options,null, configFile);
-
-		Map<String, Object> clientCtx = new HashMap<String, Object>();
-//		System.out.println(pipeline);
-		//Falls die Pipeline nur aus einem Annotator besteht
-		if (pipeline.size() == 1 && pipeline.values().iterator().next().get(0).size() == 1
-				&& pipeline.values().iterator().next().size() == 1) {
-			clientCtx.put(UimaAsynchronousEngine.ServerUri, pipeline.values().iterator().next().get(0).get(0).getBrokerURL());
-			clientCtx.put(UimaAsynchronousEngine.ENDPOINT, pipeline.values().iterator().next().get(0).get(0).getName());
-			clientCtx.put(UimaAsynchronousEngine.Timeout, 12000);
-			clientCtx.put(UimaAsynchronousEngine.GetMetaTimeout, 5000);
-			clientCtx.put(UimaAsynchronousEngine.CpcTimeout, 12000);
-			clientCtx.put(UimaAsynchronousEngine.CasPoolSize, casPoolSize);
-			clientCtx.put(UimaAsynchronousEngine.UimaEeDebug, true);
+		HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline = null;
+		if(forcePipeline){
+			ArrayList<ArrayList<ServiceDataholder>> top = new ArrayList<>();
+			ArrayList<ServiceDataholder> annotators = new ArrayList<>();
+			for (Entry<String, String> option : options.entrySet()) {
+				annotators.add(pipelineAPI.configDataholder.getService(null, option.getValue(), option.getKey()));
+			}
+			top.add(annotators);
+			pipeline = new HashMap<>();
+			pipeline.put(options.entrySet().iterator().next().getKey(), top);
 		}
 		else{
+			pipeline = pipelineAPI.constructPipeline(options,null, configFile,languageDefined);
+		}
+		
+		System.out.println(pipeline);
+		Map<String, Object> clientCtx = new HashMap<String, Object>();
+		//		System.out.println(pipeline);
+		//Falls die Pipeline nur aus einem Annotator besteht
+//		if (pipeline.size() == 1 && pipeline.values().iterator().next().get(0).size() == 1
+//				&& pipeline.values().iterator().next().size() == 1) {
+//			clientCtx.put(UimaAsynchronousEngine.ServerUri, pipeline.values().iterator().next().get(0).get(0).getBrokerURL());
+//			clientCtx.put(UimaAsynchronousEngine.ENDPOINT, pipeline.values().iterator().next().get(0).get(0).getName());
+//			clientCtx.put(UimaAsynchronousEngine.Timeout, 12000);
+//			clientCtx.put(UimaAsynchronousEngine.GetMetaTimeout, 5000);
+//			clientCtx.put(UimaAsynchronousEngine.CpcTimeout, 12000);
+//			clientCtx.put(UimaAsynchronousEngine.CasPoolSize, casPoolSize);
+//			clientCtx.put(UimaAsynchronousEngine.UimaEeDebug, true);
+//		}
+//		else{
 			String pipelineName = pipelineAPI.constructPipelineName(pipeline);
 
 			File aeDescriptionFile = File.createTempFile("aed", ".xml");
@@ -249,7 +268,7 @@ public class TextImagerClient {
 			clientCtx.put(UimaAsynchronousEngine.GetMetaTimeout, 500 * timeout);
 			clientCtx.put(UimaAsynchronousEngine.CpcTimeout, 500 * timeout);
 			clientCtx.put(UimaAsynchronousEngine.CasPoolSize, casPoolSize);
-		}
+//		}
 
 		if(collectionReader != null){
 			uimaAsEngine.setCollectionReader(collectionReader);
@@ -258,7 +277,7 @@ public class TextImagerClient {
 		if(listener != null){
 			uimaAsEngine.addStatusCallbackListener(listener);
 		}
-		
+
 
 		// Initialize the client
 		uimaAsEngine.initialize(clientCtx);
@@ -288,7 +307,7 @@ public class TextImagerClient {
 		Document doc1 = null;
 		if(org.apache.commons.lang.SystemUtils.IS_OS_WINDOWS){
 			try {
-//				System.out.println(new File(new URI(locationDescriptor)));
+				//				System.out.println(new File(new URI(locationDescriptor)));
 				doc1 = dBuilder1.parse(new File(new URI(locationDescriptor)));
 				locationDescriptor = new File(new URI(locationDescriptor)).getPath();
 			} catch (URISyntaxException e) {
@@ -516,7 +535,7 @@ public class TextImagerClient {
 				else
 					options.put(inputLanguage.name(), string);
 		}
-		
+
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
 				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
 				null,TextImagerOptions.getWriter(outputFormat, outputLocation));
@@ -569,7 +588,32 @@ public class TextImagerClient {
 					options.put(inputLanguage.name(), string);
 		}
 
-		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,null,casConsumer);
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,null,casConsumer,inputLanguage == Language.unknown?false:true,false);
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+	
+	/**
+	 * Process collection with cas consumer and custom collection reader.
+	 * @param reader
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param numberOfCases
+	 * @param casConsumer
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(CollectionReader reader,Language inputLanguage,String []annotators, int numberOfCases, AnalysisEngineDescription casConsumer, boolean forcePipeline) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,null,casConsumer,inputLanguage == Language.unknown?false:true,forcePipeline);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
@@ -597,7 +641,7 @@ public class TextImagerClient {
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
-	
+
 	/**
 	 * Process collection
 	 * @param reader Collection Reader

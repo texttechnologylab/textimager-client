@@ -67,7 +67,7 @@
 			</webservice>
 			<webservice name="MateParser" group="parser">
 				<remoteDeployInfo>
-					<brokerURL>tcp://141.2.108.202:61617</brokerURL>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>

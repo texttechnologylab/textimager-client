@@ -37,6 +37,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -52,7 +53,6 @@
 							<mainClass>org.hucompute.textimager.client.TextImagerClientCLI</mainClass>
 						</manifest>
 					</archive>
-
 				</configuration>
 				<executions>
 					<execution>
@@ -91,6 +91,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.10</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimaj-as-core</artifactId>
 			<version>2.10.3</version>
@@ -128,7 +133,6 @@
 			<version>1.8.0</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
@@ -141,13 +145,17 @@
 			<version>1.8.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/de.tudarmstadt.ukp.dkpro.core/de.tudarmstadt.ukp.dkpro.core.api.io-asl -->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
 			<version>1.8.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
+			<version>1.8.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -191,7 +199,7 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab</groupId>
 			<artifactId>textimager-database</artifactId>
-			<version>c6600c7fd9</version>
+			<version>265557f1bb</version>
 		</dependency>
 
 		<!-- <dependency> -->
@@ -199,11 +207,11 @@
 		<!-- <artifactId>textimager-uima-types</artifactId> -->
 		<!-- <version>0.0.1-SNAPSHOT</version> -->
 		<!-- </dependency> -->
-<!-- 		<dependency> -->
-<!-- 		<groupId>org.hucompute.textimager.uima</groupId> -->
-<!-- 		<artifactId>textimager-uima-io</artifactId> -->
-<!-- 		<version>0.0.1-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
+		<!-- <artifactId>textimager-uima-io</artifactId> -->
+		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
 		<!-- <artifactId>textimager-uima-io-mediawiki</artifactId> -->
@@ -214,6 +222,5 @@
 		<!-- <artifactId>uimadatabase</artifactId> -->
 		<!-- <version>0.0.1-SNAPSHOT</version> -->
 		<!-- </dependency> -->
-
 	</dependencies>
 </project>

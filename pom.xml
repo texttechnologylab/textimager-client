@@ -199,7 +199,7 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab</groupId>
 			<artifactId>textimager-database</artifactId>
-			<version>265557f1bb</version>
+			<version>0e7578d553</version>
 		</dependency>
 
 		<!-- <dependency> -->

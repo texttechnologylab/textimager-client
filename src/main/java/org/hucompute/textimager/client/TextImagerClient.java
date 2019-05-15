@@ -203,6 +203,9 @@ public class TextImagerClient {
 		Pipeline pipelineAPI = new Pipeline();
 		HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline = null;
 		if(forcePipeline){
+			// TODO Mehr testen, und schönere Lösung?
+			pipelineAPI.configDataholder = new ConfigDataholder(configFile);
+			
 			ArrayList<ArrayList<ServiceDataholder>> top = new ArrayList<>();
 			ArrayList<ServiceDataholder> annotators = new ArrayList<>();
 			for (Entry<String, String> option : options.entrySet()) {

@@ -23,6 +23,7 @@ public class TextImagerClientCLI {
 	private final static String HELP_OPTION = "help";
 	private final static String SERVICES_FILE_OPTION = "services-file";
 	private final static String PIPELINE_OPTION = "pipeline";
+	private final static String PIPELINE_FORCE_OPTION = "pipeline-force";
 	private final static String INPUT_OPTION = "input";
 	private final static String INPUT_FORMAT_OPTION = "input-format";
 	private final static String INPUT_LANG_OPTION = "input-language";
@@ -57,6 +58,13 @@ public class TextImagerClientCLI {
 				.hasArg(true)
 				.argName("annotators")
 				.desc("The annotators, comma separated.")
+				.build());
+		
+		options.addOption(Option.builder()
+				.longOpt(PIPELINE_FORCE_OPTION)
+				.required(false)
+				.hasArg(false)
+				.desc("Force pipeline.")
 				.build());
 
 		options.addOption(Option.builder("i")
@@ -198,6 +206,9 @@ public class TextImagerClientCLI {
 		boolean printOutput = commandLine.hasOption(OUTPUT_PRINT_OPTION);
 		System.out.println("print output: " + printOutput);
 
+		boolean forcePipeline = commandLine.hasOption(PIPELINE_FORCE_OPTION);
+		System.out.println("force pipeline: " + forcePipeline);
+
 		IOFormat inputFormat = IOFormat.TXT;
 		if (commandLine.hasOption(INPUT_FORMAT_OPTION)) {
 			try {
@@ -285,7 +296,7 @@ public class TextImagerClientCLI {
 					System.exit(1);
 				}
 
-				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage);
+				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage, forcePipeline);
 
 			} else {
 				System.err.println("input and output must either both be a file or directory.");
@@ -312,14 +323,14 @@ public class TextImagerClientCLI {
 		System.out.println("output file: " + outputFile.getAbsolutePath());
 	}
 
-	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage) {
+	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage, boolean forcePipeline) {
 		System.out.println("processing collection: " + inputFile.getAbsolutePath());
 
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			String[] annotators = pipeline.split(",");
-			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath());
+			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath(), forcePipeline);
 		} catch (Exception e) {
 			System.err.println("error processing: " + e.getMessage());
 			e.printStackTrace();

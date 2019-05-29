@@ -575,6 +575,34 @@ public class TextImagerClient {
 	}
 
 	/**
+	 * Process collection with into outputformat
+	 * @param collectionPath Collection base directory
+	 * @param inputFormant
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param outputFormat
+	 * @param outputLocation
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(File collectionPath, IOFormat inputFormant, Language inputLanguage,String []annotators,IOFormat outputFormat, String outputLocation, boolean forcePipeline, String fileSuffix) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage, fileSuffix),
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation), false, forcePipeline);
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+
+	/**
 	 * Process collection with callback listener and custom collection reader.
 	 * @param reader
 	 * @param inputLanguage

@@ -28,6 +28,7 @@ public class TextImagerClientCLI {
 	private final static String INPUT_FORMAT_OPTION = "input-format";
 	private final static String INPUT_LANG_OPTION = "input-language";
 	private final static String INPUT_TEXT_OPTION = "input-text";
+	private final static String INPUT_FILE_SUFFIX_OPTION = "input-file-suffix";
 	private final static String OUTPUT_OPTION = "output";
 	private final static String OUTPUT_FORMAT_OPTION = "output-format";
 	private final static String OUTPUT_OVERWRITE_OPTION = "output-overwrite";
@@ -136,6 +137,14 @@ public class TextImagerClientCLI {
 				.desc("Input language.")
 				.build());
 
+		options.addOption(Option.builder()
+				.longOpt(INPUT_FILE_SUFFIX_OPTION)
+				.required(false)
+				.hasArg(true)
+				.argName("suffix")
+				.desc("Input search for file suffix.")
+				.build());
+
 		return options;
 	}
 
@@ -219,6 +228,13 @@ public class TextImagerClientCLI {
 			}
 		}
 		System.out.println("input format: " + inputFormat);
+
+		// empty file suffix == use default extensions
+		String fileSuffix = "";
+		if (commandLine.hasOption(INPUT_FILE_SUFFIX_OPTION)) {
+			fileSuffix = commandLine.getOptionValue(INPUT_FILE_SUFFIX_OPTION);
+			System.out.println("fileSuffix: " + fileSuffix);
+		}
 
 		IOFormat outputFormat = IOFormat.XMI;
 		if (commandLine.hasOption(OUTPUT_FORMAT_OPTION)) {

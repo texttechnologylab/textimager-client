@@ -119,56 +119,56 @@ public class TextImagerOptions {
 		MEDIAWIKI
 	}
 
-	public static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
+	public static CollectionReader getReader(IOFormat format,String inputDir,Language language, String fileSuffix) throws ResourceInitializationException{
 		Class<? extends CollectionReader> reader = null;
 		String pattern = "[+]**/*.";
 		switch (format) {
-		case TCF:
-			reader = TcfReader.class;
-			pattern = pattern + "tcf";
-			break;
-		case XMI:
-			reader = XmiReader.class;
-			pattern = pattern + "xmi";
-			break;
-		case TXT:
-			reader = TextReader.class;
-			pattern = pattern + "txt";
-			break;
-		case TEI:
-			reader = TeiReader.class;
-			pattern = pattern + "xml";
-			break;
-		case CONLL2000:
-			reader = Conll2000Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2002:
-			reader = Conll2002Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2006:
-			reader = Conll2006Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2009:
-			reader = Conll2009Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2012:
-			reader = Conll2012Reader.class;
-			pattern = pattern + "conll";
-			break;
+			case TCF:
+				reader = TcfReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "tcf" : fileSuffix);
+				break;
+			case XMI:
+				reader = XmiReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "xmi" : fileSuffix);
+				break;
+			case TXT:
+				reader = TextReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "txt" : fileSuffix);
+				break;
+			case TEI:
+				reader = TeiReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "xml" : fileSuffix);
+				break;
+			case CONLL2000:
+				reader = Conll2000Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2002:
+				reader = Conll2002Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2006:
+				reader = Conll2006Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2009:
+				reader = Conll2009Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2012:
+				reader = Conll2012Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
 //		case CONLLU:
 //			reader = ConllUReader.class;
-//			pattern = pattern + "conll";
+//			pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
 //			break;
-		case BINARYCAS:
-			reader = BinaryCasReader.class;
-			pattern = pattern + "bin";
-			break;
-		default:
-			throw new UnsupportedOperationException("Input format not supported. Supported output formats are TCF, XMI, TXT, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
+			case BINARYCAS:
+				reader = BinaryCasReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "bin" : fileSuffix);
+				break;
+			default:
+				throw new UnsupportedOperationException("Input format not supported. Supported output formats are TCF, XMI, TXT, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}
 		if(language == Language.unknown)
 			return CollectionReaderFactory.createReader(reader,
@@ -179,7 +179,7 @@ public class TextImagerOptions {
 //					ConllUReader.PARAM_READ_LEMMA,false,
 //					ConllUReader.PARAM_READ_MORPH,false,
 //					ConllUReader.PARAM_READ_POS,false
-					);
+			);
 		else
 			return CollectionReaderFactory.createReader(reader,
 					ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
@@ -190,7 +190,12 @@ public class TextImagerOptions {
 //					ConllUReader.PARAM_READ_LEMMA,false,
 //					ConllUReader.PARAM_READ_MORPH,false,
 //					ConllUReader.PARAM_READ_POS,false
-					);
+			);
+	}
+
+	public static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
+		// empty suffix to use defaults
+		return getReader(format, inputDir, language, "");
 	}
 	//
 

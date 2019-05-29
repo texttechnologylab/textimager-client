@@ -312,7 +312,7 @@ public class TextImagerClientCLI {
 					System.exit(1);
 				}
 
-				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage, forcePipeline);
+				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage, forcePipeline, fileSuffix);
 
 			} else {
 				System.err.println("input and output must either both be a file or directory.");
@@ -339,14 +339,14 @@ public class TextImagerClientCLI {
 		System.out.println("output file: " + outputFile.getAbsolutePath());
 	}
 
-	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage, boolean forcePipeline) {
+	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage, boolean forcePipeline, String fileSuffix) {
 		System.out.println("processing collection: " + inputFile.getAbsolutePath());
 
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			String[] annotators = pipeline.split(",");
-			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath(), forcePipeline);
+			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath(), forcePipeline, fileSuffix);
 		} catch (Exception e) {
 			System.err.println("error processing: " + e.getMessage());
 			e.printStackTrace();

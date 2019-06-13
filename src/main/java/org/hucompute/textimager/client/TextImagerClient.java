@@ -585,7 +585,7 @@ public class TextImagerClient {
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */
-	public void processCollection(File collectionPath, IOFormat inputFormant, Language inputLanguage,String []annotators,IOFormat outputFormat, String outputLocation, boolean forcePipeline, String fileSuffix) throws ResourceInitializationException, Exception{
+	public void processCollection(File collectionPath, IOFormat inputFormant, Language inputLanguage,String []annotators,IOFormat outputFormat, String outputLocation, boolean forcePipeline, String fileSuffix, String sourceEncoding) throws ResourceInitializationException, Exception{
 		HashMap<String, String> options = new HashMap<>();
 		for (String string : annotators) {
 			if(string.trim().length()>0)
@@ -596,7 +596,7 @@ public class TextImagerClient {
 		}
 
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
-				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage, fileSuffix),
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage, fileSuffix, sourceEncoding),
 				null,TextImagerOptions.getWriter(outputFormat, outputLocation), false, forcePipeline);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();

@@ -29,6 +29,7 @@ public class TextImagerClientCLI {
 	private final static String INPUT_LANG_OPTION = "input-language";
 	private final static String INPUT_TEXT_OPTION = "input-text";
 	private final static String INPUT_FILE_SUFFIX_OPTION = "input-file-suffix";
+	private final static String INPUT_FILE_ENCODING_OPTION = "input-encoding";
 	private final static String OUTPUT_OPTION = "output";
 	private final static String OUTPUT_FORMAT_OPTION = "output-format";
 	private final static String OUTPUT_OVERWRITE_OPTION = "output-overwrite";
@@ -145,6 +146,14 @@ public class TextImagerClientCLI {
 				.desc("Input search for file suffix.")
 				.build());
 
+		options.addOption(Option.builder()
+				.longOpt(INPUT_FILE_ENCODING_OPTION)
+				.required(false)
+				.hasArg(true)
+				.argName("encoding")
+				.desc("Input source encoding.")
+				.build());
+
 		return options;
 	}
 
@@ -257,6 +266,17 @@ public class TextImagerClientCLI {
 			}
 		}
 		System.out.println("input language: " + inputLanguage);
+		
+		String sourceEncoding = "";
+		if (commandLine.hasOption(INPUT_FILE_ENCODING_OPTION)) {
+			try {
+				sourceEncoding = commandLine.getOptionValue(INPUT_FILE_ENCODING_OPTION);
+			} catch (IllegalArgumentException ex) {
+				System.err.println("error setting input encoding: " + ex.getMessage());
+				System.exit(1);
+			}
+		}
+		System.out.println("input encoding: " + sourceEncoding);
 
 		if (commandLine.hasOption(INPUT_TEXT_OPTION)) {
 			// 1) input is direct text -> output must be file
@@ -312,7 +332,7 @@ public class TextImagerClientCLI {
 					System.exit(1);
 				}
 
-				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage, forcePipeline, fileSuffix);
+				processWithCollection(servicesXmlFile, pipeline, outputFile, outputFormat, inputFile, inputFormat, inputLanguage, forcePipeline, fileSuffix, sourceEncoding);
 
 			} else {
 				System.err.println("input and output must either both be a file or directory.");
@@ -339,14 +359,14 @@ public class TextImagerClientCLI {
 		System.out.println("output file: " + outputFile.getAbsolutePath());
 	}
 
-	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage, boolean forcePipeline, String fileSuffix) {
+	private static void processWithCollection(String servicesXmlFilename, String pipeline, File outputFile, IOFormat outputFormat, File inputFile, IOFormat inputFormat, Language inputLanguage, boolean forcePipeline, String fileSuffix, String sourceEncoding) {
 		System.out.println("processing collection: " + inputFile.getAbsolutePath());
 
 		TextImagerClient client = new TextImagerClient();
 		client.setConfigFile(servicesXmlFilename);
 		try {
 			String[] annotators = pipeline.split(",");
-			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath(), forcePipeline, fileSuffix);
+			client.processCollection(inputFile, inputFormat, inputLanguage, annotators, outputFormat, outputFile.getAbsolutePath(), forcePipeline, fileSuffix, sourceEncoding);
 		} catch (Exception e) {
 			System.err.println("error processing: " + e.getMessage());
 			e.printStackTrace();

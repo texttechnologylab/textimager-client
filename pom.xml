@@ -200,6 +200,12 @@
 			<artifactId>textimager-database</artifactId>
 			<version>0e7578d553</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.hucompute.textimager.uima</groupId>
+			<artifactId>textimager-uima-io-html</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<!-- <dependency> -->
 		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->

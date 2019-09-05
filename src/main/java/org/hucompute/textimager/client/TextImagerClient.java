@@ -200,9 +200,12 @@ public class TextImagerClient {
 
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize,CollectionReader collectionReader,UimaAsBaseCallbackListener listener,AnalysisEngineDescription casConsumer,boolean languageDefined, boolean forcePipeline) throws Exception{
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = new BaseUIMAAsynchronousEngine_impl();
-		Pipeline pipelineAPI = new Pipeline(configFile);
+		Pipeline pipelineAPI = new Pipeline();
 		HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline = null;
 		if(forcePipeline){
+			// TODO Mehr testen, und schönere Lösung?
+			pipelineAPI.configDataholder = new ConfigDataholder(configFile);
+			
 			ArrayList<ArrayList<ServiceDataholder>> top = new ArrayList<>();
 			ArrayList<ServiceDataholder> annotators = new ArrayList<>();
 			for (Entry<String, String> option : options.entrySet()) {
@@ -299,7 +302,7 @@ public class TextImagerClient {
 
 		String locationDescriptor = ((Element)((Element)doc.getElementsByTagName("topDescriptor").item(0)).getElementsByTagName("import").item(0)).getAttribute("location");
 
-		File casConsumerFile = new File(System.getProperty("java.io.tmpdir") + "/" + newAnnotatorName + ".xml");
+		File casConsumerFile = File.createTempFile(newAnnotatorName, ".xml");
 		desciption.toXML(new FileOutputStream(casConsumerFile));
 		DocumentBuilderFactory dbFactory1 = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder1 = dbFactory1.newDocumentBuilder();
@@ -539,6 +542,62 @@ public class TextImagerClient {
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
 				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
 				null,TextImagerOptions.getWriter(outputFormat, outputLocation));
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+	
+	/**
+	 * Process collection with into outputformat
+	 * @param collectionPath Collection base directory
+	 * @param inputFormant
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param outputFormat
+	 * @param outputLocation
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(File collectionPath, IOFormat inputFormant, Language inputLanguage,String []annotators,IOFormat outputFormat, String outputLocation, boolean forcePipeline) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation), false, forcePipeline);
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+
+	/**
+	 * Process collection with into outputformat
+	 * @param collectionPath Collection base directory
+	 * @param inputFormant
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param outputFormat
+	 * @param outputLocation
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(File collectionPath, IOFormat inputFormant, Language inputLanguage,String []annotators,IOFormat outputFormat, String outputLocation, boolean forcePipeline, String fileSuffix, String sourceEncoding) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
+				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage, fileSuffix, sourceEncoding),
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation), false, forcePipeline);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}

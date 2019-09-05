@@ -37,7 +37,6 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -189,7 +188,7 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
-			<version>15f4d4f785</version>
+			<version>5ccabb4217</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
@@ -201,7 +200,7 @@
 			<artifactId>textimager-database</artifactId>
 			<version>0e7578d553</version>
 		</dependency>
-
+		
 		<!-- <dependency> -->
 		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
 		<!-- <artifactId>textimager-uima-types</artifactId> -->

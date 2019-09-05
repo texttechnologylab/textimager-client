@@ -2,6 +2,8 @@ package org.hucompute.textimager.client;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
+import java.util.Map;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -10,6 +12,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
 import org.hucompute.textimager.uima.io.tei.TeiReader;
 import org.hucompute.textimager.uima.io.tei.TeiWriter;
+//import org.hucompute.textimager.uima.io.html.EnhancedHtmlReader;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -116,59 +119,64 @@ public class TextImagerOptions {
 		TEI,
 		BINARYCAS,
 		TXT,
-		MEDIAWIKI
+		MEDIAWIKI,
+		HTML
 	}
 
-	public static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
+	public static CollectionReader getReader(IOFormat format,String inputDir,Language language, String fileSuffix, String sourceEncoding) throws ResourceInitializationException{
 		Class<? extends CollectionReader> reader = null;
 		String pattern = "[+]**/*.";
 		switch (format) {
-		case TCF:
-			reader = TcfReader.class;
-			pattern = pattern + "tcf";
-			break;
-		case XMI:
-			reader = XmiReader.class;
-			pattern = pattern + "xmi";
-			break;
-		case TXT:
-			reader = TextReader.class;
-			pattern = pattern + "txt";
-			break;
-		case TEI:
-			reader = TeiReader.class;
-			pattern = pattern + "xml";
-			break;
-		case CONLL2000:
-			reader = Conll2000Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2002:
-			reader = Conll2002Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2006:
-			reader = Conll2006Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2009:
-			reader = Conll2009Reader.class;
-			pattern = pattern + "conll";
-			break;
-		case CONLL2012:
-			reader = Conll2012Reader.class;
-			pattern = pattern + "conll";
-			break;
+			case TCF:
+				reader = TcfReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "tcf" : fileSuffix);
+				break;
+			case XMI:
+				reader = XmiReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "xmi" : fileSuffix);
+				break;
+			case TXT:
+				reader = TextReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "txt" : fileSuffix);
+				break;
+			case TEI:
+				reader = TeiReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "xml" : fileSuffix);
+				break;
+			case CONLL2000:
+				reader = Conll2000Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2002:
+				reader = Conll2002Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2006:
+				reader = Conll2006Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2009:
+				reader = Conll2009Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
+			case CONLL2012:
+				reader = Conll2012Reader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
+				break;
 //		case CONLLU:
 //			reader = ConllUReader.class;
-//			pattern = pattern + "conll";
+//			pattern = pattern + (fileSuffix.isEmpty() ? "conll" : fileSuffix);
 //			break;
-		case BINARYCAS:
-			reader = BinaryCasReader.class;
-			pattern = pattern + "bin";
-			break;
-		default:
-			throw new UnsupportedOperationException("Input format not supported. Supported output formats are TCF, XMI, TXT, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
+			case BINARYCAS:
+				reader = BinaryCasReader.class;
+				pattern = pattern + (fileSuffix.isEmpty() ? "bin" : fileSuffix);
+				break;
+//			case HTML:
+//				reader = EnhancedHtmlReader.class;
+//				pattern = pattern + (fileSuffix.isEmpty() ? "html" : fileSuffix);
+//				return getEnhancedHtmlReader(language, inputDir, pattern, sourceEncoding);
+			default:
+				throw new UnsupportedOperationException("Input format not supported. Supported output formats are TCF, XMI, TXT, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}
 		if(language == Language.unknown)
 			return CollectionReaderFactory.createReader(reader,
@@ -179,7 +187,7 @@ public class TextImagerOptions {
 //					ConllUReader.PARAM_READ_LEMMA,false,
 //					ConllUReader.PARAM_READ_MORPH,false,
 //					ConllUReader.PARAM_READ_POS,false
-					);
+			);
 		else
 			return CollectionReaderFactory.createReader(reader,
 					ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
@@ -190,9 +198,33 @@ public class TextImagerOptions {
 //					ConllUReader.PARAM_READ_LEMMA,false,
 //					ConllUReader.PARAM_READ_MORPH,false,
 //					ConllUReader.PARAM_READ_POS,false
-					);
+			);
+	}
+
+	public static CollectionReader getReader(IOFormat format,String inputDir,Language language) throws ResourceInitializationException{
+		// empty suffix to use defaults
+		return getReader(format, inputDir, language, "", "");
 	}
 	//
+	
+//	private static CollectionReader getEnhancedHtmlReader(Language language, String inputDir, String pattern, String sourceEncoding) throws ResourceInitializationException {
+//		if (sourceEncoding == null || sourceEncoding.isEmpty()) {
+//			sourceEncoding = "auto";
+//		}
+//		if(language == Language.unknown)
+//			return CollectionReaderFactory.createReader(EnhancedHtmlReader.class,
+//					ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
+//					ResourceCollectionReaderBase.PARAM_PATTERNS,pattern,
+//					EnhancedHtmlReader.PARAM_SOURCE_ENCODING, sourceEncoding
+//			);
+//		else
+//			return CollectionReaderFactory.createReader(EnhancedHtmlReader.class,
+//					ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,inputDir,
+//					ResourceCollectionReaderBase.PARAM_PATTERNS,pattern,
+//					ResourceCollectionReaderBase.PARAM_LANGUAGE,language,
+//					EnhancedHtmlReader.PARAM_SOURCE_ENCODING, sourceEncoding
+//			);
+//	}
 
 	public static AnalysisEngineDescription getWriter(IOFormat format,String outputDir) throws ResourceInitializationException{
 		return getWriter(format, outputDir, false);

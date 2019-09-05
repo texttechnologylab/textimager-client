@@ -31,9 +31,16 @@ public class Pipeline {
 	boolean containsBabelText = false;
 
 	ConfigDataholder configDataholder;
-	public Pipeline() throws JAXBException, IOException{
-		configDataholder = new ConfigDataholder();
+	public Pipeline(String configFile) throws JAXBException, IOException{
+		if(configFile !=null)
+			configDataholder = new ConfigDataholder(configFile);
+		else
+			configDataholder = new ConfigDataholder(configFile);
 		containsBabelText = false;
+	}
+	
+	public Pipeline() throws JAXBException, IOException{
+		this(null);
 	}
 
 	/**

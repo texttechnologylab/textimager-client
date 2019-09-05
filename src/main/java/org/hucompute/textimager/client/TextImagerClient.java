@@ -200,7 +200,7 @@ public class TextImagerClient {
 
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options, int casPoolSize,CollectionReader collectionReader,UimaAsBaseCallbackListener listener,AnalysisEngineDescription casConsumer,boolean languageDefined, boolean forcePipeline) throws Exception{
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = new BaseUIMAAsynchronousEngine_impl();
-		Pipeline pipelineAPI = new Pipeline();
+		Pipeline pipelineAPI = new Pipeline(configFile);
 		HashMap<String, ArrayList<ArrayList<ServiceDataholder>>> pipeline = null;
 		if(forcePipeline){
 			ArrayList<ArrayList<ServiceDataholder>> top = new ArrayList<>();

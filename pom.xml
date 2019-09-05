@@ -199,7 +199,7 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab</groupId>
 			<artifactId>textimager-database</artifactId>
-			<version>265557f1bb</version>
+			<version>0e7578d553</version>
 		</dependency>
 
 		<!-- <dependency> -->
@@ -221,6 +221,18 @@
 		<!-- <groupId>org.hucompute.services</groupId> -->
 		<!-- <artifactId>uimadatabase</artifactId> -->
 		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
+		<!-- <artifactId>textimager-uima-HUComputeNER</artifactId> -->
+		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>de.tudarmstadt.ukp.dkpro.core</groupId> -->
+		<!-- <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId> -->
+		<!-- <version>1.8.0</version> -->
 		<!-- </dependency> -->
 	</dependencies>
 </project>

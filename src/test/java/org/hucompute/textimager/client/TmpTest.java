@@ -116,9 +116,10 @@ public class TmpTest {
 		//		System.out.println(XmlFormatter.getPrettyString(output));
 //
 		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile("src/main/resources/services.xml");
+//		client.setConfigFile("src/main/resources/services.xml");
 //		client.process("Nos Petrus Dei et apostolice sedis gracia episcopus ecclesie Osiliensis, iudex et executor causarum causeque et causis ac partibus infrascriptis a gloriosissimo, serenissimo et invictissimo principe et domino, domino Frederico, divina favente clemencia Romanorum imperatore, semper Augusto etc., unacum reverendo patre, domino abbate in Padyß, Cisterciensis ordinis.", "CLTKSegmenter");
-		client.processCollection(TextImagerOptions.getReader(IOFormat.TEI, "/home/ahemati/Downloads/teiDatein", Language.de), Language.de, new String[]{"LanguageToolSegmenter", "ParagraphSplitter"}, TextImagerOptions.getWriter(IOFormat.TEI, "testTei"));
+		CAS cas = client.process("Das ist ein Test aus Frankfurt am Main.","LanguageToolSegmenter,StanfordPosTagger,ParagraphSplitter,MarMoTLemma,EuroWordNetTagger");
+		System.out.println(XmlFormatter.getPrettyString(cas));
 		//		System.out.println(XmlFormatter.getPrettyString(client.process("This is a test.", new String[]{"StanfordSegmenter","StanfordPosTagger"})));		
 //		client.process(new File("/home/ahemati/Downloads/CoNLL Files/UD_German/de-ud-dev.conllu"), "LanguageToolLemmatizer,MarMoTTagger");
 //		client.processCollection(new File("/home/ahemati/Downloads/CoNLL Files/UD_German"), IOFormat.CONLLU, Language.de, new String[]{"HeidelTime"}, IOFormat.CONLLU,"test2");

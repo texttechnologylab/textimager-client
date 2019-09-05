@@ -42,18 +42,24 @@ public class ConfigDataholder {
 	private static Document getPropertiesDoc() throws MalformedURLException, SAXException, IOException, ParserConfigurationException{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
+
 		Document doc;
-		try{
-			doc = db.parse(localFile);
-		}catch(FileNotFoundException e){
+		if(localFile != null)
+			try{
+				System.out.println(localFile);
+				doc = db.parse(localFile);
+			}catch(FileNotFoundException e){
+				doc = db.parse(new URL(remoteFile).openStream());
+			}
+		else
 			doc = db.parse(new URL(remoteFile).openStream());
-		}
+		System.out.println(doc);
 		return doc;
 	}
 
 	public ConfigDataholder() {
 	}
-	
+
 	public ConfigDataholder(String configFile) {
 		this.localFile = configFile;
 	}
@@ -72,6 +78,7 @@ public class ConfigDataholder {
 			if(classname == null)
 				return getDefaultWebserviceByGroup(groupName,language);
 			Document doc = getPropertiesDoc();
+			System.out.println(doc);
 			doc.getDocumentElement().normalize();
 			XPathFactory xPathfactory = XPathFactory.newInstance();
 			XPath xpath = xPathfactory.newXPath();
@@ -81,11 +88,12 @@ public class ConfigDataholder {
 			ServiceDataholder holder = new ServiceDataholder(node);
 			return holder;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new NullPointerException("could not find service " + classname + " (" + groupName + "): " + e.getMessage());
 		}
 		//return null;
 	}
-	
+
 
 	public ArrayList<ServiceDataholder> getWebserviceGroup(String groupName){
 		ArrayList<ServiceDataholder> output = new ArrayList<ServiceDataholder>();
@@ -114,7 +122,7 @@ public class ConfigDataholder {
 			if(webserviceHolder.supportedLanguages.contains(language) || webserviceHolder.supportedLanguages.contains("all"))
 				return webserviceHolder;
 		}
-		
+
 		return null;
 	}
 
@@ -150,7 +158,7 @@ public class ConfigDataholder {
 		}
 		return dest.getAbsolutePath();
 	}
-	
+
 	public static String getDd2SpringPath(){
 		File dest = new File(System.getProperty("java.io.tmpdir")+"/dd2spring.xsl");
 		if(!dest.exists()) { 

@@ -82,7 +82,7 @@ public class TextImagerClientTest {
 						TestReader.PARAM_MY_FANCY_PARAM, new String[]{"das ist ein param","hier noch einer"},
 						TestReader.PARAM_MY_FANCY_PARAM_2,42),
 				Language.de,
-				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger","FastTextDDC3LemmaNoPunctPOSNoFunctionwordsWithCategoriesService"},
+				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger"},
 				10,
 				new UimaAsBaseCallbackListener() {
 					@Override

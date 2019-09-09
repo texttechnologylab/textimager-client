@@ -89,6 +89,7 @@
 	</repositories>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
@@ -125,7 +126,6 @@
 			<artifactId>uimafit-core</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
@@ -179,28 +179,41 @@
 			<artifactId>dom4j</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io</artifactId>
-			<version>15f4d4f785</version>
+			<version>7899071e84</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
-			<version>5ccabb4217</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
-			<artifactId>textimager-uima-types</artifactId>
-			<version>15f4d4f785</version>
+			<version>7899071e84</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab</groupId>
 			<artifactId>textimager-database</artifactId>
 			<version>0e7578d553</version>
+			<exclusions>
+				<exclusion>
+					<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
+					<artifactId>
+						de.tudarmstadt.ukp.wikipedia.api
+					</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.github.texttechnologylab</groupId>
+			<artifactId>UIMATypeSystem</artifactId>
+			<version>ca495bd3f7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
+			<artifactId>textimager-uima-types</artifactId>
+			<version>7899071e84</version>
+		</dependency>
+
 		<!-- <dependency> -->
 		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
 		<!-- <artifactId>textimager-uima-types</artifactId> -->
@@ -231,7 +244,15 @@
 		<!-- <dependency> -->
 		<!-- <groupId>de.tudarmstadt.ukp.dkpro.core</groupId> -->
 		<!-- <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId> -->
-		<!-- <version>1.8.0</version> -->
+		<!-- <version>1.10.0</version> -->
 		<!-- </dependency> -->
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.hucompute.textimager.uima</groupId> -->
+		<!-- <artifactId>textimager-uima-HUComputeNER</artifactId> -->
+		<!-- <version>0.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
+
 	</dependencies>
 </project>

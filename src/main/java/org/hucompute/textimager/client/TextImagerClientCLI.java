@@ -419,7 +419,6 @@ public class TextImagerClientCLI {
 			try{
 				DocumentMetaData.create(output).setDocumentId("Inline Document");
 			}catch(IllegalStateException e){
-				e.printStackTrace();
 				DocumentMetaData.get(output).setDocumentId("Inline Document");
 			}
 			if(outputFormat == IOFormat.XMI){

@@ -659,6 +659,32 @@ public class TextImagerClient {
 	 * @param annotators
 	 * @param numberOfCases
 	 * @param casConsumer
+	 * @param callbackListener
+	 * @throws ResourceInitializationException
+	 * @throws Exception
+	 */
+	public void processCollection(CollectionReader reader,Language inputLanguage,String []annotators, int numberOfCases, AnalysisEngineDescription casConsumer, UimaAsBaseCallbackListener callbackListener) throws ResourceInitializationException, Exception{
+		HashMap<String, String> options = new HashMap<>();
+		for (String string : annotators) {
+			if(string.trim().length()>0)
+				if(options.containsKey(inputLanguage.name()))
+					options.put(inputLanguage.name(), options.get(inputLanguage.name())+","+string);
+				else
+					options.put(inputLanguage.name(), string);
+		}
+
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,numberOfCases,reader,callbackListener,casConsumer,inputLanguage == Language.unknown?false:true,false);
+		uimaAsEngine.process();
+		uimaAsEngine.stop();
+	}
+	
+	/**
+	 * Process collection with cas consumer and custom collection reader.
+	 * @param reader
+	 * @param inputLanguage
+	 * @param annotators
+	 * @param numberOfCases
+	 * @param casConsumer
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */

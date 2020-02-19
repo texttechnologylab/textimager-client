@@ -17,7 +17,7 @@ public class TextImagerClientCLITest {
 		//Test simple CLI
 		String[]args = new String[]{
 				"-I","This is a test.",
-				"-p","StanfordSegmenter", 
+				"-p","CoreNlpSegmenter", 
 				"-o","testOutput.xmi"
 		};
 		TextImagerClientCLI.main(args);
@@ -34,7 +34,7 @@ public class TextImagerClientCLITest {
 
 		args = new String[]{
 				"-I","This is a test.",
-				"-p","StanfordSegmenter", 
+				"-p","CoreNlpSegmenter", 
 				"-o","testOutput.xmi",
 				"--output-overwrite"
 		};		
@@ -48,7 +48,7 @@ public class TextImagerClientCLITest {
 		//Test conll output
 		String[]argsConll = new String[]{
 				"-I","This is a test.",
-				"-p","StanfordSegmenter,StanfordPosTagger", 
+				"-p","CoreNlpSegmenter,CoreNlpPosTagger", 
 				"-o","testOutput.conll",
 				"--output-format","CONLL2009"
 		};
@@ -65,7 +65,7 @@ public class TextImagerClientCLITest {
 		//Test conll output
 		String[]argsConll = new String[]{
 				"-i","src/test/resources/testCLI/input.txt",
-				"-p","StanfordSegmenter,StanfordPosTagger", 
+				"-p","CoreNlpSegmenter,CoreNlpPosTagger", 
 				"-o","testTxtOutput.conll",
 				"--output-format","CONLL2009"
 		};

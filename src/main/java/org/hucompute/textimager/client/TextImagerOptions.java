@@ -9,35 +9,34 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
-import org.hucompute.textimager.uima.io.tei.TeiReader;
-import org.hucompute.textimager.uima.io.tei.TeiWriter;
 //import org.hucompute.textimager.uima.io.html.EnhancedHtmlReader;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.dkpro.core.api.io.ResourceCollectionReaderBase;
 //
-import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader;
-import de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Writer;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Writer;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Writer;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
-//import de.tudarmstadt.ukp.dkpro.core.io.conll.ConllUReader;
-//import de.tudarmstadt.ukp.dkpro.core.io.conll.ConllUWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfReader;
-import de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfWriter;
-//import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
-//import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader;
-import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
+import org.dkpro.core.io.bincas.BinaryCasReader;
+import org.dkpro.core.io.bincas.BinaryCasWriter;
+import org.dkpro.core.io.conll.Conll2000Reader;
+import org.dkpro.core.io.conll.Conll2000Writer;
+import org.dkpro.core.io.conll.Conll2002Reader;
+import org.dkpro.core.io.conll.Conll2002Writer;
+import org.dkpro.core.io.conll.Conll2006Reader;
+import org.dkpro.core.io.conll.Conll2006Writer;
+import org.dkpro.core.io.conll.Conll2009Reader;
+import org.dkpro.core.io.conll.Conll2009Writer;
+import org.dkpro.core.io.conll.Conll2012Reader;
+import org.dkpro.core.io.conll.Conll2012Writer;
+//import org.dkpro.core.io.conll.ConllUReader;
+//import org.dkpro.core.io.conll.ConllUWriter;
+import org.dkpro.core.io.tcf.TcfReader;
+import org.dkpro.core.io.tcf.TcfWriter;
+import org.dkpro.core.io.tei.TeiReader;
+import org.dkpro.core.io.tei.TeiWriter;
+//import org.dkpro.core.io.tei.TeiReader;
+//import org.dkpro.core.io.tei.TeiWriter;
+import org.dkpro.core.io.text.TextReader;
+import org.dkpro.core.io.xmi.XmiReader;
+import org.dkpro.core.io.xmi.XmiWriter;
 
 public class TextImagerOptions {
 	public enum Language{
@@ -263,9 +262,9 @@ public class TextImagerOptions {
 		case BINARYCAS:
 			consumer = BinaryCasWriter.class;
 			break;
-		case MEDIAWIKI:
-			consumer = MediawikiWriter.class;
-			break;
+//		case MEDIAWIKI:
+//			consumer = MediawikiWriter.class;
+//			break;
 		default:
 			throw new UnsupportedOperationException("Output format not supported. Supported output formats are TCF, XMI, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}

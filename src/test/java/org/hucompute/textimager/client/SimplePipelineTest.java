@@ -18,7 +18,6 @@ import org.apache.uima.resource.CustomResourceSpecifier;
 import org.apache.uima.resource.Parameter;
 import org.apache.uima.resource.impl.CustomResourceSpecifier_impl;
 import org.apache.uima.resource.impl.Parameter_impl;
-import org.dkpro.core.corenlp.CoreNlpPosTagger;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.xmi.XmiReader;
 import org.dkpro.core.io.xmi.XmiWriter;

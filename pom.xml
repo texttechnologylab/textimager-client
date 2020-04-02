@@ -15,8 +15,12 @@
 			<id>ukp-oss-model-releases</id>
 			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
 		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
-	
+
 	<profiles>
 		<profile>
 			<id>source</id>
@@ -150,22 +154,21 @@
 			<artifactId>dom4j</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.hucompute.textimager.uima</groupId>
-			<artifactId>textimager-uima-types</artifactId>
-			<version>0.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hucompute.textimager.uima</groupId>
+			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.2.rc2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hucompute.textimager.uima</groupId>
-			<artifactId>textimager-uima-deploy</artifactId>
-			<version>0.0.2</version>
+			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
+			<artifactId>textimager-uima-types</artifactId>
+			<version>0.0.2.rc2</version>
 		</dependency>
+		<!-- <dependency> <groupId>org.hucompute.textimager.uima</groupId> <artifactId>textimager-uima-types</artifactId> 
+			<version>0.0.2</version> </dependency> <dependency> <groupId>org.hucompute.textimager.uima</groupId> 
+			<artifactId>textimager-uima-io</artifactId> <version>0.0.2</version> </dependency> 
+			<dependency> <groupId>org.hucompute.textimager.uima</groupId> <artifactId>textimager-uima-deploy</artifactId> 
+			<version>0.0.2</version> </dependency> -->
 
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

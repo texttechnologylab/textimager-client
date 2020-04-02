@@ -17,7 +17,7 @@ public class TextImagerClientCLITest {
 		//Test simple CLI
 		String[]args = new String[]{
 				"-I","This is a test.",
-				"-p","CoreNlpSegmenter", 
+				"-p","LanguageIdentification", 
 				"-o","testOutput.xmi"
 		};
 		TextImagerClientCLI.main(args);
@@ -34,7 +34,7 @@ public class TextImagerClientCLITest {
 
 		args = new String[]{
 				"-I","This is a test.",
-				"-p","CoreNlpSegmenter", 
+				"-p","LanguageIdentification", 
 				"-o","testOutput.xmi",
 				"--output-overwrite"
 		};		

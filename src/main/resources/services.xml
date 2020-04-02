@@ -293,7 +293,7 @@
 			</webservice>
 			<webservice name="NeuralNER" group="ner" visible="false">
 				<remoteDeployInfo>
-					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -852,7 +852,7 @@
 		<webserviceGroup name="languageDetection" visible="false">
 			<webservice name="LanguageIdentification" group="languageDetection">
 				<remoteDeployInfo>
-					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -896,7 +896,7 @@
 			visible="false">
 			<webservice name="LanguageIdentificationPercentage" group="advancedLanguageDetection">
 				<remoteDeployInfo>
-					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>

@@ -16,7 +16,6 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.hucompute.services.type.CategoryCoveredTagged;
 import org.hucompute.textimager.client.TextImagerOptions.IOFormat;
 import org.hucompute.textimager.client.TextImagerOptions.Language;
 import org.hucompute.textimager.uima.io.StringReader;
@@ -31,85 +30,85 @@ public class TextImagerClientTest {
 	public void testStringArrayCasCallback() throws ResourceInitializationException, Exception{
 		String[] inputDocuments = new String[]{"Das ist ein Test.", "This is a test."};
 		TextImagerClient client = new TextImagerClient();
-		List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,inputDocuments),TextImagerOptions.Language.unknown, new String[]{"HucomputeLanguageDetection"}, 2);
+		List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,inputDocuments),TextImagerOptions.Language.unknown, new String[]{"LanguageIdentification"}, 2);
 		assertEquals(output.get(0).getDocumentLanguage(), "de");
 		assertEquals(output.get(1).getDocumentLanguage(), "en");
 	}
 	
 
-	@Test
-	public void testCallbackListener() throws ResourceInitializationException, Exception{
-		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile("src/main/resources/services.xml");
-		client.processCollection(
-				new File("src/test/resources/collectionTest"),
-				IOFormat.TXT,
-				TextImagerOptions.Language.de,
-				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma"},
-				10,
-				new UimaAsBaseCallbackListener() {
-					@Override
-					public void entityProcessComplete(CAS aCas, EntityProcessStatus aStatus) {
-						// TODO Auto-generated method stub
-						super.entityProcessComplete(aCas, aStatus);
-						try {
-							Collection<CategoryCoveredTagged> ddcs = JCasUtil.select(aCas.getJCas(), CategoryCoveredTagged.class);
-							//System.out.println(ddcs.size());
+//	@Test
+//	public void testCallbackListener() throws ResourceInitializationException, Exception{
+//		TextImagerClient client = new TextImagerClient();
+//		client.setConfigFile("src/main/resources/services.xml");
+//		client.processCollection(
+//				new File("src/test/resources/collectionTest"),
+//				IOFormat.TXT,
+//				TextImagerOptions.Language.de,
+//				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma"},
+//				10,
+//				new UimaAsBaseCallbackListener() {
+//					@Override
+//					public void entityProcessComplete(CAS aCas, EntityProcessStatus aStatus) {
+//						// TODO Auto-generated method stub
+//						super.entityProcessComplete(aCas, aStatus);
+//						try {
+//							Collection<CategoryCoveredTagged> ddcs = JCasUtil.select(aCas.getJCas(), CategoryCoveredTagged.class);
+//							//System.out.println(ddcs.size());
+//
+//						} catch (CASException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//					}
+//
+//					@Override
+//					public void collectionProcessComplete(EntityProcessStatus aStatus) {
+//						super.collectionProcessComplete(aStatus);
+//						//System.out.println("collection complete");
+//					};
+//				}
+//				);
+//	}
 
-						} catch (CASException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-					@Override
-					public void collectionProcessComplete(EntityProcessStatus aStatus) {
-						super.collectionProcessComplete(aStatus);
-						//System.out.println("collection complete");
-					};
-				}
-				);
-	}
-
-	@Test
-	public void testCallbackListenerCustomReader() throws ResourceInitializationException, Exception{
-		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile("src/main/resources/services.xml");
-		// CollectionReader reader,String inputLanguage,String []annotators, int numberOfCases, UimaAsBaseCallbackListener callbackListener
-		client.processCollection(
-				CollectionReaderFactory.createCollectionReader(
-						TestReader.class, 
-						TestReader.PARAM_MY_FANCY_PARAM, new String[]{"das ist ein param","hier noch einer"},
-						TestReader.PARAM_MY_FANCY_PARAM_2,42),
-				Language.de,
-				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger"},
-				10,
-				new UimaAsBaseCallbackListener() {
-					@Override
-					public void entityProcessComplete(CAS aCas, EntityProcessStatus aStatus) {
-						super.entityProcessComplete(aCas, aStatus);
-						System.out.println(XmlFormatter.getPrettyString(aCas));
-						try {
-							Collection<CategoryCoveredTagged> ddcs = JCasUtil.select(aCas.getJCas(), CategoryCoveredTagged.class);
-							Iterator<CategoryCoveredTagged> i = ddcs.iterator();
-							if (i.hasNext()) {
-								CategoryCoveredTagged lCategoryCoveredTagged = i.next();
-								System.out.println(lCategoryCoveredTagged.getBegin()+"-"+lCategoryCoveredTagged.getEnd()+"\t"+lCategoryCoveredTagged.getValue());
-							}
-
-						} catch (CASException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-					@Override
-					public void collectionProcessComplete(EntityProcessStatus aStatus) {
-						super.collectionProcessComplete(aStatus);
-						System.out.println("collection complete");
-					};
-				});
-	}
+//	@Test
+//	public void testCallbackListenerCustomReader() throws ResourceInitializationException, Exception{
+//		TextImagerClient client = new TextImagerClient();
+//		client.setConfigFile("src/main/resources/services.xml");
+//		// CollectionReader reader,String inputLanguage,String []annotators, int numberOfCases, UimaAsBaseCallbackListener callbackListener
+//		client.processCollection(
+//				CollectionReaderFactory.createCollectionReader(
+//						TestReader.class, 
+//						TestReader.PARAM_MY_FANCY_PARAM, new String[]{"das ist ein param","hier noch einer"},
+//						TestReader.PARAM_MY_FANCY_PARAM_2,42),
+//				Language.de,
+//				new String[]{"LanguageToolSegmenter", "ParagraphSplitter", "MarMoTLemma", "MarMoTTagger"},
+//				10,
+//				new UimaAsBaseCallbackListener() {
+//					@Override
+//					public void entityProcessComplete(CAS aCas, EntityProcessStatus aStatus) {
+//						super.entityProcessComplete(aCas, aStatus);
+//						System.out.println(XmlFormatter.getPrettyString(aCas));
+//						try {
+//							Collection<CategoryCoveredTagged> ddcs = JCasUtil.select(aCas.getJCas(), CategoryCoveredTagged.class);
+//							Iterator<CategoryCoveredTagged> i = ddcs.iterator();
+//							if (i.hasNext()) {
+//								CategoryCoveredTagged lCategoryCoveredTagged = i.next();
+//								System.out.println(lCategoryCoveredTagged.getBegin()+"-"+lCategoryCoveredTagged.getEnd()+"\t"+lCategoryCoveredTagged.getValue());
+//							}
+//
+//						} catch (CASException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//					}
+//
+//					@Override
+//					public void collectionProcessComplete(EntityProcessStatus aStatus) {
+//						super.collectionProcessComplete(aStatus);
+//						System.out.println("collection complete");
+//					};
+//				});
+//	}
 
 
 //	@Test
@@ -142,14 +141,14 @@ public class TextImagerClientTest {
 	@Test
 	public void testSingleAnnotator() throws Exception{
 		TextImagerClient client = new TextImagerClient();
-		CAS output = client.process("Das ist ein Test.", new String[]{"HucomputeLanguageDetection"});
+		CAS output = client.process("Das ist ein Test.", new String[]{"LanguageIdentification"});
 		assertEquals("de", output.getDocumentLanguage());
 	}
 
 	@Test
 	public void testWrtonAnnotator() throws Exception{
 		TextImagerClient client = new TextImagerClient();
-		CAS output = client.process("Das ist ein Test.", new String[]{"HucomputeLanguageDetection"});
+		CAS output = client.process("Das ist ein Test.", new String[]{"LanguageIdentification"});
 		assertEquals("de", output.getDocumentLanguage());
 	}
 
@@ -161,7 +160,7 @@ public class TextImagerClientTest {
 		assertEquals(5, JCasUtil.select(output.getJCas(), Token.class).size());
 		assertEquals("Das", JCasUtil.select(output.getJCas(), Token.class).iterator().next().getCoveredText());
 
-		CAS output3 = client.process("Das ist ein Test.",  new String[]{"BreakIteratorSegmenter","HucomputeLanguageDetection"});
+		CAS output3 = client.process("Das ist ein Test.",  new String[]{"BreakIteratorSegmenter","LanguageIdentification"});
 		assertEquals("de", output3.getDocumentLanguage());
 		assertEquals(5, JCasUtil.select(output3.getJCas(), Token.class).size());
 		assertEquals("Das", JCasUtil.select(output3.getJCas(), Token.class).iterator().next().getCoveredText());
@@ -171,7 +170,7 @@ public class TextImagerClientTest {
 		assertEquals(5, JCasUtil.select(output1.getJCas(), Token.class).size());
 		assertEquals("Das", JCasUtil.select(output1.getJCas(), Token.class).iterator().next().getCoveredText());
 
-		CAS output2 = client.process("Das ist ein Test.", "BreakIteratorSegmenter,HucomputeLanguageDetection");
+		CAS output2 = client.process("Das ist ein Test.", "BreakIteratorSegmenter,LanguageIdentification");
 		assertEquals("de", output2.getDocumentLanguage());
 		assertEquals(5, JCasUtil.select(output2.getJCas(), Token.class).size());
 		assertEquals("Das", JCasUtil.select(output2.getJCas(), Token.class).iterator().next().getCoveredText());
@@ -180,7 +179,7 @@ public class TextImagerClientTest {
 	@Test
 	public void testSingleFileAnnotator() throws Exception{
 		TextImagerClient client = new TextImagerClient();
-		CAS output = client.process(new File("src/test/resources/testfile.txt"), new String[]{"HucomputeLanguageDetection"});
+		CAS output = client.process(new File("src/test/resources/testfile.txt"), new String[]{"LanguageIdentification"});
 		assertEquals("de", output.getDocumentLanguage());
 	}
 

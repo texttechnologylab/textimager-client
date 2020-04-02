@@ -36,7 +36,8 @@ import org.xml.sax.SAXException;
 
 public class ConfigDataholder {
 	final static Logger logger = Logger.getLogger(ConfigDataholder.class);
-	private static String localFile = "/home/ahemati/workspace/services/services-server/src/main/resources/surls.xml";
+//	private static String localFile = "/home/ahemati/workspace/services/services-server/src/main/resources/surls.xml";
+	private static String localFile = null;
 	private final static String remoteFile= "http://service.hucompute.org/urls_v2.xml";
 
 	private static Document getPropertiesDoc() throws MalformedURLException, SAXException, IOException, ParserConfigurationException{

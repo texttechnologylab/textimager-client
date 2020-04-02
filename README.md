@@ -17,7 +17,7 @@ git clone https://github.com/texttechnologylab/textimager-client
 Navigate to the directory and build project
 ```
 cd ../some/dir/textimager-client
-mvn install -DskipTests
+mvn install -DskipTests -P CLI
 ```
 
 ### Running
@@ -29,7 +29,7 @@ Instructions and help will be printed with:  ```java -jar target/textimager-CLI
 
 Example client call:
 ```
-java -Dfile.encoding=UTF-8 -jar target/textimager-CLI.jar -I "This is a test." -p "StanfordSegmenter,StanfordPosTagger" -o "test.xmi"
+java -Dfile.encoding=UTF-8 -jar target/textimager-CLI.jar -I "This is a test." -p "CoreNlpSegmenter,CoreNlpPosTagger" -o "test.xmi"
 ```
 
 The above example will parse the input document defined in ```-I``` with the pipeline defined in ```-p``` and writes the output as XMI defined in ```-o```

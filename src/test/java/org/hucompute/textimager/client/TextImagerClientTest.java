@@ -27,6 +27,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TextImagerClientTest {
 	
 	@Test
+	public void testForceLanguage() throws ResourceInitializationException, Exception{
+		TextImagerClient client = new TextImagerClient();
+		CAS output = client.process("This is a test.", "BreakIteratorSegmenter", "de");
+		System.out.println(XmlFormatter.getPrettyString(output));
+		assertEquals(output.getDocumentLanguage(), "de");
+
+		
+	}
+	
+	@Test
 	public void testStringArrayCasCallback() throws ResourceInitializationException, Exception{
 		String[] inputDocuments = new String[]{"Das ist ein Test.", "This is a test."};
 		TextImagerClient client = new TextImagerClient();
@@ -126,7 +136,7 @@ public class TextImagerClientTest {
 	}
 
 
-//	@Test
+	@Test
 	public void testCASInput() throws Exception{
 		CAS inputCas = JCasFactory.createJCas().getCas();
 		inputCas.setDocumentLanguage("de");
@@ -145,14 +155,8 @@ public class TextImagerClientTest {
 		assertEquals("de", output.getDocumentLanguage());
 	}
 
-	@Test
-	public void testWrtonAnnotator() throws Exception{
-		TextImagerClient client = new TextImagerClient();
-		CAS output = client.process("Das ist ein Test.", new String[]{"LanguageIdentification"});
-		assertEquals("de", output.getDocumentLanguage());
-	}
 
-//	@Test
+	@Test
 	public void testSimplePipeline() throws Exception{
 		TextImagerClient client = new TextImagerClient();
 		CAS output = client.process("Das ist ein Test.", new String[]{"BreakIteratorSegmenter"});
@@ -165,7 +169,7 @@ public class TextImagerClientTest {
 		assertEquals(5, JCasUtil.select(output3.getJCas(), Token.class).size());
 		assertEquals("Das", JCasUtil.select(output3.getJCas(), Token.class).iterator().next().getCoveredText());
 
-		CAS output1 = client.process("Das ist ein Test.", "HucomputeLanguageDetection,   BreakIteratorSegmenter,    ");
+		CAS output1 = client.process("Das ist ein Test.", "LanguageIdentification,   BreakIteratorSegmenter,    ");
 		assertEquals("de", output1.getDocumentLanguage());
 		assertEquals(5, JCasUtil.select(output1.getJCas(), Token.class).size());
 		assertEquals("Das", JCasUtil.select(output1.getJCas(), Token.class).iterator().next().getCoveredText());
@@ -183,7 +187,7 @@ public class TextImagerClientTest {
 		assertEquals("de", output.getDocumentLanguage());
 	}
 
-//	@Test
+	@Test
 	public void testSimpleFilePipeline() throws Exception{
 		TextImagerClient client = new TextImagerClient();
 		CAS output = client.process(new File("src/test/resources/testfile.txt"), new String[]{"BreakIteratorSegmenter"});

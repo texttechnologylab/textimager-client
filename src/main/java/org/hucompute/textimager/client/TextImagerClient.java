@@ -130,7 +130,7 @@ public class TextImagerClient {
 					options.put(language, string);
 			}
 		}
-		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options);
+		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,language != null && !language.equals("unknown"));
 		CAS output = uimaAsEngine.getCAS();
 		DocumentMetaData.create(output).setDocumentId("Inline");
 		output.setDocumentText(inputString);
@@ -180,6 +180,10 @@ public class TextImagerClient {
 	public CAS process(File inputFile, String annotators) throws Exception{
 		ArrayList<String> pipeline = new ArrayList<String>(Arrays.asList(annotators.split(",")).stream().map(x->x.trim()).collect(Collectors.toSet()));
 		return process(inputFile,pipeline.toArray(new String[pipeline.size()]));
+	}
+	
+	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options,boolean forceLanguage) throws Exception{
+		return getUimaAsEngine(options, 1,null,null,null,forceLanguage,false);
 	}
 
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options) throws Exception{

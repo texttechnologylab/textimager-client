@@ -26,6 +26,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -162,14 +163,20 @@ public class ConfigDataholder {
 
 	public static String getDd2SpringPath(){
 		File dest = new File(System.getProperty("java.io.tmpdir")+"/dd2spring.xsl");
-		if(!dest.exists()) { 
-			URL inputUrl = ConfigDataholder.class.getClassLoader().getResource("dd2spring.xsl");
-			try {
-				FileUtils.copyURLToFile(inputUrl, dest);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
+		try {
+			if(!dest.exists() || !FileUtils.readFileToString(dest).equals(IOUtils.toString(ConfigDataholder.class.getClassLoader().getResourceAsStream("dd2spring.xsl")))) { 
+				System.out.println("============dd2spring.xsl");
+				URL inputUrl = ConfigDataholder.class.getClassLoader().getResource("dd2spring.xsl");
+				try {
+					FileUtils.copyURLToFile(inputUrl, dest);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return dest.getAbsolutePath();
 	}

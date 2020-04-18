@@ -86,7 +86,7 @@
     
   <xsl:output method="xml" indent="yes"
     doctype-public="-//Spring//DTD BEAN//EN"
-    doctype-system="http://www.springframework.org/dtd/spring-beans.dtd" 
+    doctype-system="http://www.springframework.org/dtd/spring-beans-2.0.dtd" 
     />
  
   <xsl:param name="useRelativePaths"/>
@@ -2402,7 +2402,12 @@
         <xsl:sequence select="document($importNode/@location)"/>
       </xsl:when>
       <xsl:when test="$importNode/@name">
-        <xsl:sequence select="document(x1:resolveByName($importNode/@name))"/>
+		<xsl:variable name="result" select="x1:resolveByName($importNode/@name)"/>
+		<xsl:if test="not($result)">
+		  <xsl:sequence select=
+            "f:msgWithLineNumber('ERROR', ('ERROR cannot import by', $importNode/@name), $importNode)"/>
+ 		</xsl:if>
+		<xsl:sequence select="document($result)"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select=
@@ -2727,7 +2732,7 @@
     <xsl:if test="not($result)">
       <xsl:sequence select="f:msgWithLineNumber(
         'ERROR', 
-        ('ERROR cannot load delegate descriptor with key', $key),
+        ('ERROR cannot load delegate descriptor with', $key),
         $local_ae_descriptor)"/> 
     </xsl:if>
     <xsl:sequence select="$result"/>
@@ -3023,16 +3028,24 @@
     </xsl:for-each>
    </xsl:function>
 
+  <!-- Terminate processing on first error -->
   <xsl:function name="f:msgWithLineNumber">
     <xsl:param name="kind"/>
     <xsl:param name="msg"/>  <!-- can be multi-element sequence -->
     <xsl:param name="node"/>
-    <xsl:message>
+    <xsl:variable name="yesno">
+      <xsl:choose>
+        <xsl:when test="$kind eq 'ERROR'">
+          <xsl:sequence select="'yes'"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="'no'"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:message terminate="{$yesno}">
       *** <xsl:sequence select="concat($kind,':')"/> line-number: <xsl:sequence select="saxon:line-number($node)"/>
       <xsl:sequence select="$msg"/> 
     </xsl:message>
-    <!-- xsl:if test="$kind eq 'ERROR'">
-      <xsl:sequence select="error()"/>
-    </xsl:if-->
   </xsl:function>
 </xsl:stylesheet>

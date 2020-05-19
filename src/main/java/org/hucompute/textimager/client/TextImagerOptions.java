@@ -37,6 +37,7 @@ import org.dkpro.core.io.tei.TeiWriter;
 import org.dkpro.core.io.text.TextReader;
 import org.dkpro.core.io.xmi.XmiReader;
 import org.dkpro.core.io.xmi.XmiWriter;
+import org.hucompute.textimager.uima.io.mediawiki.MediawikiWriter;
 
 public class TextImagerOptions {
 	public enum Language{
@@ -262,9 +263,9 @@ public class TextImagerOptions {
 		case BINARYCAS:
 			consumer = BinaryCasWriter.class;
 			break;
-//		case MEDIAWIKI:
-//			consumer = MediawikiWriter.class;
-//			break;
+		case MEDIAWIKI:
+			consumer = MediawikiWriter.class;
+			break;
 		default:
 			throw new UnsupportedOperationException("Output format not supported. Supported output formats are TCF, XMI, TEI, CONLL2000, CONLL2002, CONLL2006, CONLL2009, BINARYCAS");
 		}

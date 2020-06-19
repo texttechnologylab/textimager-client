@@ -639,7 +639,6 @@ public class MediawikiWriter extends JCasFileWriter_ImplBase{
 		// Get all categories for the document (sorted by their plausibility)
 		ArrayList<CategoryCoveredTagged>ddcs = new ArrayList<>();
 		for (CategoryCoveredTagged cct : JCasUtil.select(jCas, CategoryCoveredTagged.class)) {
-			System.out.println(cct);
 			if (cct.getStart() == 0 && cct.getEnd() == jCas.getDocumentText().length()) {
 				ddcs.add(cct);
 			}

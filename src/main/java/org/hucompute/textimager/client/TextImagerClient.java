@@ -545,7 +545,7 @@ public class TextImagerClient {
 
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
 				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
-				null,TextImagerOptions.getWriter(outputFormat, outputLocation));
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation),true,false);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}

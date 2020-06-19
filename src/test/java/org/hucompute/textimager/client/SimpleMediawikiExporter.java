@@ -11,7 +11,7 @@ public class SimpleMediawikiExporter {
 	public static void main(String[] args) throws ResourceInitializationException, Exception {
 		TextImagerClient client = new TextImagerClient();
 		client.processCollection(
-				new File("/home/ahemati/texte"), 
+				new File("inputTexte"), 
 				IOFormat.TXT, 
 				Language.de, 
 				new String[]{
@@ -23,7 +23,7 @@ public class SimpleMediawikiExporter {
 						"TagMeLocalAnnotator",
 						"MateMorphTagger" 
 				},
-				IOFormat.MEDIAWIKI, "/home/ahemati/texte/mediawiki");
+				IOFormat.MEDIAWIKI, "output");
 	}
 
 }

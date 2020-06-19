@@ -5,6 +5,8 @@ import static spark.Spark.post;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,8 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.hucompute.textimager.client.TextImagerClient;
 import org.hucompute.textimager.client.TextImagerOptions;
@@ -31,6 +35,13 @@ import org.hucompute.textimager.client.TextImagerOptions.Language;
 import org.hucompute.textimager.uima.io.StringReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import io.swagger.annotations.Api;
@@ -48,21 +59,21 @@ import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
-//@SwaggerDefinition(host = "141.2.108.201:4567", //
-//info = @Info(description = "TextImager API", //
-//version = "v0.1 Beta", //
-//title = "TextImager API", //
-//contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
-//schemes = { SwaggerDefinition.Scheme.HTTP } //
-//		)
-
-@SwaggerDefinition(host = "textimager.hucompute.org/rest", //
+@SwaggerDefinition(host = "localhost:4567", //
 info = @Info(description = "TextImager API", //
-version = "v0.2.1 Beta", //
+version = "v0.1 Beta", //
 title = "TextImager API", //
 contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
-schemes = { SwaggerDefinition.Scheme.HTTPS } //
+schemes = { SwaggerDefinition.Scheme.HTTP } //
 		)
+
+//@SwaggerDefinition(host = "textimager.hucompute.org/rest", //
+//info = @Info(description = "TextImager API", //
+//version = "v0.2.1 Beta", //
+//title = "TextImager API", //
+//contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
+//schemes = { SwaggerDefinition.Scheme.HTTPS } //
+//		)
 
 @Api
 @Path("/")
@@ -278,6 +289,44 @@ public class REST implements SparkApplication{
 		return "/home/ducc/ducc/ducctest/logs/" + Long.toString(duccId) + ".job";
 	}
 	
+	
+	/**
+	 * Database zeugs
+	 */
+
+	MongoCredential credential = null;
+
+	MongoClient mongoClient = null;
+	MongoDatabase db = mongoClient.getDatabase("lab");
+
+	@Path("/database/aggregate")
+	@GET
+	@ApiOperation(value = "Get Document from database")
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
+	})
+	public JSONArray aggregate(
+			@QueryParam("collectionId") @ApiParam(name = "collectionId", value = "Collection Id", required = true)String collectionId,
+			@QueryParam("documentId") @ApiParam(name = "documentId", value = "Document Id", required = true)String documentId,
+			String mongoQuery){
+
+		MongoCollection<Document> coll = db.getCollection(collectionId);
+		BasicDBObject id = new BasicDBObject();
+		id.put("_id", new ObjectId(documentId));
+		List<Document> q= new ArrayList<>();
+		JSONArray mongoQueryJson = new JSONArray(mongoQuery);
+		for (Object object : mongoQueryJson) {
+			q.add(Document.parse(object.toString()));
+		}
+		q.add(0, Document.parse("{$match:"+id+"}"));
+		JSONArray output = new JSONArray();
+		for (Document object : coll.aggregate(q)) {
+			output.put(new JSONObject(object.toJson()));
+		}
+		System.out.println(output.toString(4));
+		return output;
+	}
+	
 	/**
 	 * 
 	 * @param args
@@ -285,14 +334,6 @@ public class REST implements SparkApplication{
 	@Override
 	public void init() {
 		System.setProperty("DUCC_HOME", "/home/ducc/ducc");
-		try {
-			DocumentMetaData meta = DocumentMetaData.create(JCasFactory.createJCas());
-			System.out.println(meta);
-			
-		} catch (IllegalStateException | UIMAException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		Spark.staticFileLocation("html");
 		try {
 			// Build swagger json description
@@ -338,6 +379,13 @@ public class REST implements SparkApplication{
 			res.status(200);
 			res.type("application/json");
 			return output;
+		});
+		
+		post("/database/aggregate", (request, response) -> {
+			response.status(200);
+			response.type("application/json");
+			System.out.println(request.body());
+			return aggregate(request.queryParams("collectionId"),request.queryParams("documentId"),request.body());
 		});
 	}
 }

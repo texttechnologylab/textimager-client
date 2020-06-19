@@ -28,9 +28,9 @@ public class SimplePipelineTest {
 
 		CollectionReader reader = CollectionReaderFactory.createReader(
 				XmiReader.class, 
-				TextReader.PARAM_SOURCE_LOCATION,"/resources/public/stoeckel/BIOfid/BIOfid_XMI_27.01.2020",
-				TextReader.PARAM_PATTERNS,"*.xmi",
-				TextReader.PARAM_LANGUAGE,"de");
+				XmiReader.PARAM_SOURCE_LOCATION,"/resources/public/stoeckel/BIOfid/BIOfid_XMI_27.01.2020",
+				XmiReader.PARAM_PATTERNS,"*.xmi",
+				XmiReader.PARAM_LANGUAGE,"de");
 
 		AnalysisEngineDescription aggDesc = UIMAFramework.getResourceSpecifierFactory()
 				.createAnalysisEngineDescription();

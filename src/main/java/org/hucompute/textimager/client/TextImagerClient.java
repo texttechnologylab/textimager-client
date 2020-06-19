@@ -545,7 +545,7 @@ public class TextImagerClient {
 
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
 				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
-				null,TextImagerOptions.getWriter(outputFormat, outputLocation),true,false);
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation),inputLanguage == Language.unknown?false:true,false);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
@@ -573,7 +573,7 @@ public class TextImagerClient {
 
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
 				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage),
-				null,TextImagerOptions.getWriter(outputFormat, outputLocation), false, forcePipeline);
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation), inputLanguage == Language.unknown?false:true, forcePipeline);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
@@ -601,7 +601,7 @@ public class TextImagerClient {
 
 		BaseUIMAAsynchronousEngine_impl uimaAsEngine = getUimaAsEngine(options,2,
 				TextImagerOptions.getReader(inputFormant, collectionPath.getPath(), inputLanguage, fileSuffix, sourceEncoding),
-				null,TextImagerOptions.getWriter(outputFormat, outputLocation), false, forcePipeline);
+				null,TextImagerOptions.getWriter(outputFormat, outputLocation), inputLanguage == Language.unknown?false:true, forcePipeline);
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}

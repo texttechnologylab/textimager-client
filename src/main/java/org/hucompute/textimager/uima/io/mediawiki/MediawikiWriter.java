@@ -28,6 +28,7 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import org.hucompute.textimager.uima.type.category.CategoryCoveredTagged;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -39,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
 
 
 // TODO replace with new "types" category
-import org.hucompute.services.type.CategoryCoveredTagged;
 
 public class MediawikiWriter extends JCasFileWriter_ImplBase{
 
@@ -639,6 +639,7 @@ public class MediawikiWriter extends JCasFileWriter_ImplBase{
 		// Get all categories for the document (sorted by their plausibility)
 		ArrayList<CategoryCoveredTagged>ddcs = new ArrayList<>();
 		for (CategoryCoveredTagged cct : JCasUtil.select(jCas, CategoryCoveredTagged.class)) {
+			System.out.println(cct);
 			if (cct.getStart() == 0 && cct.getEnd() == jCas.getDocumentText().length()) {
 				ddcs.add(cct);
 			}

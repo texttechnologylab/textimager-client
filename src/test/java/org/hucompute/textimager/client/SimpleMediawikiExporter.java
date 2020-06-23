@@ -23,7 +23,7 @@ public class SimpleMediawikiExporter {
 						"TagMeLocalAnnotator",
 						"MateMorphTagger" 
 				},
-				IOFormat.XMI, "output");
+				IOFormat.MEDIAWIKI, "output");
 	}
 
 }

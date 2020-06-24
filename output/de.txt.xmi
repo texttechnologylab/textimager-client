@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?><xmi:XMI xmlns:time="http:///org/texttechnologylab/annotation/semaf/isotimeml/time.ecore" xmlns:type17="http:///org/hucompute/textimager/uima/type.ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:cas="http:///uima/cas.ecore" xmlns:tweet="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/pos/tweet.ecore" xmlns:type15="http:///org/dkpro/similarity/uima/entailment/type.ecore" xmlns:type21="http:///org/texttechnologylab/annotation/context/type.ecore" xmlns:type16="http:///org/hucompute/services/type.ecore" xmlns:type3="http:///de/tudarmstadt/ukp/dkpro/core/api/coref/type.ecore" xmlns:administration="http:///org/texttechnologylab/annotation/administration.ecore" xmlns:type19="http:///org/texttechnologylab/annotation/node/type.ecore" xmlns:type4="http:///de/tudarmstadt/ukp/dkpro/core/api/frequency/tfidf/type.ecore" xmlns:type22="http:///org/texttechnologylab/annotation/orientation/type.ecore" xmlns:isospace="http:///org/texttechnologylab/annotation/semaf/isospace.ecore" xmlns:iaa="http:///org/texttechnologylab/iaa.ecore" xmlns:type11="http:///de/tudarmstadt/ukp/dkpro/core/api/transform/type.ecore" xmlns:sentence="http:///org/texttechnologylab/annotation/sentence.ecore" xmlns:type2="http:///de/tudarmstadt/ukp/dkpro/core/api/anomaly/type.ecore" xmlns:isobase="http:///org/texttechnologylab/annotation/semaf/isobase.ecore" xmlns:type13="http:///org/dkpro/core/api/xml/type.ecore" xmlns:segmentation="http:///org/hucompute/textimager/uima/type/segmentation.ecore" xmlns:ocr="http:///org/texttechnologylab/annotation/ocr.ecore" xmlns:type20="http:///org/texttechnologylab/annotation/attribution/type.ecore" xmlns:pos="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/pos.ecore" xmlns:isotimeml="http:///org/texttechnologylab/annotation/semaf/isotimeml.ecore" xmlns:tcas="http:///uima/tcas.ecore" xmlns:type="http:///countAnnotator/type.ecore" xmlns:type14="http:///org/dkpro/similarity/uima/api/type.ecore" xmlns:semafsr="http:///org/texttechnologylab/annotation/semaf/semafsr.ecore" xmlns:dependency="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/dependency.ecore" xmlns:type8="http:///de/tudarmstadt/ukp/dkpro/core/api/semantics/type.ecore" xmlns:heideltime="http:///de/unihd/dbs/uima/types/heideltime.ecore" xmlns:type5="http:///de/tudarmstadt/ukp/dkpro/core/api/metadata/type.ecore" xmlns:typo="http:///org/texttechnologylab/annotation/typo.ecore" xmlns:type9="http:///de/tudarmstadt/ukp/dkpro/core/api/structure/type.ecore" xmlns:type18="http:///org/texttechnologylab/annotation/type.ecore" xmlns:meta="http:///org/texttechnologylab/annotation/semaf/meta.ecore" xmlns:knowledge="http:///org/texttechnologylab/annotation/knowledge.ecore" xmlns:wikidata="http:///org/hucompute/textimager/uima/type/wikidata.ecore" xmlns:morph="http:///de/tudarmstadt/ukp/dkpro/core/api/lexmorph/type/morph.ecore" xmlns:wikipedia="http:///org/hucompute/textimager/uima/type/wikipedia.ecore" xmlns:annotation="http:///org/texttechnologylab/annotation.ecore" xmlns:category="http:///org/hucompute/textimager/uima/type/category.ecore" xmlns:type10="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type.ecore" xmlns:IsoSpatial="http:///org/texttechnologylab/annotation/semaf/IsoSpatial.ecore" xmlns:type6="http:///de/tudarmstadt/ukp/dkpro/core/api/ner/type.ecore" xmlns:type12="http:///de/tudarmstadt/ukp/dkpro/core/io/jwpl/type.ecore" xmlns:type7="http:///de/tudarmstadt/ukp/dkpro/core/api/segmentation/type.ecore" xmlns:concept="http:///org/texttechnologylab/annotation/type/concept.ecore" xmlns:constituent="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/constituent.ecore" xmlns:Room="http:///org/texttechnologylab/annotation/Room.ecore" xmlns:type23="http:///org/texttechnologylab/annotation/temporal/type.ecore" xmlns:chunk="http:///de/tudarmstadt/ukp/dkpro/core/api/syntax/type/chunk.ecore" xmi:version="2.0">
+    <cas:NULL xmi:id="0"/>
+    <type5:DocumentMetaData xmi:id="1" sofa="12" begin="0" end="29" language="de" documentTitle="de.txt" documentId="de.txt" documentUri="file:/home/ahemati/workspaceGitNew/textimager-client/inputTexte/de.txt" collectionId="file:/home/ahemati/workspaceGitNew/textimager-client/inputTexte/" documentBaseUri="file:/home/ahemati/workspaceGitNew/textimager-client/inputTexte/" isLastSegment="false"/>
+    <type7:Paragraph xmi:id="19" sofa="12" begin="0" end="29"/>
+    <type7:Sentence xmi:id="25" sofa="12" begin="0" end="27"/>
+    <type7:Token xmi:id="30" sofa="12" begin="0" end="3" lemma="115" pos="214" morph="5444" order="0"/>
+    <type7:Token xmi:id="43" sofa="12" begin="4" end="7" lemma="120" pos="220" morph="5467" order="0"/>
+    <type7:Token xmi:id="56" sofa="12" begin="8" end="11" lemma="125" pos="226" morph="5490" order="0"/>
+    <type7:Token xmi:id="69" sofa="12" begin="12" end="21" lemma="130" pos="232" morph="5513" order="0"/>
+    <type7:Token xmi:id="82" sofa="12" begin="22" end="26" lemma="135" pos="238" morph="5536" order="0"/>
+    <type7:Token xmi:id="95" sofa="12" begin="26" end="27" lemma="140" pos="244" morph="5559" order="0"/>
+    <type12:WikipediaLink xmi:id="108" sofa="12" begin="12" end="21" LinkType="internal" Target="Deutsche_Sprache"/>
+    <type7:Lemma xmi:id="115" sofa="12" begin="0" end="3" value="der"/>
+    <type7:Lemma xmi:id="120" sofa="12" begin="4" end="7" value="sein"/>
+    <type7:Lemma xmi:id="125" sofa="12" begin="8" end="11" value="ein"/>
+    <type7:Lemma xmi:id="130" sofa="12" begin="12" end="21" value="deutsch"/>
+    <type7:Lemma xmi:id="135" sofa="12" begin="22" end="26" value="Text"/>
+    <type7:Lemma xmi:id="140" sofa="12" begin="26" end="27" value="."/>
+    <type5:TagsetDescription xmi:id="145" sofa="12" begin="0" end="29" layer="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" name="stts" tags="250 252 254 256 258 260 262 264 266 268 270 272 274 276 278 280 282 284 286 288 290 292 294 296 298 300 302 304 306 308 310 312 314 316 318 320 322 324 326 328 330 332 334 336 338 340 342 344 346 348 350 352 354 356" componentName="org.dkpro.core.corenlp.CoreNlpPosTagger" modelLocation="classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-de-fast.properties" modelVariant="fast" modelLanguage="de" modelVersion="20140827.1" input="false"/>
+    <pos:POS_PRON xmi:id="214" sofa="12" begin="0" end="3" PosValue="PDS" coarseValue="PRON"/>
+    <pos:POS_VERB xmi:id="220" sofa="12" begin="4" end="7" PosValue="VAFIN" coarseValue="VERB"/>
+    <pos:POS_DET xmi:id="226" sofa="12" begin="8" end="11" PosValue="ART" coarseValue="DET"/>
+    <pos:POS_ADJ xmi:id="232" sofa="12" begin="12" end="21" PosValue="ADJA" coarseValue="ADJ"/>
+    <pos:POS_NOUN xmi:id="238" sofa="12" begin="22" end="26" PosValue="NN" coarseValue="NOUN"/>
+    <pos:POS_PUNCT xmi:id="244" sofa="12" begin="26" end="27" PosValue="$." coarseValue="PUNCT"/>
+    <type6:NamedEntity xmi:id="358" sofa="12" begin="12" end="21" value="MISC"/>
+    <category:CategoryCoveredTagged xmi:id="364" sofa="12" begin="0" end="29" value="__label_ddc__830" score="0.185184626709" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="372" sofa="12" begin="0" end="29" value="__label_ddc__439" score="1.586918125E-8" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="380" sofa="12" begin="0" end="29" value="__label_ddc__438" score="1.586918125E-8" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="388" sofa="12" begin="0" end="29" value="__label_ddc__833" score="3.6239741211E-9" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="396" sofa="12" begin="0" end="29" value="__label_ddc__831" score="3.6239741211E-9" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="404" sofa="12" begin="0" end="29" value="__label_ddc__338" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="412" sofa="12" begin="0" end="29" value="__label_ddc__333" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="420" sofa="12" begin="0" end="29" value="__label_ddc__330" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="428" sofa="12" begin="0" end="29" value="__label_ddc__339" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="436" sofa="12" begin="0" end="29" value="__label_ddc__334" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="444" sofa="12" begin="0" end="29" value="__label_ddc__796" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="452" sofa="12" begin="0" end="29" value="__label_ddc__793" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="460" sofa="12" begin="0" end="29" value="__label_ddc__797" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="468" sofa="12" begin="0" end="29" value="__label_ddc__798" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="476" sofa="12" begin="0" end="29" value="__label_ddc__799" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="484" sofa="12" begin="0" end="29" value="__label_ddc__611" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="492" sofa="12" begin="0" end="29" value="__label_ddc__617" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="500" sofa="12" begin="0" end="29" value="__label_ddc__614" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="508" sofa="12" begin="0" end="29" value="__label_ddc__610" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="516" sofa="12" begin="0" end="29" value="__label_ddc__616" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="524" sofa="12" begin="0" end="29" value="__label_ddc__006" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="532" sofa="12" begin="0" end="29" value="__label_ddc__002" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="540" sofa="12" begin="0" end="29" value="__label_ddc__004" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="548" sofa="12" begin="0" end="29" value="__label_ddc__572" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="556" sofa="12" begin="0" end="29" value="__label_ddc__579" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="564" sofa="12" begin="0" end="29" value="__label_ddc__578" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="572" sofa="12" begin="0" end="29" value="__label_ddc__576" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="580" sofa="12" begin="0" end="29" value="__label_ddc__358" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="588" sofa="12" begin="0" end="29" value="__label_ddc__359" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="596" sofa="12" begin="0" end="29" value="__label_ddc__353" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="604" sofa="12" begin="0" end="29" value="__label_ddc__356" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="612" sofa="12" begin="0" end="29" value="__label_ddc__357" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="620" sofa="12" begin="0" end="29" value="__label_ddc__388" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="628" sofa="12" begin="0" end="29" value="__label_ddc__385" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="636" sofa="12" begin="0" end="29" value="__label_ddc__382" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="644" sofa="12" begin="0" end="29" value="__label_ddc__384" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="652" sofa="12" begin="0" end="29" value="__label_ddc__599" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="660" sofa="12" begin="0" end="29" value="__label_ddc__597" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="668" sofa="12" begin="0" end="29" value="__label_ddc__591" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="676" sofa="12" begin="0" end="29" value="__label_ddc__593" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="684" sofa="12" begin="0" end="29" value="__label_ddc__592" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="692" sofa="12" begin="0" end="29" value="__label_ddc__363" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="700" sofa="12" begin="0" end="29" value="__label_ddc__364" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="708" sofa="12" begin="0" end="29" value="__label_ddc__368" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="716" sofa="12" begin="0" end="29" value="__label_ddc__367" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="724" sofa="12" begin="0" end="29" value="__label_ddc__369" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="732" sofa="12" begin="0" end="29" value="__label_ddc__635" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="740" sofa="12" begin="0" end="29" value="__label_ddc__633" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="748" sofa="12" begin="0" end="29" value="__label_ddc__632" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="756" sofa="12" begin="0" end="29" value="__label_ddc__637" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="764" sofa="12" begin="0" end="29" value="__label_ddc__634" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="772" sofa="12" begin="0" end="29" value="__label_ddc__669" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="780" sofa="12" begin="0" end="29" value="__label_ddc__663" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="788" sofa="12" begin="0" end="29" value="__label_ddc__668" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="796" sofa="12" begin="0" end="29" value="__label_ddc__662" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="804" sofa="12" begin="0" end="29" value="__label_ddc__667" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="812" sofa="12" begin="0" end="29" value="__label_ddc__546" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="820" sofa="12" begin="0" end="29" value="__label_ddc__549" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="828" sofa="12" begin="0" end="29" value="__label_ddc__540" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="836" sofa="12" begin="0" end="29" value="__label_ddc__548" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="844" sofa="12" begin="0" end="29" value="__label_ddc__726" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="852" sofa="12" begin="0" end="29" value="__label_ddc__728" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="860" sofa="12" begin="0" end="29" value="__label_ddc__729" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="868" sofa="12" begin="0" end="29" value="__label_ddc__724" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="876" sofa="12" begin="0" end="29" value="__label_ddc__722" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="884" sofa="12" begin="0" end="29" value="__label_ddc__657" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="892" sofa="12" begin="0" end="29" value="__label_ddc__651" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="900" sofa="12" begin="0" end="29" value="__label_ddc__652" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="908" sofa="12" begin="0" end="29" value="__label_ddc__681" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="916" sofa="12" begin="0" end="29" value="__label_ddc__688" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="924" sofa="12" begin="0" end="29" value="__label_ddc__685" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="932" sofa="12" begin="0" end="29" value="__label_ddc__684" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="940" sofa="12" begin="0" end="29" value="__label_ddc__680" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="948" sofa="12" begin="0" end="29" value="__label_ddc__152" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="956" sofa="12" begin="0" end="29" value="__label_ddc__154" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="964" sofa="12" begin="0" end="29" value="__label_ddc__158" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="972" sofa="12" begin="0" end="29" value="__label_ddc__551" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="980" sofa="12" begin="0" end="29" value="__label_ddc__552" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="988" sofa="12" begin="0" end="29" value="__label_ddc__320" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="996" sofa="12" begin="0" end="29" value="__label_ddc__327" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1004" sofa="12" begin="0" end="29" value="__label_ddc__323" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1012" sofa="12" begin="0" end="29" value="__label_ddc__325" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1020" sofa="12" begin="0" end="29" value="__label_ddc__326" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1028" sofa="12" begin="0" end="29" value="__label_ddc__581" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1036" sofa="12" begin="0" end="29" value="__label_ddc__585" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1044" sofa="12" begin="0" end="29" value="__label_ddc__580" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1052" sofa="12" begin="0" end="29" value="__label_ddc__587" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1060" sofa="12" begin="0" end="29" value="__label_ddc__394" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1068" sofa="12" begin="0" end="29" value="__label_ddc__393" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1076" sofa="12" begin="0" end="29" value="__label_ddc__395" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1084" sofa="12" begin="0" end="29" value="__label_ddc__399" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1092" sofa="12" begin="0" end="29" value="__label_ddc__530" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1100" sofa="12" begin="0" end="29" value="__label_ddc__531" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1108" sofa="12" begin="0" end="29" value="__label_ddc__536" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1116" sofa="12" begin="0" end="29" value="__label_ddc__533" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1124" sofa="12" begin="0" end="29" value="__label_ddc__532" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1132" sofa="12" begin="0" end="29" value="__label_ddc__378" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1140" sofa="12" begin="0" end="29" value="__label_ddc__372" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1148" sofa="12" begin="0" end="29" value="__label_ddc__374" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1156" sofa="12" begin="0" end="29" value="__label_ddc__375" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1164" sofa="12" begin="0" end="29" value="__label_ddc__529" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1172" sofa="12" begin="0" end="29" value="__label_ddc__526" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1180" sofa="12" begin="0" end="29" value="__label_ddc__520" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1188" sofa="12" begin="0" end="29" value="__label_ddc__527" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1196" sofa="12" begin="0" end="29" value="__label_ddc__940" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1204" sofa="12" begin="0" end="29" value="__label_ddc__947" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1212" sofa="12" begin="0" end="29" value="__label_ddc__949" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1220" sofa="12" begin="0" end="29" value="__label_ddc__945" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1228" sofa="12" begin="0" end="29" value="__label_ddc__941" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1236" sofa="12" begin="0" end="29" value="__label_ddc__781" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1244" sofa="12" begin="0" end="29" value="__label_ddc__784" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1252" sofa="12" begin="0" end="29" value="__label_ddc__780" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1260" sofa="12" begin="0" end="29" value="__label_ddc__788" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1268" sofa="12" begin="0" end="29" value="__label_ddc__785" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1276" sofa="12" begin="0" end="29" value="__label_ddc__203" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1284" sofa="12" begin="0" end="29" value="__label_ddc__205" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1292" sofa="12" begin="0" end="29" value="__label_ddc__200" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1300" sofa="12" begin="0" end="29" value="__label_ddc__209" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1308" sofa="12" begin="0" end="29" value="__label_ddc__208" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1316" sofa="12" begin="0" end="29" value="__label_ddc__512" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1324" sofa="12" begin="0" end="29" value="__label_ddc__511" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1332" sofa="12" begin="0" end="29" value="__label_ddc__515" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1340" sofa="12" begin="0" end="29" value="__label_ddc__510" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1348" sofa="12" begin="0" end="29" value="__label_ddc__739" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1356" sofa="12" begin="0" end="29" value="__label_ddc__737" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1364" sofa="12" begin="0" end="29" value="__label_ddc__738" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1372" sofa="12" begin="0" end="29" value="__label_ddc__735" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1380" sofa="12" begin="0" end="29" value="__label_ddc__415" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1388" sofa="12" begin="0" end="29" value="__label_ddc__417" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1396" sofa="12" begin="0" end="29" value="__label_ddc__411" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1404" sofa="12" begin="0" end="29" value="__label_ddc__412" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1412" sofa="12" begin="0" end="29" value="__label_ddc__413" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1420" sofa="12" begin="0" end="29" value="__label_ddc__741" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1428" sofa="12" begin="0" end="29" value="__label_ddc__747" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1436" sofa="12" begin="0" end="29" value="__label_ddc__748" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1444" sofa="12" begin="0" end="29" value="__label_ddc__262" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1452" sofa="12" begin="0" end="29" value="__label_ddc__263" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1460" sofa="12" begin="0" end="29" value="__label_ddc__265" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1468" sofa="12" begin="0" end="29" value="__label_ddc__266" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1476" sofa="12" begin="0" end="29" value="__label_ddc__269" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1484" sofa="12" begin="0" end="29" value="__label_ddc__808" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1492" sofa="12" begin="0" end="29" value="__label_ddc__801" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1500" sofa="12" begin="0" end="29" value="__label_ddc__807" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1508" sofa="12" begin="0" end="29" value="__label_ddc__806" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1516" sofa="12" begin="0" end="29" value="__label_ddc__170" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1524" sofa="12" begin="0" end="29" value="__label_ddc__174" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1532" sofa="12" begin="0" end="29" value="__label_ddc__172" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1540" sofa="12" begin="0" end="29" value="__label_ddc__175" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1548" sofa="12" begin="0" end="29" value="__label_ddc__677" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1556" sofa="12" begin="0" end="29" value="__label_ddc__676" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1564" sofa="12" begin="0" end="29" value="__label_ddc__670" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1572" sofa="12" begin="0" end="29" value="__label_ddc__675" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1580" sofa="12" begin="0" end="29" value="__label_ddc__673" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1588" sofa="12" begin="0" end="29" value="__label_ddc__704" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1596" sofa="12" begin="0" end="29" value="__label_ddc__701" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1604" sofa="12" begin="0" end="29" value="__label_ddc__702" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1612" sofa="12" begin="0" end="29" value="__label_ddc__707" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1620" sofa="12" begin="0" end="29" value="__label_ddc__910" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1628" sofa="12" begin="0" end="29" value="__label_ddc__914" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1636" sofa="12" begin="0" end="29" value="__label_ddc__916" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1644" sofa="12" begin="0" end="29" value="__label_ddc__919" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1652" sofa="12" begin="0" end="29" value="__label_ddc__230" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1660" sofa="12" begin="0" end="29" value="__label_ddc__235" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1668" sofa="12" begin="0" end="29" value="__label_ddc__232" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1676" sofa="12" begin="0" end="29" value="__label_ddc__233" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1684" sofa="12" begin="0" end="29" value="__label_ddc__025" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1692" sofa="12" begin="0" end="29" value="__label_ddc__020" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1700" sofa="12" begin="0" end="29" value="__label_ddc__028" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1708" sofa="12" begin="0" end="29" value="__label_ddc__023" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1716" sofa="12" begin="0" end="29" value="__label_ddc__070" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1724" sofa="12" begin="0" end="29" value="__label_ddc__133" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1732" sofa="12" begin="0" end="29" value="__label_ddc__130" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1740" sofa="12" begin="0" end="29" value="__label_ddc__139" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1748" sofa="12" begin="0" end="29" value="__label_ddc__248" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1756" sofa="12" begin="0" end="29" value="__label_ddc__247" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1764" sofa="12" begin="0" end="29" value="__label_ddc__929" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1772" sofa="12" begin="0" end="29" value="__label_ddc__121" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1780" sofa="12" begin="0" end="29" value="__label_ddc__123" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1788" sofa="12" begin="0" end="29" value="__label_ddc__124" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1796" sofa="12" begin="0" end="29" value="__label_ddc__122" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1804" sofa="12" begin="0" end="29" value="__label_ddc__711" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1812" sofa="12" begin="0" end="29" value="__label_ddc__714" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1820" sofa="12" begin="0" end="29" value="__label_ddc__719" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1828" sofa="12" begin="0" end="29" value="__label_ddc__718" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1836" sofa="12" begin="0" end="29" value="__label_ddc__271" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1844" sofa="12" begin="0" end="29" value="__label_ddc__273" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1852" sofa="12" begin="0" end="29" value="__label_ddc__930" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1860" sofa="12" begin="0" end="29" value="__label_ddc__938" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1868" sofa="12" begin="0" end="29" value="__label_ddc__931" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1876" sofa="12" begin="0" end="29" value="__label_ddc__936" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1884" sofa="12" begin="0" end="29" value="__label_ddc__400" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1892" sofa="12" begin="0" end="29" value="__label_ddc__406" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1900" sofa="12" begin="0" end="29" value="__label_ddc__407" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1908" sofa="12" begin="0" end="29" value="__label_ddc__778" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1916" sofa="12" begin="0" end="29" value="__label_ddc__779" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1924" sofa="12" begin="0" end="29" value="__label_ddc__777" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1932" sofa="12" begin="0" end="29" value="__label_ddc__772" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1940" sofa="12" begin="0" end="29" value="__label_ddc__149" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1948" sofa="12" begin="0" end="29" value="__label_ddc__142" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1956" sofa="12" begin="0" end="29" value="__label_ddc__141" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1964" sofa="12" begin="0" end="29" value="__label_ddc__140" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1972" sofa="12" begin="0" end="29" value="__label_ddc__148" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1980" sofa="12" begin="0" end="29" value="__label_ddc__495" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1988" sofa="12" begin="0" end="29" value="__label_ddc__494" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="1996" sofa="12" begin="0" end="29" value="__label_ddc__493" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2004" sofa="12" begin="0" end="29" value="__label_ddc__498" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2012" sofa="12" begin="0" end="29" value="__label_ddc__280" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2020" sofa="12" begin="0" end="29" value="__label_ddc__289" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2028" sofa="12" begin="0" end="29" value="__label_ddc__281" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2036" sofa="12" begin="0" end="29" value="__label_ddc__285" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2044" sofa="12" begin="0" end="29" value="__label_ddc__769" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2052" sofa="12" begin="0" end="29" value="__label_ddc__765" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2060" sofa="12" begin="0" end="29" value="__label_ddc__767" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2068" sofa="12" begin="0" end="29" value="__label_ddc__764" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2076" sofa="12" begin="0" end="29" value="__label_ddc__560" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2084" sofa="12" begin="0" end="29" value="__label_ddc__569" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2092" sofa="12" begin="0" end="29" value="__label_ddc__562" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2100" sofa="12" begin="0" end="29" value="__label_ddc__907" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2108" sofa="12" begin="0" end="29" value="__label_ddc__909" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2116" sofa="12" begin="0" end="29" value="__label_ddc__901" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2124" sofa="12" begin="0" end="29" value="__label_ddc__951" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2132" sofa="12" begin="0" end="29" value="__label_ddc__952" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2140" sofa="12" begin="0" end="29" value="__label_ddc__955" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2148" sofa="12" begin="0" end="29" value="__label_ddc__958" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2156" sofa="12" begin="0" end="29" value="__label_ddc__297" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2164" sofa="12" begin="0" end="29" value="__label_ddc__296" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2172" sofa="12" begin="0" end="29" value="__label_ddc__292" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2180" sofa="12" begin="0" end="29" value="__label_ddc__295" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2188" sofa="12" begin="0" end="29" value="__label_ddc__115" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2196" sofa="12" begin="0" end="29" value="__label_ddc__110" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2204" sofa="12" begin="0" end="29" value="__label_ddc__508" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2212" sofa="12" begin="0" end="29" value="__label_ddc__502" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2220" sofa="12" begin="0" end="29" value="__label_ddc__500" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2228" sofa="12" begin="0" end="29" value="__label_ddc__069" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2236" sofa="12" begin="0" end="29" value="__label_ddc__751" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2244" sofa="12" begin="0" end="29" value="__label_ddc__758" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2252" sofa="12" begin="0" end="29" value="__label_ddc__752" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2260" sofa="12" begin="0" end="29" value="__label_ddc__754" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2268" sofa="12" begin="0" end="29" value="__label_ddc__218" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2276" sofa="12" begin="0" end="29" value="__label_ddc__210" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2284" sofa="12" begin="0" end="29" value="__label_ddc__214" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2292" sofa="12" begin="0" end="29" value="__label_ddc__165" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2300" sofa="12" begin="0" end="29" value="__label_ddc__166" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2308" sofa="12" begin="0" end="29" value="__label_ddc__162" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2316" sofa="12" begin="0" end="29" value="__label_ddc__094" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2324" sofa="12" begin="0" end="29" value="__label_ddc__090" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2332" sofa="12" begin="0" end="29" value="__label_ddc__099" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2340" sofa="12" begin="0" end="29" value="__label_ddc__098" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2348" sofa="12" begin="0" end="29" value="__label_ddc__093" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2356" sofa="12" begin="0" end="29" value="__label_ddc__016" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2364" sofa="12" begin="0" end="29" value="__label_ddc__015" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2372" sofa="12" begin="0" end="29" value="__label_ddc__973" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2380" sofa="12" begin="0" end="29" value="__label_ddc__970" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2388" sofa="12" begin="0" end="29" value="__label_ddc__979" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2396" sofa="12" begin="0" end="29" value="__label_ddc__609" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2404" sofa="12" begin="0" end="29" value="__label_ddc__601" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2412" sofa="12" begin="0" end="29" value="__label_ddc__607" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2420" sofa="12" begin="0" end="29" value="__label_ddc__184" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2428" sofa="12" begin="0" end="29" value="__label_ddc__183" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2436" sofa="12" begin="0" end="29" value="__label_ddc__180" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2444" sofa="12" begin="0" end="29" value="__label_ddc__187" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2452" sofa="12" begin="0" end="29" value="__label_ddc__253" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2460" sofa="12" begin="0" end="29" value="__label_ddc__254" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2468" sofa="12" begin="0" end="29" value="__label_ddc__251" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2476" sofa="12" begin="0" end="29" value="__label_ddc__220" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2484" sofa="12" begin="0" end="29" value="__label_ddc__228" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2492" sofa="12" begin="0" end="29" value="__label_ddc__222" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2500" sofa="12" begin="0" end="29" value="__label_ddc__229" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2508" sofa="12" begin="0" end="29" value="__label_ddc__100" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2516" sofa="12" begin="0" end="29" value="__label_ddc__107" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2524" sofa="12" begin="0" end="29" value="__label_ddc__191" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2532" sofa="12" begin="0" end="29" value="__label_ddc__050" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2540" sofa="12" begin="0" end="29" value="__label_ddc__843" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2548" sofa="12" begin="0" end="29" value="__label_ddc__427" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2556" sofa="12" begin="0" end="29" value="__label_ddc__425" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2564" sofa="12" begin="0" end="29" value="__label_ddc__962" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2572" sofa="12" begin="0" end="29" value="__label_ddc__967" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2580" sofa="12" begin="0" end="29" value="__label_ddc__470" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2588" sofa="12" begin="0" end="29" value="__label_ddc__475" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2596" sofa="12" begin="0" end="29" value="__label_ddc__480" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2604" sofa="12" begin="0" end="29" value="__label_ddc__080" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2612" sofa="12" begin="0" end="29" value="__label_ddc__997" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2620" sofa="12" begin="0" end="29" value="__label_ddc__869" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2628" sofa="12" begin="0" end="29" value="__label_ddc__860" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2636" sofa="12" begin="0" end="29" value="__label_ddc__445" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2644" sofa="12" begin="0" end="29" value="__label_ddc__810" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2652" sofa="12" begin="0" end="29" value="__label_ddc__882" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2660" sofa="12" begin="0" end="29" value="__label_ddc__310" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2668" sofa="12" begin="0" end="29" value="__label_ddc__984" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2676" sofa="12" begin="0" end="29" value="__label_ddc__983" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2684" sofa="12" begin="0" end="29" value="__label_ddc__891" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2692" sofa="12" begin="0" end="29" value="__label_ddc__894" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2700" sofa="12" begin="0" end="29" value="__label_ddc__896" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2708" sofa="12" begin="0" end="29" value="__label_ddc__893" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2716" sofa="12" begin="0" end="29" value="__label_ddc__897" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2724" sofa="12" begin="0" end="29" value="__label_ddc__693" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2732" sofa="12" begin="0" end="29" value="__label_ddc__697" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2740" sofa="12" begin="0" end="29" value="__label_ddc__696" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2748" sofa="12" begin="0" end="29" value="__label_ddc__695" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2756" sofa="12" begin="0" end="29" value="__label_ddc__641" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2764" sofa="12" begin="0" end="29" value="__label_ddc__647" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2772" sofa="12" begin="0" end="29" value="__label_ddc__645" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2780" sofa="12" begin="0" end="29" value="__label_ddc__649" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2788" sofa="12" begin="0" end="29" value="__label_ddc__648" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2796" sofa="12" begin="0" end="29" value="__label_ddc__305" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2804" sofa="12" begin="0" end="29" value="__label_ddc__302" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2812" sofa="12" begin="0" end="29" value="__label_ddc__307" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2820" sofa="12" begin="0" end="29" value="__label_ddc__301" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2828" sofa="12" begin="0" end="29" value="__label_ddc__346" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2836" sofa="12" begin="0" end="29" value="__label_ddc__342" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2844" sofa="12" begin="0" end="29" value="__label_ddc__345" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2852" sofa="12" begin="0" end="29" value="__label_ddc__340" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2860" sofa="12" begin="0" end="29" value="__label_ddc__348" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2868" sofa="12" begin="0" end="29" value="__label_ddc__621" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2876" sofa="12" begin="0" end="29" value="__label_ddc__620" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2884" sofa="12" begin="0" end="29" value="__label_ddc__625" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2892" sofa="12" begin="0" end="29" value="__label_ddc__627" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2900" sofa="12" begin="0" end="29" value="__label_ddc__623" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2908" sofa="12" begin="0" end="29" value="__label_ddc__622" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2916" sofa="12" begin="0" end="29" value="__label_ddc__628" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2924" sofa="12" begin="0" end="29" value="__label_ddc__624" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2932" sofa="12" begin="0" end="29" value="__label_ddc__629" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2940" sofa="12" begin="0" end="29" value="__label_ddc__349" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2948" sofa="12" begin="0" end="29" value="__label_ddc__341" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2956" sofa="12" begin="0" end="29" value="__label_ddc__347" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2964" sofa="12" begin="0" end="29" value="__label_ddc__344" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2972" sofa="12" begin="0" end="29" value="__label_ddc__343" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2980" sofa="12" begin="0" end="29" value="__label_ddc__300" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2988" sofa="12" begin="0" end="29" value="__label_ddc__304" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="2996" sofa="12" begin="0" end="29" value="__label_ddc__303" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3004" sofa="12" begin="0" end="29" value="__label_ddc__306" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3012" sofa="12" begin="0" end="29" value="__label_ddc__644" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3020" sofa="12" begin="0" end="29" value="__label_ddc__640" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3028" sofa="12" begin="0" end="29" value="__label_ddc__642" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3036" sofa="12" begin="0" end="29" value="__label_ddc__643" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3044" sofa="12" begin="0" end="29" value="__label_ddc__646" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3052" sofa="12" begin="0" end="29" value="__label_ddc__694" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3060" sofa="12" begin="0" end="29" value="__label_ddc__692" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3068" sofa="12" begin="0" end="29" value="__label_ddc__698" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3076" sofa="12" begin="0" end="29" value="__label_ddc__691" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3084" sofa="12" begin="0" end="29" value="__label_ddc__690" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3092" sofa="12" begin="0" end="29" value="__label_ddc__898" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3100" sofa="12" begin="0" end="29" value="__label_ddc__899" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3108" sofa="12" begin="0" end="29" value="__label_ddc__895" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3116" sofa="12" begin="0" end="29" value="__label_ddc__892" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3124" sofa="12" begin="0" end="29" value="__label_ddc__852" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3132" sofa="12" begin="0" end="29" value="__label_ddc__985" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3140" sofa="12" begin="0" end="29" value="__label_ddc__870" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3148" sofa="12" begin="0" end="29" value="__label_ddc__469" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3156" sofa="12" begin="0" end="29" value="__label_ddc__880" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3164" sofa="12" begin="0" end="29" value="__label_ddc__440" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3172" sofa="12" begin="0" end="29" value="__label_ddc__030" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3180" sofa="12" begin="0" end="29" value="__label_ddc__861" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3188" sofa="12" begin="0" end="29" value="__label_ddc__996" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3196" sofa="12" begin="0" end="29" value="__label_ddc__999" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3204" sofa="12" begin="0" end="29" value="__label_ddc__485" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3212" sofa="12" begin="0" end="29" value="__label_ddc__820" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3220" sofa="12" begin="0" end="29" value="__label_ddc__477" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3228" sofa="12" begin="0" end="29" value="__label_ddc__965" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3236" sofa="12" begin="0" end="29" value="__label_ddc__968" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3244" sofa="12" begin="0" end="29" value="__label_ddc__429" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3252" sofa="12" begin="0" end="29" value="__label_ddc__420" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3260" sofa="12" begin="0" end="29" value="__label_ddc__849" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3268" sofa="12" begin="0" end="29" value="__label_ddc__840" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3276" sofa="12" begin="0" end="29" value="__label_ddc__190" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3284" sofa="12" begin="0" end="29" value="__label_ddc__193" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3292" sofa="12" begin="0" end="29" value="__label_ddc__109" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3300" sofa="12" begin="0" end="29" value="__label_ddc__101" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3308" sofa="12" begin="0" end="29" value="__label_ddc__223" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3316" sofa="12" begin="0" end="29" value="__label_ddc__225" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3324" sofa="12" begin="0" end="29" value="__label_ddc__226" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3332" sofa="12" begin="0" end="29" value="__label_ddc__252" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3340" sofa="12" begin="0" end="29" value="__label_ddc__259" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3348" sofa="12" begin="0" end="29" value="__label_ddc__250" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3356" sofa="12" begin="0" end="29" value="__label_ddc__255" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3364" sofa="12" begin="0" end="29" value="__label_ddc__182" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3372" sofa="12" begin="0" end="29" value="__label_ddc__189" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3380" sofa="12" begin="0" end="29" value="__label_ddc__186" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3388" sofa="12" begin="0" end="29" value="__label_ddc__181" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3396" sofa="12" begin="0" end="29" value="__label_ddc__602" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3404" sofa="12" begin="0" end="29" value="__label_ddc__600" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3412" sofa="12" begin="0" end="29" value="__label_ddc__604" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3420" sofa="12" begin="0" end="29" value="__label_ddc__977" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3428" sofa="12" begin="0" end="29" value="__label_ddc__972" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3436" sofa="12" begin="0" end="29" value="__label_ddc__010" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3444" sofa="12" begin="0" end="29" value="__label_ddc__017" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3452" sofa="12" begin="0" end="29" value="__label_ddc__011" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3460" sofa="12" begin="0" end="29" value="__label_ddc__095" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3468" sofa="12" begin="0" end="29" value="__label_ddc__092" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3476" sofa="12" begin="0" end="29" value="__label_ddc__096" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3484" sofa="12" begin="0" end="29" value="__label_ddc__091" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3492" sofa="12" begin="0" end="29" value="__label_ddc__161" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3500" sofa="12" begin="0" end="29" value="__label_ddc__167" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3508" sofa="12" begin="0" end="29" value="__label_ddc__168" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3516" sofa="12" begin="0" end="29" value="__label_ddc__160" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3524" sofa="12" begin="0" end="29" value="__label_ddc__213" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3532" sofa="12" begin="0" end="29" value="__label_ddc__212" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3540" sofa="12" begin="0" end="29" value="__label_ddc__211" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3548" sofa="12" begin="0" end="29" value="__label_ddc__755" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3556" sofa="12" begin="0" end="29" value="__label_ddc__750" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3564" sofa="12" begin="0" end="29" value="__label_ddc__759" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3572" sofa="12" begin="0" end="29" value="__label_ddc__060" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3580" sofa="12" begin="0" end="29" value="__label_ddc__509" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3588" sofa="12" begin="0" end="29" value="__label_ddc__507" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3596" sofa="12" begin="0" end="29" value="__label_ddc__501" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3604" sofa="12" begin="0" end="29" value="__label_ddc__114" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3612" sofa="12" begin="0" end="29" value="__label_ddc__113" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3620" sofa="12" begin="0" end="29" value="__label_ddc__111" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3628" sofa="12" begin="0" end="29" value="__label_ddc__293" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3636" sofa="12" begin="0" end="29" value="__label_ddc__299" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3644" sofa="12" begin="0" end="29" value="__label_ddc__294" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3652" sofa="12" begin="0" end="29" value="__label_ddc__953" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3660" sofa="12" begin="0" end="29" value="__label_ddc__959" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3668" sofa="12" begin="0" end="29" value="__label_ddc__954" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3676" sofa="12" begin="0" end="29" value="__label_ddc__956" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3684" sofa="12" begin="0" end="29" value="__label_ddc__902" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3692" sofa="12" begin="0" end="29" value="__label_ddc__904" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3700" sofa="12" begin="0" end="29" value="__label_ddc__900" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3708" sofa="12" begin="0" end="29" value="__label_ddc__568" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3716" sofa="12" begin="0" end="29" value="__label_ddc__567" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3724" sofa="12" begin="0" end="29" value="__label_ddc__561" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3732" sofa="12" begin="0" end="29" value="__label_ddc__766" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3740" sofa="12" begin="0" end="29" value="__label_ddc__763" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3748" sofa="12" begin="0" end="29" value="__label_ddc__760" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3756" sofa="12" begin="0" end="29" value="__label_ddc__761" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3764" sofa="12" begin="0" end="29" value="__label_ddc__283" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3772" sofa="12" begin="0" end="29" value="__label_ddc__286" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3780" sofa="12" begin="0" end="29" value="__label_ddc__282" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3788" sofa="12" begin="0" end="29" value="__label_ddc__284" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3796" sofa="12" begin="0" end="29" value="__label_ddc__497" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3804" sofa="12" begin="0" end="29" value="__label_ddc__496" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3812" sofa="12" begin="0" end="29" value="__label_ddc__499" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3820" sofa="12" begin="0" end="29" value="__label_ddc__492" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3828" sofa="12" begin="0" end="29" value="__label_ddc__491" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3836" sofa="12" begin="0" end="29" value="__label_ddc__143" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3844" sofa="12" begin="0" end="29" value="__label_ddc__147" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3852" sofa="12" begin="0" end="29" value="__label_ddc__144" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3860" sofa="12" begin="0" end="29" value="__label_ddc__146" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3868" sofa="12" begin="0" end="29" value="__label_ddc__774" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3876" sofa="12" begin="0" end="29" value="__label_ddc__776" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3884" sofa="12" begin="0" end="29" value="__label_ddc__770" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3892" sofa="12" begin="0" end="29" value="__label_ddc__771" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3900" sofa="12" begin="0" end="29" value="__label_ddc__408" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3908" sofa="12" begin="0" end="29" value="__label_ddc__405" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3916" sofa="12" begin="0" end="29" value="__label_ddc__404" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3924" sofa="12" begin="0" end="29" value="__label_ddc__401" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3932" sofa="12" begin="0" end="29" value="__label_ddc__932" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3940" sofa="12" begin="0" end="29" value="__label_ddc__939" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3948" sofa="12" begin="0" end="29" value="__label_ddc__937" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3956" sofa="12" begin="0" end="29" value="__label_ddc__274" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3964" sofa="12" begin="0" end="29" value="__label_ddc__272" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3972" sofa="12" begin="0" end="29" value="__label_ddc__270" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3980" sofa="12" begin="0" end="29" value="__label_ddc__715" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3988" sofa="12" begin="0" end="29" value="__label_ddc__717" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="3996" sofa="12" begin="0" end="29" value="__label_ddc__712" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4004" sofa="12" begin="0" end="29" value="__label_ddc__127" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4012" sofa="12" begin="0" end="29" value="__label_ddc__126" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4020" sofa="12" begin="0" end="29" value="__label_ddc__129" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4028" sofa="12" begin="0" end="29" value="__label_ddc__128" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4036" sofa="12" begin="0" end="29" value="__label_ddc__920" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4044" sofa="12" begin="0" end="29" value="__label_ddc__242" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4052" sofa="12" begin="0" end="29" value="__label_ddc__246" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4060" sofa="12" begin="0" end="29" value="__label_ddc__241" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4068" sofa="12" begin="0" end="29" value="__label_ddc__131" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4076" sofa="12" begin="0" end="29" value="__label_ddc__135" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4084" sofa="12" begin="0" end="29" value="__label_ddc__079" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4092" sofa="12" begin="0" end="29" value="__label_ddc__022" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4100" sofa="12" begin="0" end="29" value="__label_ddc__021" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4108" sofa="12" begin="0" end="29" value="__label_ddc__026" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4116" sofa="12" begin="0" end="29" value="__label_ddc__027" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4124" sofa="12" begin="0" end="29" value="__label_ddc__238" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4132" sofa="12" begin="0" end="29" value="__label_ddc__239" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4140" sofa="12" begin="0" end="29" value="__label_ddc__236" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4148" sofa="12" begin="0" end="29" value="__label_ddc__231" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4156" sofa="12" begin="0" end="29" value="__label_ddc__234" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4164" sofa="12" begin="0" end="29" value="__label_ddc__917" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4172" sofa="12" begin="0" end="29" value="__label_ddc__911" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4180" sofa="12" begin="0" end="29" value="__label_ddc__912" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4188" sofa="12" begin="0" end="29" value="__label_ddc__706" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4196" sofa="12" begin="0" end="29" value="__label_ddc__708" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4204" sofa="12" begin="0" end="29" value="__label_ddc__700" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4212" sofa="12" begin="0" end="29" value="__label_ddc__709" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4220" sofa="12" begin="0" end="29" value="__label_ddc__672" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4228" sofa="12" begin="0" end="29" value="__label_ddc__678" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4236" sofa="12" begin="0" end="29" value="__label_ddc__679" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4244" sofa="12" begin="0" end="29" value="__label_ddc__674" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4252" sofa="12" begin="0" end="29" value="__label_ddc__671" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4260" sofa="12" begin="0" end="29" value="__label_ddc__178" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4268" sofa="12" begin="0" end="29" value="__label_ddc__176" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4276" sofa="12" begin="0" end="29" value="__label_ddc__171" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4284" sofa="12" begin="0" end="29" value="__label_ddc__177" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4292" sofa="12" begin="0" end="29" value="__label_ddc__179" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4300" sofa="12" begin="0" end="29" value="__label_ddc__805" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4308" sofa="12" begin="0" end="29" value="__label_ddc__800" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4316" sofa="12" begin="0" end="29" value="__label_ddc__809" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4324" sofa="12" begin="0" end="29" value="__label_ddc__260" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4332" sofa="12" begin="0" end="29" value="__label_ddc__267" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4340" sofa="12" begin="0" end="29" value="__label_ddc__268" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4348" sofa="12" begin="0" end="29" value="__label_ddc__261" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4356" sofa="12" begin="0" end="29" value="__label_ddc__264" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4364" sofa="12" begin="0" end="29" value="__label_ddc__740" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4372" sofa="12" begin="0" end="29" value="__label_ddc__749" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4380" sofa="12" begin="0" end="29" value="__label_ddc__746" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4388" sofa="12" begin="0" end="29" value="__label_ddc__745" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4396" sofa="12" begin="0" end="29" value="__label_ddc__419" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4404" sofa="12" begin="0" end="29" value="__label_ddc__410" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4412" sofa="12" begin="0" end="29" value="__label_ddc__418" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4420" sofa="12" begin="0" end="29" value="__label_ddc__414" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4428" sofa="12" begin="0" end="29" value="__label_ddc__732" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4436" sofa="12" begin="0" end="29" value="__label_ddc__730" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4444" sofa="12" begin="0" end="29" value="__label_ddc__736" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4452" sofa="12" begin="0" end="29" value="__label_ddc__731" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4460" sofa="12" begin="0" end="29" value="__label_ddc__518" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4468" sofa="12" begin="0" end="29" value="__label_ddc__514" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4476" sofa="12" begin="0" end="29" value="__label_ddc__513" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4484" sofa="12" begin="0" end="29" value="__label_ddc__516" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4492" sofa="12" begin="0" end="29" value="__label_ddc__519" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4500" sofa="12" begin="0" end="29" value="__label_ddc__207" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4508" sofa="12" begin="0" end="29" value="__label_ddc__206" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4516" sofa="12" begin="0" end="29" value="__label_ddc__204" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4524" sofa="12" begin="0" end="29" value="__label_ddc__201" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4532" sofa="12" begin="0" end="29" value="__label_ddc__202" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4540" sofa="12" begin="0" end="29" value="__label_ddc__783" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4548" sofa="12" begin="0" end="29" value="__label_ddc__787" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4556" sofa="12" begin="0" end="29" value="__label_ddc__786" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4564" sofa="12" begin="0" end="29" value="__label_ddc__782" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4572" sofa="12" begin="0" end="29" value="__label_ddc__946" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4580" sofa="12" begin="0" end="29" value="__label_ddc__942" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4588" sofa="12" begin="0" end="29" value="__label_ddc__948" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4596" sofa="12" begin="0" end="29" value="__label_ddc__944" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4604" sofa="12" begin="0" end="29" value="__label_ddc__943" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4612" sofa="12" begin="0" end="29" value="__label_ddc__528" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4620" sofa="12" begin="0" end="29" value="__label_ddc__525" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4628" sofa="12" begin="0" end="29" value="__label_ddc__521" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4636" sofa="12" begin="0" end="29" value="__label_ddc__522" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4644" sofa="12" begin="0" end="29" value="__label_ddc__523" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4652" sofa="12" begin="0" end="29" value="__label_ddc__379" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4660" sofa="12" begin="0" end="29" value="__label_ddc__373" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4668" sofa="12" begin="0" end="29" value="__label_ddc__370" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4676" sofa="12" begin="0" end="29" value="__label_ddc__371" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4684" sofa="12" begin="0" end="29" value="__label_ddc__534" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4692" sofa="12" begin="0" end="29" value="__label_ddc__538" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4700" sofa="12" begin="0" end="29" value="__label_ddc__535" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4708" sofa="12" begin="0" end="29" value="__label_ddc__537" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4716" sofa="12" begin="0" end="29" value="__label_ddc__539" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4724" sofa="12" begin="0" end="29" value="__label_ddc__390" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4732" sofa="12" begin="0" end="29" value="__label_ddc__392" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4740" sofa="12" begin="0" end="29" value="__label_ddc__398" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4748" sofa="12" begin="0" end="29" value="__label_ddc__391" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4756" sofa="12" begin="0" end="29" value="__label_ddc__588" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4764" sofa="12" begin="0" end="29" value="__label_ddc__582" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4772" sofa="12" begin="0" end="29" value="__label_ddc__584" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4780" sofa="12" begin="0" end="29" value="__label_ddc__583" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4788" sofa="12" begin="0" end="29" value="__label_ddc__322" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4796" sofa="12" begin="0" end="29" value="__label_ddc__328" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4804" sofa="12" begin="0" end="29" value="__label_ddc__324" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4812" sofa="12" begin="0" end="29" value="__label_ddc__321" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4820" sofa="12" begin="0" end="29" value="__label_ddc__550" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4828" sofa="12" begin="0" end="29" value="__label_ddc__553" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4836" sofa="12" begin="0" end="29" value="__label_ddc__153" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4844" sofa="12" begin="0" end="29" value="__label_ddc__156" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4852" sofa="12" begin="0" end="29" value="__label_ddc__150" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4860" sofa="12" begin="0" end="29" value="__label_ddc__155" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4868" sofa="12" begin="0" end="29" value="__label_ddc__682" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4876" sofa="12" begin="0" end="29" value="__label_ddc__683" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4884" sofa="12" begin="0" end="29" value="__label_ddc__687" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4892" sofa="12" begin="0" end="29" value="__label_ddc__686" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4900" sofa="12" begin="0" end="29" value="__label_ddc__653" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4908" sofa="12" begin="0" end="29" value="__label_ddc__650" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4916" sofa="12" begin="0" end="29" value="__label_ddc__659" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4924" sofa="12" begin="0" end="29" value="__label_ddc__658" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4932" sofa="12" begin="0" end="29" value="__label_ddc__723" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4940" sofa="12" begin="0" end="29" value="__label_ddc__727" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4948" sofa="12" begin="0" end="29" value="__label_ddc__720" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4956" sofa="12" begin="0" end="29" value="__label_ddc__721" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4964" sofa="12" begin="0" end="29" value="__label_ddc__725" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4972" sofa="12" begin="0" end="29" value="__label_ddc__542" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4980" sofa="12" begin="0" end="29" value="__label_ddc__543" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4988" sofa="12" begin="0" end="29" value="__label_ddc__541" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="4996" sofa="12" begin="0" end="29" value="__label_ddc__547" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5004" sofa="12" begin="0" end="29" value="__label_ddc__665" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5012" sofa="12" begin="0" end="29" value="__label_ddc__666" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5020" sofa="12" begin="0" end="29" value="__label_ddc__660" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5028" sofa="12" begin="0" end="29" value="__label_ddc__661" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5036" sofa="12" begin="0" end="29" value="__label_ddc__664" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5044" sofa="12" begin="0" end="29" value="__label_ddc__638" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5052" sofa="12" begin="0" end="29" value="__label_ddc__630" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5060" sofa="12" begin="0" end="29" value="__label_ddc__639" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5068" sofa="12" begin="0" end="29" value="__label_ddc__631" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5076" sofa="12" begin="0" end="29" value="__label_ddc__636" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5084" sofa="12" begin="0" end="29" value="__label_ddc__366" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5092" sofa="12" begin="0" end="29" value="__label_ddc__365" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5100" sofa="12" begin="0" end="29" value="__label_ddc__361" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5108" sofa="12" begin="0" end="29" value="__label_ddc__362" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5116" sofa="12" begin="0" end="29" value="__label_ddc__590" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5124" sofa="12" begin="0" end="29" value="__label_ddc__596" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5132" sofa="12" begin="0" end="29" value="__label_ddc__594" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5140" sofa="12" begin="0" end="29" value="__label_ddc__595" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5148" sofa="12" begin="0" end="29" value="__label_ddc__598" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5156" sofa="12" begin="0" end="29" value="__label_ddc__389" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5164" sofa="12" begin="0" end="29" value="__label_ddc__386" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5172" sofa="12" begin="0" end="29" value="__label_ddc__383" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5180" sofa="12" begin="0" end="29" value="__label_ddc__381" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5188" sofa="12" begin="0" end="29" value="__label_ddc__387" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5196" sofa="12" begin="0" end="29" value="__label_ddc__351" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5204" sofa="12" begin="0" end="29" value="__label_ddc__354" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5212" sofa="12" begin="0" end="29" value="__label_ddc__352" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5220" sofa="12" begin="0" end="29" value="__label_ddc__355" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5228" sofa="12" begin="0" end="29" value="__label_ddc__570" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5236" sofa="12" begin="0" end="29" value="__label_ddc__575" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5244" sofa="12" begin="0" end="29" value="__label_ddc__571" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5252" sofa="12" begin="0" end="29" value="__label_ddc__577" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5260" sofa="12" begin="0" end="29" value="__label_ddc__573" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5268" sofa="12" begin="0" end="29" value="__label_ddc__003" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5276" sofa="12" begin="0" end="29" value="__label_ddc__001" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5284" sofa="12" begin="0" end="29" value="__label_ddc__005" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5292" sofa="12" begin="0" end="29" value="__label_ddc__612" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5300" sofa="12" begin="0" end="29" value="__label_ddc__618" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5308" sofa="12" begin="0" end="29" value="__label_ddc__613" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5316" sofa="12" begin="0" end="29" value="__label_ddc__615" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5324" sofa="12" begin="0" end="29" value="__label_ddc__795" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5332" sofa="12" begin="0" end="29" value="__label_ddc__790" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5340" sofa="12" begin="0" end="29" value="__label_ddc__794" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5348" sofa="12" begin="0" end="29" value="__label_ddc__792" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5356" sofa="12" begin="0" end="29" value="__label_ddc__791" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5364" sofa="12" begin="0" end="29" value="__label_ddc__337" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5372" sofa="12" begin="0" end="29" value="__label_ddc__335" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5380" sofa="12" begin="0" end="29" value="__label_ddc__336" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5388" sofa="12" begin="0" end="29" value="__label_ddc__331" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5396" sofa="12" begin="0" end="29" value="__label_ddc__332" score="3.8147167969000006E-16" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5404" sofa="12" begin="0" end="29" value="__label_ddc__832" score="3.6239741211E-9" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5412" sofa="12" begin="0" end="29" value="__label_ddc__839" score="3.6239741211E-9" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5420" sofa="12" begin="0" end="29" value="__label_ddc__437" score="1.586918125E-8" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5428" sofa="12" begin="0" end="29" value="__label_ddc__435" score="1.586918125E-8" tags="ddc3"/>
+    <category:CategoryCoveredTagged xmi:id="5436" sofa="12" begin="0" end="29" value="__label_ddc__430" score="1.586918125E-8" tags="ddc3"/>
+    <morph:MorphologicalFeatures xmi:id="5444" sofa="12" begin="0" end="3" value="acc|sg|3"/>
+    <morph:MorphologicalFeatures xmi:id="5467" sofa="12" begin="4" end="7" value="acc|sg|fem|pos"/>
+    <morph:MorphologicalFeatures xmi:id="5490" sofa="12" begin="8" end="11" value="sg|3|past|subj"/>
+    <morph:MorphologicalFeatures xmi:id="5513" sofa="12" begin="12" end="21" value="nom|pl|masc"/>
+    <morph:MorphologicalFeatures xmi:id="5536" sofa="12" begin="22" end="26" value="sg|3|past|subj"/>
+    <morph:MorphologicalFeatures xmi:id="5559" sofa="12" begin="26" end="27" value="nom|sg|masc"/>
+    <cas:Sofa xmi:id="12" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString="Das ist ein deutscher Text. &#10;"/>
+    <type5:TagDescription xmi:id="250" name="$,"/>
+    <type5:TagDescription xmi:id="252" name="$."/>
+    <type5:TagDescription xmi:id="254" name="$["/>
+    <type5:TagDescription xmi:id="256" name="ADJA"/>
+    <type5:TagDescription xmi:id="258" name="ADJD"/>
+    <type5:TagDescription xmi:id="260" name="ADV"/>
+    <type5:TagDescription xmi:id="262" name="APPO"/>
+    <type5:TagDescription xmi:id="264" name="APPR"/>
+    <type5:TagDescription xmi:id="266" name="APPRART"/>
+    <type5:TagDescription xmi:id="268" name="APZR"/>
+    <type5:TagDescription xmi:id="270" name="ART"/>
+    <type5:TagDescription xmi:id="272" name="CARD"/>
+    <type5:TagDescription xmi:id="274" name="FM"/>
+    <type5:TagDescription xmi:id="276" name="ITJ"/>
+    <type5:TagDescription xmi:id="278" name="KOKOM"/>
+    <type5:TagDescription xmi:id="280" name="KON"/>
+    <type5:TagDescription xmi:id="282" name="KOUI"/>
+    <type5:TagDescription xmi:id="284" name="KOUS"/>
+    <type5:TagDescription xmi:id="286" name="NE"/>
+    <type5:TagDescription xmi:id="288" name="NN"/>
+    <type5:TagDescription xmi:id="290" name="PDAT"/>
+    <type5:TagDescription xmi:id="292" name="PDS"/>
+    <type5:TagDescription xmi:id="294" name="PIAT"/>
+    <type5:TagDescription xmi:id="296" name="PIDAT"/>
+    <type5:TagDescription xmi:id="298" name="PIS"/>
+    <type5:TagDescription xmi:id="300" name="PPER"/>
+    <type5:TagDescription xmi:id="302" name="PPOSAT"/>
+    <type5:TagDescription xmi:id="304" name="PPOSS"/>
+    <type5:TagDescription xmi:id="306" name="PRELAT"/>
+    <type5:TagDescription xmi:id="308" name="PRELS"/>
+    <type5:TagDescription xmi:id="310" name="PRF"/>
+    <type5:TagDescription xmi:id="312" name="PROAV"/>
+    <type5:TagDescription xmi:id="314" name="PTKA"/>
+    <type5:TagDescription xmi:id="316" name="PTKANT"/>
+    <type5:TagDescription xmi:id="318" name="PTKNEG"/>
+    <type5:TagDescription xmi:id="320" name="PTKVZ"/>
+    <type5:TagDescription xmi:id="322" name="PTKZU"/>
+    <type5:TagDescription xmi:id="324" name="PWAT"/>
+    <type5:TagDescription xmi:id="326" name="PWAV"/>
+    <type5:TagDescription xmi:id="328" name="PWS"/>
+    <type5:TagDescription xmi:id="330" name="TRUNC"/>
+    <type5:TagDescription xmi:id="332" name="VAFIN"/>
+    <type5:TagDescription xmi:id="334" name="VAIMP"/>
+    <type5:TagDescription xmi:id="336" name="VAINF"/>
+    <type5:TagDescription xmi:id="338" name="VAPP"/>
+    <type5:TagDescription xmi:id="340" name="VMFIN"/>
+    <type5:TagDescription xmi:id="342" name="VMINF"/>
+    <type5:TagDescription xmi:id="344" name="VMPP"/>
+    <type5:TagDescription xmi:id="346" name="VVFIN"/>
+    <type5:TagDescription xmi:id="348" name="VVIMP"/>
+    <type5:TagDescription xmi:id="350" name="VVINF"/>
+    <type5:TagDescription xmi:id="352" name="VVIZU"/>
+    <type5:TagDescription xmi:id="354" name="VVPP"/>
+    <type5:TagDescription xmi:id="356" name="XY"/>
+    <cas:View sofa="12" members="1 19 25 30 43 56 69 82 95 108 115 120 125 130 135 140 145 214 220 226 232 238 244 358 364 372 380 388 396 404 412 420 428 436 444 452 460 468 476 484 492 500 508 516 524 532 540 548 556 564 572 580 588 596 604 612 620 628 636 644 652 660 668 676 684 692 700 708 716 724 732 740 748 756 764 772 780 788 796 804 812 820 828 836 844 852 860 868 876 884 892 900 908 916 924 932 940 948 956 964 972 980 988 996 1004 1012 1020 1028 1036 1044 1052 1060 1068 1076 1084 1092 1100 1108 1116 1124 1132 1140 1148 1156 1164 1172 1180 1188 1196 1204 1212 1220 1228 1236 1244 1252 1260 1268 1276 1284 1292 1300 1308 1316 1324 1332 1340 1348 1356 1364 1372 1380 1388 1396 1404 1412 1420 1428 1436 1444 1452 1460 1468 1476 1484 1492 1500 1508 1516 1524 1532 1540 1548 1556 1564 1572 1580 1588 1596 1604 1612 1620 1628 1636 1644 1652 1660 1668 1676 1684 1692 1700 1708 1716 1724 1732 1740 1748 1756 1764 1772 1780 1788 1796 1804 1812 1820 1828 1836 1844 1852 1860 1868 1876 1884 1892 1900 1908 1916 1924 1932 1940 1948 1956 1964 1972 1980 1988 1996 2004 2012 2020 2028 2036 2044 2052 2060 2068 2076 2084 2092 2100 2108 2116 2124 2132 2140 2148 2156 2164 2172 2180 2188 2196 2204 2212 2220 2228 2236 2244 2252 2260 2268 2276 2284 2292 2300 2308 2316 2324 2332 2340 2348 2356 2364 2372 2380 2388 2396 2404 2412 2420 2428 2436 2444 2452 2460 2468 2476 2484 2492 2500 2508 2516 2524 2532 2540 2548 2556 2564 2572 2580 2588 2596 2604 2612 2620 2628 2636 2644 2652 2660 2668 2676 2684 2692 2700 2708 2716 2724 2732 2740 2748 2756 2764 2772 2780 2788 2796 2804 2812 2820 2828 2836 2844 2852 2860 2868 2876 2884 2892 2900 2908 2916 2924 2932 2940 2948 2956 2964 2972 2980 2988 2996 3004 3012 3020 3028 3036 3044 3052 3060 3068 3076 3084 3092 3100 3108 3116 3124 3132 3140 3148 3156 3164 3172 3180 3188 3196 3204 3212 3220 3228 3236 3244 3252 3260 3268 3276 3284 3292 3300 3308 3316 3324 3332 3340 3348 3356 3364 3372 3380 3388 3396 3404 3412 3420 3428 3436 3444 3452 3460 3468 3476 3484 3492 3500 3508 3516 3524 3532 3540 3548 3556 3564 3572 3580 3588 3596 3604 3612 3620 3628 3636 3644 3652 3660 3668 3676 3684 3692 3700 3708 3716 3724 3732 3740 3748 3756 3764 3772 3780 3788 3796 3804 3812 3820 3828 3836 3844 3852 3860 3868 3876 3884 3892 3900 3908 3916 3924 3932 3940 3948 3956 3964 3972 3980 3988 3996 4004 4012 4020 4028 4036 4044 4052 4060 4068 4076 4084 4092 4100 4108 4116 4124 4132 4140 4148 4156 4164 4172 4180 4188 4196 4204 4212 4220 4228 4236 4244 4252 4260 4268 4276 4284 4292 4300 4308 4316 4324 4332 4340 4348 4356 4364 4372 4380 4388 4396 4404 4412 4420 4428 4436 4444 4452 4460 4468 4476 4484 4492 4500 4508 4516 4524 4532 4540 4548 4556 4564 4572 4580 4588 4596 4604 4612 4620 4628 4636 4644 4652 4660 4668 4676 4684 4692 4700 4708 4716 4724 4732 4740 4748 4756 4764 4772 4780 4788 4796 4804 4812 4820 4828 4836 4844 4852 4860 4868 4876 4884 4892 4900 4908 4916 4924 4932 4940 4948 4956 4964 4972 4980 4988 4996 5004 5012 5020 5028 5036 5044 5052 5060 5068 5076 5084 5092 5100 5108 5116 5124 5132 5140 5148 5156 5164 5172 5180 5188 5196 5204 5212 5220 5228 5236 5244 5252 5260 5268 5276 5284 5292 5300 5308 5316 5324 5332 5340 5348 5356 5364 5372 5380 5388 5396 5404 5412 5420 5428 5436 5444 5467 5490 5513 5536 5559"/>
+</xmi:XMI>

@@ -269,6 +269,7 @@ public class DUCCAPI {
 			@ApiImplicitParam(dataType = "string", name = "outputLocation", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "outputMongoConnectionString", required = false, paramType = "query", value="Simplified MongoDB connection string like \"mongodb://username:password@host:port/db?authSource=admin\". Leave empty to use TextImager default database"),
 			@ApiImplicitParam(dataType = "string", name = "session", required = false,paramType = "query",value="Description"),
+			@ApiImplicitParam(dataType = "string", name = "description", required = false, paramType = "query", value="Short description, visible in the DUCC UI"),
 	}
 			)
 	public JSONObject analyse(@ApiParam(hidden=true)Request request) throws XPathExpressionException, NullPointerException, UIMAException, JAXBException, IOException, SAXException, ParserConfigurationException{
@@ -289,6 +290,10 @@ public class DUCCAPI {
 
 
 		prop.setProperty("driver_descriptor_CR", getInputReader(inputFormat));
+		
+		if (request.queryParams().contains("description")) {
+			prop.setProperty("description", "\"" + request.queryParams("description") + "\"");
+		}
 
 		String uuid = UUID.randomUUID().toString().split("-")[0];
 

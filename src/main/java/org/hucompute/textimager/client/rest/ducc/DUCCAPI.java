@@ -52,6 +52,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xml.sax.SAXException;
 
+import com.mongodb.ConnectionString;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -76,11 +77,11 @@ import spark.Request;
 @Path("/big-data")
 public class DUCCAPI {
 
-	public static String DUCC_HOME_HOST = "/home/ahemati/workspaceGitNew/textimager-server/duccDataContainer/apache-uima-ducc";
-	public static String DUCC_HOME_CONTAINER = "/home/ducc/apache-uima-ducc";
-	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/serviceScripts/";
+	public static String DUCC_HOME_HOST = "/home/baumartz/dev/git/textimager-server/duccData/apache-uima-ducc";
+	public static String DUCC_HOME_CONTAINER = "/home/ducc/ducc/apache-uima-ducc";
+	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/ducc/serviceScripts/";
 	
-	public static String MONGO_CONNECTION_HOST = "mongodb_container";
+	public static String MONGO_CONNECTION_HOST = "textimager-database";
 	public static String MONGO_CONNECTION_DBNAME = "lab";
 	public static String MONGO_CONNECTION_USER = "root";
 	public static String MONGO_CONNECTION_PW = "rootpassword";
@@ -132,7 +133,7 @@ public class DUCCAPI {
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new PromiscuousVerifier());
 		String username = "root";
-		File privateKey = new File("/home/ahemati/workspaceGitNew/textimager-server/ducc/id_rsa");
+		File privateKey = new File("/home/baumartz/dev/git/textimager-server/ducc/id_rsa");
 		KeyProvider keys = ssh.loadKeys(privateKey.getPath());
 		ssh.connect("127.0.0.1", 2222);
 		ssh.authPublickey(username, keys);
@@ -140,7 +141,7 @@ public class DUCCAPI {
 		Session session = null;
 		try {
 			session = ssh.startSession();
-			final Command cmd = session.exec("[ -d /home/ducc/texte ] && echo \"true\" || echo \"false\"");
+			final Command cmd = session.exec("[ -d /home/ducc/ducc/texte ] && echo \"true\" || echo \"false\"");
 			String output = (IOUtils.toString(cmd.getInputStream())).replace("\n", "").replace(System.lineSeparator(), "");
 			return Boolean.parseBoolean(output);
 		} finally {
@@ -244,13 +245,13 @@ public class DUCCAPI {
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
 		prop.setProperty("driver_jvm_args", "\"-Xmx1g -Dfile.encoding=utf-8\"");
-		prop.setProperty("classpath", "$DUCC_HOME/lib/uima-ducc/*:$DUCC_HOME/lib/uima-ducc/examples/*:$DUCC_HOME/apache-uima/lib/*:$DUCC_HOME/apache-uima/apache-activemq/lib/*:$DUCC_HOME/jars/*:$DUCC_HOME/jars/uima/*:$DUCC_HOME/lib/apache-log4j/*:$DUCC_HOME/jars/dkpro-core/*:$DUCC_HOME/lib/apache-commons/*".replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
+		prop.setProperty("classpath", "$DUCC_HOME/lib/uima-ducc/*:$DUCC_HOME/lib/uima-ducc/examples/*:$DUCC_HOME/apache-uima/lib/*:$DUCC_HOME/apache-uima/apache-activemq/lib/*:/home/ducc/ducc/jars/*:$DUCC_HOME/jars/uima/*:$DUCC_HOME/lib/apache-log4j/*:$DUCC_HOME/jars/dkpro-core/*:$DUCC_HOME/lib/apache-commons/*".replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
 		prop.setProperty("process_deployments_max", "10");
 		prop.setProperty("debug", "");
 		//		prop.setProperty("all_in_one", "local");
 		return prop;
 	}
-
+	
 	@POST
 	@Path("/analyse")
 	@Consumes({"multipart/form-data"})
@@ -266,6 +267,7 @@ public class DUCCAPI {
 			@ApiImplicitParam(dataType = "integer", name = "process_per_item_time_max", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "outputFormat", required = false,paramType = "query",value="Description",defaultValue="MONGO", allowableValues="XMI,MONGO"),
 			@ApiImplicitParam(dataType = "string", name = "outputLocation", required = false,paramType = "query",value="Description"),
+			@ApiImplicitParam(dataType = "string", name = "outputMongoConnectionString", required = false, paramType = "query", value="Simplified MongoDB connection string like \"mongodb://username:password@host:port/db?authSource=admin\". Leave empty to use TextImager default database"),
 			@ApiImplicitParam(dataType = "string", name = "session", required = false,paramType = "query",value="Description"),
 	}
 			)
@@ -316,6 +318,24 @@ public class DUCCAPI {
 				prop.setProperty("process_descriptor_CC", Paths.get(DUCC_SERVICE_SCRIPTS,"io/XmiWriter.xml").toString());
 			}
 			else{
+				// MongoDB
+				String mongoHost = MONGO_CONNECTION_HOST;
+				String mongoDB = MONGO_CONNECTION_DBNAME;
+				String mongoUser = MONGO_CONNECTION_USER;
+				String mongoPass = MONGO_CONNECTION_PW;
+				
+				// Use connection string
+				if (request.queryParams().contains("outputMongoConnectionString")) {
+					String outputMongoConnectionString = request.queryParams("outputMongoConnectionString");
+					if (!outputMongoConnectionString.isEmpty()) {
+						ConnectionString mongoConnectionString = new ConnectionString(outputMongoConnectionString);
+						mongoHost = mongoConnectionString.getHosts().get(0);
+						mongoDB = mongoConnectionString.getDatabase();
+						mongoUser = mongoConnectionString.getUsername();
+						mongoPass = String.valueOf(mongoConnectionString.getPassword());
+					}
+				}
+				
 				prop.setProperty("process_descriptor_CC_overrides", String.format("\""
 						+ "mongo_connection_collectionname=%s "
 						+ "mongo_connection_host=%s "
@@ -323,10 +343,10 @@ public class DUCCAPI {
 						+ "mongo_connection_user=%s "
 						+ "mongo_connection_pw=%s\"",
 						uuid,
-						MONGO_CONNECTION_HOST,
-						MONGO_CONNECTION_DBNAME,
-						MONGO_CONNECTION_USER,
-						MONGO_CONNECTION_PW));
+						mongoHost,
+						mongoDB,
+						mongoUser,
+						mongoPass));
 				prop.setProperty("process_descriptor_CC", Paths.get(DUCC_SERVICE_SCRIPTS,"io/MongoWriter.xml").toString());
 			}
 		}

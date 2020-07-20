@@ -17,7 +17,7 @@ import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 
 public class SSHUtils {
 	
-	public static String RSA_KEY_PATH = "/home/ahemati/workspaceGitNew/textimager-server/ducc/id_rsa"; 
+	public static String RSA_KEY_PATH = "/home/baumartz/dev/git/textimager-server/ducc/id_rsa"; 
 	public static String SERVER_URL = "localhost";
 	public static int SERVER_SSH_PORT = 2222;
 	
@@ -53,15 +53,15 @@ public class SSHUtils {
 			params.append("--" + entry.getKey()).append(" ").append(entry.getValue()).append(" ");
 		}
 		String output = runRemoteCommand(
-				("su - ducc -c 'cd /home/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString()+"'")).replace(System.lineSeparator(), " ").replace("\n", " ");
-		System.out.println(("su - ducc -c 'cd /home/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString().replace(System.lineSeparator(), " ").replace("\n", " ")+"'"));
+				("su - ducc -c 'cd /home/ducc/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString()+"'")).replace(System.lineSeparator(), " ").replace("\n", " ");
+		System.out.println(("su - ducc -c 'cd /home/ducc/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString().replace(System.lineSeparator(), " ").replace("\n", " ")+"'"));
 		return Long.parseLong(output.replaceAll(".*?Job (.*?) submitted.*", "$1"));
 	}
 	
 	//TODO: Fehler abfangen
 	public static boolean sshDuccJobCancel(long jobId) throws IOException{
 		String output = runRemoteCommand(
-				"cd /home/ducc/apache-uima-ducc/bin",
+				"cd /home/ducc/ducc/apache-uima-ducc/bin",
 				"./ducc_cancel --id "+ jobId)
 				.replace(System.lineSeparator(), " ")
 				.replace("\n", " ");

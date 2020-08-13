@@ -77,9 +77,10 @@ import spark.Request;
 @Path("/big-data")
 public class DUCCAPI {
 
-	public static String DUCC_HOME_HOST = "/home/baumartz/dev/git/textimager-server/duccData/apache-uima-ducc";
+	public static String DUCC_HOME_HOST = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_HOME_CONTAINER = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/ducc/serviceScripts/";
+	public static String DUCC_LOCAL = "/home/ducc";
 	
 	public static String MONGO_CONNECTION_HOST = "textimager-database";
 	public static String MONGO_CONNECTION_DBNAME = "lab";
@@ -133,7 +134,7 @@ public class DUCCAPI {
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new PromiscuousVerifier());
 		String username = "root";
-		File privateKey = new File("/home/baumartz/dev/git/textimager-server/ducc/id_rsa");
+		File privateKey = new File(DUCC_LOCAL + "/.ssh/id_rsa");
 		KeyProvider keys = ssh.loadKeys(privateKey.getPath());
 		ssh.connect("127.0.0.1", 2222);
 		ssh.authPublickey(username, keys);
@@ -245,9 +246,16 @@ public class DUCCAPI {
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
 		prop.setProperty("driver_jvm_args", "\"-Xmx1g -Dfile.encoding=utf-8\"");
-		prop.setProperty("classpath", "$DUCC_HOME/lib/uima-ducc/*:$DUCC_HOME/lib/uima-ducc/examples/*:$DUCC_HOME/apache-uima/lib/*:$DUCC_HOME/apache-uima/apache-activemq/lib/*:/home/ducc/ducc/jars/*:$DUCC_HOME/jars/uima/*:$DUCC_HOME/lib/apache-log4j/*:$DUCC_HOME/jars/dkpro-core/*:$DUCC_HOME/lib/apache-commons/*".replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
+		prop.setProperty("classpath", "/home/ducc/ducc/apache-uima-ducc/lib/uima-ducc/workitem/uima-ducc-workitem-v2.jar:"
+				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/lib/*:"
+				+ "/home/ducc/ducc/apache-uima-ducc/jars/*:"
+				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/*:"
+				+ "/home/duecc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/optional/*:"
+				+ "/home/ducc/ducc/jars/sub2/*"
+				.replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
 		prop.setProperty("process_deployments_max", "10");
-		prop.setProperty("debug", "");
+		prop.setProperty("scheduling_class", "fixed");
+		//prop.setProperty("debug", "");
 		//		prop.setProperty("all_in_one", "local");
 		return prop;
 	}
@@ -681,7 +689,7 @@ public class DUCCAPI {
 		MongoCredential credential = MongoCredential.createScramSha1Credential(MONGO_CONNECTION_USER,
 				authDB,
 				MONGO_CONNECTION_PW.toCharArray());
-		MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", port), Arrays.asList(credential));
+		MongoClient mongoClient = new MongoClient(new ServerAddress(MONGO_CONNECTION_HOST, port), Arrays.asList(credential));
 		return mongoClient;
 	}
 

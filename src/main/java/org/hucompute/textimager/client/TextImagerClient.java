@@ -73,7 +73,8 @@ public class TextImagerClient {
 
 	final static Logger logger = Logger.getLogger(TextImagerClient.class);
 
-	private String serverUrl = "tcp://alba.hucompute.org:61617";
+	//private String serverUrl = "tcp://alba.hucompute.org:61617";
+	private String serverUrl = "tcp://textimager-server:61617";
 	private String configFile;
 	private int timeout = 100000;
 

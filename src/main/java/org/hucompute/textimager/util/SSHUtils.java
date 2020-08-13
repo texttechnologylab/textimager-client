@@ -17,9 +17,9 @@ import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 
 public class SSHUtils {
 	
-	public static String RSA_KEY_PATH = "/home/baumartz/dev/git/textimager-server/ducc/id_rsa"; 
-	public static String SERVER_URL = "localhost";
-	public static int SERVER_SSH_PORT = 2222;
+	public static String RSA_KEY_PATH = "/home/ducc/.ssh/id_rsa"; 
+	public static String SERVER_URL = "textimager-server";
+	public static int SERVER_SSH_PORT = 22;
 	
 	public static String runRemoteCommand(String ... cmds) throws IOException{
 		final SSHClient ssh = new SSHClient();

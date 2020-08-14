@@ -76,11 +76,11 @@ import spark.Request;
 @Path("/big-data")
 public class DUCCAPI {
 
-	public static String DUCC_HOME_HOST = "/home/ahemati/workspaceGitNew/textimager-server/duccDataContainer/apache-uima-ducc";
-	public static String DUCC_HOME_CONTAINER = "/home/ducc/apache-uima-ducc";
-	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/serviceScripts/";
+	public static String DUCC_HOME_HOST = "/home/ahemati/git/daniel/textimager-server/duccData/apache-uima-ducc";
+	public static String DUCC_HOME_CONTAINER = "/home/ducc/ducc/apache-uima-ducc";
+	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/ducc/serviceScripts/";
 	
-	public static String MONGO_CONNECTION_HOST = "mongodb_container";
+	public static String MONGO_CONNECTION_HOST = "textimager-database";
 	public static String MONGO_CONNECTION_DBNAME = "lab";
 	public static String MONGO_CONNECTION_USER = "root";
 	public static String MONGO_CONNECTION_PW = "rootpassword";
@@ -132,7 +132,7 @@ public class DUCCAPI {
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new PromiscuousVerifier());
 		String username = "root";
-		File privateKey = new File("/home/ahemati/workspaceGitNew/textimager-server/ducc/id_rsa");
+		File privateKey = new File("/home/ahemati/git/daniel/textimager-server/ducc/id_rsa");
 		KeyProvider keys = ssh.loadKeys(privateKey.getPath());
 		ssh.connect("127.0.0.1", 2222);
 		ssh.authPublickey(username, keys);
@@ -244,7 +244,7 @@ public class DUCCAPI {
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
 		prop.setProperty("driver_jvm_args", "\"-Xmx1g -Dfile.encoding=utf-8\"");
-		prop.setProperty("classpath", "$DUCC_HOME/lib/uima-ducc/*:$DUCC_HOME/lib/uima-ducc/examples/*:$DUCC_HOME/apache-uima/lib/*:$DUCC_HOME/apache-uima/apache-activemq/lib/*:$DUCC_HOME/jars/*:$DUCC_HOME/jars/uima/*:$DUCC_HOME/lib/apache-log4j/*:$DUCC_HOME/jars/dkpro-core/*:$DUCC_HOME/lib/apache-commons/*".replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
+		prop.setProperty("classpath", "$DUCC_HOME/lib/uima-ducc/*:$DUCC_HOME/lib/uima-ducc/examples/*:$DUCC_HOME/apache-uima/lib/*:$DUCC_HOME/apache-uima/apache-activemq/lib/*:/home/ducc/ducc/jars/*:$DUCC_HOME/jars/uima/*:$DUCC_HOME/lib/apache-log4j/*:$DUCC_HOME/jars/dkpro-core/*:$DUCC_HOME/lib/apache-commons/*".replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
 		prop.setProperty("process_deployments_max", "10");
 		prop.setProperty("debug", "");
 		//		prop.setProperty("all_in_one", "local");
@@ -299,7 +299,8 @@ public class DUCCAPI {
 			// die Parameter werden aus props gelöscht, die Properties können dann ganz normal an Ducc gegeben werden
 			File filename = null;
 			try {
-				filename = handleFiles(request);
+//				filename = handleFiles(request);
+				filename = new File(request.queryParams("url"));
 			} catch (Exception ex) {
 				System.out.println("Error handeling files.");  
 				ex.printStackTrace();
@@ -681,6 +682,6 @@ public class DUCCAPI {
 	public static void main(String...args) throws JSONException, IOException{
 		DUCCAPI api = new DUCCAPI();
 //		System.out.println(api.getAllJobs().toString(4));
-		System.out.println(api.listDocuments(35,100,0,null));
+//		System.out.println(api.listDocuments(35,100,0,null));
 	}
 }

@@ -142,7 +142,8 @@ public class REST implements SparkApplication{
 		JSONArray json = new JSONArray();
 
 		TextImagerClient client = new TextImagerClient();
-
+		client.setConfigFile("/home/ahemati/workspaceGitNew/textimager-client/src/main/resources/services.xml");
+		
 		ExceptionCollectorListener listener = new ExceptionCollectorListener();
 
 		try {

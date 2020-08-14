@@ -138,6 +138,19 @@
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
+			<webservice name="SpaCyMultiTagger" group="parser">
+				<remoteDeployInfo>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<timeout>500000</timeout>
+					<getmetatimeout>500000</getmetatimeout>
+					<cpctimeout>500000</cpctimeout>
+				</remoteDeployInfo>
+				<supportedLanguages>
+					<language>en</language>
+					<language>de</language>
+				</supportedLanguages>
+				<parallel>false</parallel>
+			</webservice>
 			<webservice name="ClearNlpParser" group="parser">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
@@ -778,7 +791,7 @@
 			</webservice>
 			<webservice name="CoreNlpSegmenter" group="tokenizer">
 				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<brokerURL>tcp://localhost:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>

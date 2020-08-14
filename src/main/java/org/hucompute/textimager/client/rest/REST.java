@@ -49,7 +49,7 @@ import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
-@SwaggerDefinition(host = "localhost:4567", //
+@SwaggerDefinition(host = "alba.hucompute.org:4567", //
 info = @Info(description = "TextImager API", //
 version = "v0.3 Beta", //
 title = "TextImager API", //
@@ -142,7 +142,7 @@ public class REST implements SparkApplication{
 		JSONArray json = new JSONArray();
 
 		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile("/home/ahemati/workspaceGitNew/textimager-client/src/main/resources/services.xml");
+		client.setConfigFile(REST.class.getClassLoader().getResource("services.xml").getFile().toString());
 		
 		ExceptionCollectorListener listener = new ExceptionCollectorListener();
 

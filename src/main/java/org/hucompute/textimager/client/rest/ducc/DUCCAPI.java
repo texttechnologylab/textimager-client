@@ -76,11 +76,24 @@ import spark.Request;
 @Api(value = "Big Data API")
 @Path("/big-data")
 public class DUCCAPI {
+	public static String configFile = "config_local.prop";
+	
 
 	public static String DUCC_HOME_HOST = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_HOME_CONTAINER = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/ducc/serviceScripts/";
-	public static String DUCC_LOCAL = "/home/ducc";	
+	
+	static {
+	    Properties properties = new Properties();
+	    try {
+	        try (InputStream stream = DUCCAPI.class.getClassLoader().getResourceAsStream(configFile)) {
+	            properties.load(stream);
+	        }
+	    } catch (IOException ex) {
+	        // handle error
+	    }
+	    DUCC_HOME_HOST = properties.getProperty("DUCC_LOCAL");
+	}
 	
 	public static String MONGO_CONNECTION_HOST = "textimager-database";
 	public static String MONGO_CONNECTION_DBNAME = "lab";
@@ -133,10 +146,10 @@ public class DUCCAPI {
 	private boolean checkIfRemoteDirectoryExists(String path) throws IOException{
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new PromiscuousVerifier());
-		String username = "root";
-		File privateKey = new File(DUCC_LOCAL + "/.ssh/id_rsa");
+		String username = SSHUtils.SSH_USER;
+		File privateKey = new File(SSHUtils.RSA_KEY_PATH);
 		KeyProvider keys = ssh.loadKeys(privateKey.getPath());
-		ssh.connect("127.0.0.1", 2222);
+		ssh.connect(SSHUtils.SERVER_URL, SSHUtils.SERVER_SSH_PORT);
 		ssh.authPublickey(username, keys);
 
 		Session session = null;
@@ -238,22 +251,27 @@ public class DUCCAPI {
 		Properties prop = new Properties();
 		prop.setProperty("process_deployments_max", "15");
 		prop.setProperty("process_memory_size", "1");
-		prop.setProperty("process_per_item_time_max", "30");
+		prop.setProperty("process_per_item_time_max", "1200");
 		prop.setProperty("process_pipeline_count", "1");
 		prop.setProperty("process_failures_limit", "99564");
 		prop.setProperty("process_initialization_failures_cap", "9999");
-		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
+
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
+		
 		prop.setProperty("driver_jvm_args", "\"-Xmx1g -Dfile.encoding=utf-8\"");
+//		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
+		
+		prop.setProperty("process_error_window_threshold", "10");
+		prop.setProperty("process_error_window_size", "50");
+
 		prop.setProperty("classpath", "/home/ducc/ducc/apache-uima-ducc/lib/uima-ducc/workitem/uima-ducc-workitem-v2.jar:"
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/lib/*:"
 				+ "/home/ducc/ducc/apache-uima-ducc/jars/*:"
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/*:"
-				+ "/home/duecc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/optional/*:"
+				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/optional/*:"
 				+ "/home/ducc/ducc/jars/sub2/*"
 				.replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
-		prop.setProperty("process_deployments_max", "10");
 		prop.setProperty("debug", "");
 		//		prop.setProperty("all_in_one", "local");
 		return prop;
@@ -271,6 +289,7 @@ public class DUCCAPI {
 			@ApiImplicitParam(dataType = "string", name = "fileSuffix", required = true,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "pipeline", required = false,paramType = "query",value="Description",allowMultiple=true),
 			@ApiImplicitParam(dataType = "integer", name = "process_memory_size", required = false,paramType = "query",value="Description"),
+			@ApiImplicitParam(dataType = "integer", name = "process_deployments_max", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "integer", name = "process_per_item_time_max", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "outputFormat", required = false,paramType = "query",value="Description",defaultValue="MONGO", allowableValues="XMI,MONGO"),
 			@ApiImplicitParam(dataType = "string", name = "outputLocation", required = false,paramType = "query",value="Description"),

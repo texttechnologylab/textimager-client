@@ -2,11 +2,13 @@ package org.hucompute.textimager.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
+import org.hucompute.textimager.client.rest.ducc.DUCCAPI;
 
 import joptsimple.internal.Strings;
 import net.schmizz.sshj.SSHClient;
@@ -16,26 +18,50 @@ import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
 import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 
 public class SSHUtils {
+    public static Properties properties;
+    public static String RSA_KEY_PATH; 
+    public static String SERVER_URL;
+    public static int SERVER_SSH_PORT;
+    public static String SSH_USER;
+    
 	
-	public static String RSA_KEY_PATH = "/home/ducc/.ssh/id_rsa"; 
-	public static String SERVER_URL = "textimager-server";
-	public static int SERVER_SSH_PORT = 22;
-	
+	static {
+	    properties = new Properties();
+	    try {
+	        try (InputStream stream = DUCCAPI.class.getClassLoader().getResourceAsStream(DUCCAPI.configFile)) {
+	            properties.load(stream);
+	        }
+	    } catch (IOException ex) {
+	        // handle error
+	    }
+
+		RSA_KEY_PATH = properties.getProperty("SSH_KEY"); 
+		SERVER_URL = properties.getProperty("SSH_SERVER_URL");
+		SERVER_SSH_PORT = Integer.parseInt(properties.getProperty("SSH_SERVER_SSH_PORT"));
+		SSH_USER = properties.getProperty("SSH_USER");
+	}
+
 	public static String runRemoteCommand(String ... cmds) throws IOException{
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new PromiscuousVerifier());
-		String username = "root";
 		File privateKey = new File(RSA_KEY_PATH);
 		KeyProvider keys = ssh.loadKeys(privateKey.getPath());
 		ssh.connect(SERVER_URL, SERVER_SSH_PORT);
-		ssh.authPublickey(username, keys);
+		ssh.authPublickey(SSH_USER, keys);
 		String command = Strings.join(cmds, "; ");
 		Session session = null;
 		try {
 			session = ssh.startSession();
+			System.out.println("======");
+			System.out.println(command);
+			System.out.println("======");
 			final Command cmd = session.exec(command);
 			return (IOUtils.toString(cmd.getInputStream(),Charset.defaultCharset()));
-		} finally {
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} 
+		finally {
 			try {
 				if (session != null) {
 					session.close();
@@ -52,9 +78,10 @@ public class SSHUtils {
 		for (Entry<Object, Object> entry : prop.entrySet()) {
 			params.append("--" + entry.getKey()).append(" ").append(entry.getValue()).append(" ");
 		}
-		String output = runRemoteCommand(
-				("su - ducc -c 'cd /home/ducc/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString()+"'")).replace(System.lineSeparator(), " ").replace("\n", " ");
-		System.out.println(("su - ducc -c 'cd /home/ducc/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString().replace(System.lineSeparator(), " ").replace("\n", " ")+"'"));
+		
+		String command = ("cd /home/ducc/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString()+"").replace(System.lineSeparator(), " ").replace("\n", " ");
+		String output = runRemoteCommand(command);
+		System.out.println(command);
 		return Long.parseLong(output.replaceAll(".*?Job (.*?) submitted.*", "$1"));
 	}
 	

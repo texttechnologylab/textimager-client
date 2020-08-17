@@ -33,7 +33,6 @@ import org.hucompute.textimager.uima.io.StringReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -49,7 +48,8 @@ import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
-@SwaggerDefinition(host = "alba.hucompute.org:4567", //
+@SwaggerDefinition(host = "localhost:4567", //
+//@SwaggerDefinition(host = "alba.hucompute.org:4567", //
 info = @Info(description = "TextImager API", //
 version = "v0.3 Beta", //
 title = "TextImager API", //

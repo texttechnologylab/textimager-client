@@ -1,0 +1,5 @@
+DUCC_LOCAL		/resources/ducc/ducc_swarm_shared/apache-uima-ducc
+SSH_KEY				/home/ahemati/id_rsa
+SSH_SERVER_URL		alba
+SSH_SERVER_SSH_PORT	2222
+SSH_USER 			ducc

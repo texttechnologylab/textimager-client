@@ -48,7 +48,8 @@ import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
-@SwaggerDefinition(host = "localhost:4567", //
+//@SwaggerDefinition(host = "localhost:4567", //
+@SwaggerDefinition(host = "141.2.108.201:4567", //
 //@SwaggerDefinition(host = "alba.hucompute.org:4567", //
 info = @Info(description = "TextImager API", //
 version = "v0.3 Beta", //

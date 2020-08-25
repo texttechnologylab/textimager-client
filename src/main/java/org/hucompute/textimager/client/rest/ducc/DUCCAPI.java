@@ -262,17 +262,18 @@ public class DUCCAPI {
 		prop.setProperty("driver_jvm_args", "\"-Xmx1g -Dfile.encoding=utf-8\"");
 //		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
 		
-		prop.setProperty("process_error_window_threshold", "10");
-		prop.setProperty("process_error_window_size", "50");
+		prop.setProperty("process_error_window_threshold", "20");
+		prop.setProperty("process_error_window_size", "100");
 
 		prop.setProperty("classpath", "/home/ducc/ducc/apache-uima-ducc/lib/uima-ducc/workitem/uima-ducc-workitem-v2.jar:"
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/lib/*:"
-				+ "/home/ducc/ducc/apache-uima-ducc/jars/*:"
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/*:"
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/optional/*:"
-				+ "/home/ducc/ducc/jars/sub2/*"
+//				+ "/home/ducc/ducc/jars/sub2/*"
+				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.0.2-models.jar:"
+				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.3.2-source.jar"
 				.replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
-		prop.setProperty("debug", "");
+//		prop.setProperty("debug", "");
 		//		prop.setProperty("all_in_one", "local");
 		return prop;
 	}
@@ -283,16 +284,18 @@ public class DUCCAPI {
 	@ApiOperation(value = "Get language per document. (Upload function not supported by Swagger. Please use another REST-Client!)")
 	@ApiImplicitParams (value = {
 			@ApiImplicitParam(dataType = "java.io.File", name = "file", required = false,paramType = "form",allowMultiple=true,type="file", format= "binary"),
-			@ApiImplicitParam(dataType = "string", name = "url", required = false,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "string", name = "language", required = true,paramType = "query",value="Description", allowableValues="en,de,la"),
-			@ApiImplicitParam(dataType = "string", name = "inputFormat", required = true,paramType = "query",value="Description", allowableValues="TXT,TEI,TCF,XMI,WIKIDRAGON,HTML,TEI_TTLAB"),
-			@ApiImplicitParam(dataType = "string", name = "fileSuffix", required = true,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "string", name = "pipeline", required = false,paramType = "query",value="Description",allowMultiple=true),
+			@ApiImplicitParam(dataType = "string", name = "url", required = false, paramType = "query",value="This resource will be downloaded and processed. Can be a document or ZIP."),
+			@ApiImplicitParam(dataType = "string", name = "language", required = true,paramType = "query",value="Language of the corpus", allowableValues="en,de,la"),
+			@ApiImplicitParam(dataType = "string", name = "inputFormat", required = true,paramType = "query",value="Inputformat of documents in the corpus.", allowableValues="TXT,TEI,TCF,XMI,WIKIDRAGON,HTML,TEI_TTLAB"),
+			@ApiImplicitParam(dataType = "string", name = "fileSuffix", required = true,paramType = "query",value="Filesuffix of documents in corpus."),
+			@ApiImplicitParam(dataType = "boolean", name = "sortBySize", required = false,paramType = "query",defaultValue="false",value="Sort files to be processed by filesize."),
+			@ApiImplicitParam(dataType = "string", name = "pipeline", required = false,paramType = "query", value="Tools inside pipeline. ",allowMultiple=true),
 			@ApiImplicitParam(dataType = "integer", name = "process_memory_size", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "integer", name = "process_deployments_max", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "integer", name = "process_per_item_time_max", required = false,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "string", name = "outputFormat", required = false,paramType = "query",value="Description",defaultValue="MONGO", allowableValues="XMI,MONGO"),
+			@ApiImplicitParam(dataType = "string", name = "outputFormat", required = false,paramType = "query",value="Description",defaultValue="XMI", allowableValues="XMI,MONGO"),
 			@ApiImplicitParam(dataType = "string", name = "outputLocation", required = false,paramType = "query",value="Description"),
+			@ApiImplicitParam(dataType = "string", name = "outputCompression", required = false,paramType = "query",defaultValue="GZIP",value="Compression method. Only capable if outputFormat is XMI.", allowableValues="NONE, GZIP, BZIP2, XZ"),
 			@ApiImplicitParam(dataType = "string", name = "outputMongoConnectionString", required = false, paramType = "query", value="Simplified MongoDB connection string like \"mongodb://username:password@host:port/db?authSource=admin\". Leave empty to use TextImager default database"),
 			@ApiImplicitParam(dataType = "string", name = "session", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "description", required = false, paramType = "query", value="Short description, visible in the DUCC UI"),
@@ -342,10 +345,17 @@ public class DUCCAPI {
 			}
 			System.out.println("Unpack dir: " + filename);
 			String driver_descriptor_CR_overrides = "sourceLocation=" + filename + " patterns=[+]**/*."+fileSuffix+" language="+language;
+			if(request.queryParams().contains("sortBySize") && request.queryParams("sortBySize").equals("true"))
+				driver_descriptor_CR_overrides+=" sortBySize=true";
 			prop.setProperty("driver_descriptor_CR_overrides", "\""+driver_descriptor_CR_overrides+"\"");
 
 			if(request.queryParams().contains("outputFormat") && request.queryParams("outputFormat").trim().equals("XMI")){
-				prop.setProperty("process_descriptor_CC_overrides", "\"overwrite=true targetLocation="+request.queryParams("outputLocation")+"\"");
+				String overrides = "\"overwrite=true targetLocation="+request.queryParams("outputLocation");
+				if(request.queryParams().contains("outputCompression") && !request.queryParams("outputCompression").equals("NONE"))
+					overrides+=" compression=\"" + request.queryParams("outputCompression") + "\"";
+				
+				overrides +="\"";
+				prop.setProperty("process_descriptor_CC_overrides", overrides);
 				prop.setProperty("process_descriptor_CC", Paths.get(DUCC_SERVICE_SCRIPTS,"io/XmiWriter.xml").toString());
 			}
 			else{
@@ -396,7 +406,7 @@ public class DUCCAPI {
 		for (String string : pipeline) {
 			if(string.equals("textimager")){
 				if(language.equals("de")){
-					pipeline = new String[]{"LanguageToolSegmenter","MarMoTTagger","MarMoTLemma","FastTextDDCMulLemmaNoPunctPOSNoFunctionwordsWithCategoriesService"};
+					pipeline = new String[]{"SpaCyMultiTagger","LanguageToolLemmatizer","FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService","FastTextWikipediaDisambigService","HeidelTime"};
 				}
 			}
 		}

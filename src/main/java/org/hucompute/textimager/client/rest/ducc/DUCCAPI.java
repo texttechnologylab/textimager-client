@@ -249,8 +249,8 @@ public class DUCCAPI {
 
 	public Properties getJobProperties(){
 		Properties prop = new Properties();
-		prop.setProperty("process_deployments_max", "15");
-		prop.setProperty("process_memory_size", "1");
+		prop.setProperty("process_deployments_max", "30");
+		prop.setProperty("process_memory_size", "20");
 		prop.setProperty("process_per_item_time_max", "1200");
 		prop.setProperty("process_pipeline_count", "1");
 		prop.setProperty("process_failures_limit", "99564");
@@ -259,8 +259,8 @@ public class DUCCAPI {
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
 		
-		prop.setProperty("driver_jvm_args", "\"-Xmx1g -Dfile.encoding=utf-8\"");
-//		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
+		prop.setProperty("driver_jvm_args", "\"-Xmx5g -Dfile.encoding=utf-8\"");
+		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
 		
 		prop.setProperty("process_error_window_threshold", "20");
 		prop.setProperty("process_error_window_size", "100");
@@ -270,6 +270,7 @@ public class DUCCAPI {
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/*:"
 				+ "/home/ducc/ducc/apache-uima-ducc/apache-uima/apache-activemq/lib/optional/*:"
 //				+ "/home/ducc/ducc/jars/sub2/*"
+				+ "/home/ducc/ducc/jarsTagMe/*:"
 				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.0.2-models.jar:"
 				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.3.2-source.jar"
 				.replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
@@ -406,7 +407,38 @@ public class DUCCAPI {
 		for (String string : pipeline) {
 			if(string.equals("textimager")){
 				if(language.equals("de")){
-					pipeline = new String[]{"SpaCyMultiTagger","LanguageToolLemmatizer","FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService","FastTextWikipediaDisambigService","HeidelTime"};
+					pipeline = new String[]{
+							"SpaCyMultiTagger",
+							"ParagraphSplitter",
+							"LanguageToolLemmatizer",
+							"MateMorphTagger",
+							"FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService",
+							"text2cwcSplitThemaWebservice",
+							"text2cwcSplitRaumWebservice",
+							"text2cwcSplitZeitWebservice",
+							"FastTextWikipediaDisambigService",
+							"HeidelTime",
+							"TextBlobSentiment"};
+				}
+			}
+			else if(string.equals("biofid")){
+				if(language.equals("de")){
+					pipeline = new String[]{
+							"SpaCyMultiTagger",
+							"ParagraphSplitter",
+							"LanguageToolLemmatizer",
+							"MateMorphTagger",
+							"FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService",
+							"text2cwcSplitThemaWebservice",
+							"text2cwcSplitRaumWebservice",
+							"text2cwcSplitZeitWebservice",
+							"FastTextWikipediaDisambigService",
+							"HeidelTime",
+							"TextBlobSentiment",
+							"TagMeLocalAnnotator",
+							"WikidataHyponyms",
+							"BIOfidTreeGazetteer",
+							"EuroWordNetTagger"};
 				}
 			}
 		}

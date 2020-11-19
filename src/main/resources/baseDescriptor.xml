@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+    <primitive>false</primitive>
+    <delegateAnalysisEngineSpecifiers>
+	xxxxx
+    </delegateAnalysisEngineSpecifiers>
+    <analysisEngineMetaData>
+        <name>UIMA demonstration</name>
+        <version>2.0</version>
+        <configurationParameters/>
+        <configurationParameterSettings/>
+ 	<flowConstraints>
+      <fixedFlow>    
+yyyyy
+      </fixedFlow>
+    </flowConstraints>
+	<capabilities/>
+        <operationalProperties>
+            <modifiesCas>true</modifiesCas>
+            <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+            <outputsNewCASes>false</outputsNewCASes>
+        </operationalProperties>
+    </analysisEngineMetaData>
+    <resourceManagerConfiguration/>
+</analysisEngineDescription>

@@ -120,7 +120,9 @@ public class TextImagerOptions {
 		BINARYCAS,
 		TXT,
 		MEDIAWIKI,
-		HTML
+		HTML,
+		WIKIDRAGON,
+		TEI_TTLAB
 	}
 
 	public static CollectionReader getReader(IOFormat format,String inputDir,Language language, String fileSuffix, String sourceEncoding) throws ResourceInitializationException{

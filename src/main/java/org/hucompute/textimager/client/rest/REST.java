@@ -28,11 +28,11 @@ import org.hucompute.textimager.client.TextImagerClient;
 import org.hucompute.textimager.client.TextImagerOptions;
 import org.hucompute.textimager.client.TextImagerOptions.IOFormat;
 import org.hucompute.textimager.client.TextImagerOptions.Language;
+import org.hucompute.textimager.client.rest.ducc.DUCCAPI;
 import org.hucompute.textimager.uima.io.StringReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -48,9 +48,11 @@ import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
-//@SwaggerDefinition(host = "141.2.108.201:4567", //
+////@SwaggerDefinition(host = "localhost:4567", //
+//@SwaggerDefinition(host = "141.2.108.201:4568", //
+////@SwaggerDefinition(host = "alba.hucompute.org:4567", //
 //info = @Info(description = "TextImager API", //
-//version = "v0.1 Beta", //
+//version = "v0.3 Beta", //
 //title = "TextImager API", //
 //contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
 //schemes = { SwaggerDefinition.Scheme.HTTP } //
@@ -58,13 +60,13 @@ import spark.servlet.SparkApplication;
 
 @SwaggerDefinition(host = "textimager.hucompute.org/rest", //
 info = @Info(description = "TextImager API", //
-version = "v0.2.1 Beta", //
+version = "v0.3.0", //
 title = "TextImager API", //
 contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
 schemes = { SwaggerDefinition.Scheme.HTTPS } //
 		)
 
-@Api
+@Api(value = "Small Data API")
 @Path("/")
 public class REST implements SparkApplication{
 	public REST(){
@@ -74,7 +76,7 @@ public class REST implements SparkApplication{
 	public static void main(String...args){
 		new REST().init();
 	}
-	
+
 
 	@Path("/language")
 	@GET
@@ -85,7 +87,7 @@ public class REST implements SparkApplication{
 	public JSONArray getLanguageMulti(@QueryParam("document") @ApiParam(name = "document", value = "Input documents", required = true)String[] document) throws Exception{
 		try {
 			TextImagerClient client = new TextImagerClient();
-			List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document),TextImagerOptions.Language.unknown, new String[]{"HucomputeLanguageDetection"}, 2);
+			List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document),TextImagerOptions.Language.unknown, new String[]{"LanguageIdentification"}, 2);
 			JSONArray json = new JSONArray();
 			for (CAS cas : output) {
 				json.put(cas.getDocumentLanguage());
@@ -109,7 +111,7 @@ public class REST implements SparkApplication{
 	public JSONArray getLanguageMultiFile(@ApiParam(hidden = true,name = "upload_file") File collectionPath) throws Exception{
 		try {
 			TextImagerClient client = new TextImagerClient();
-			List<CAS> output = client.processCollection(collectionPath,IOFormat.TXT,Language.unknown,new String[]{"HucomputeLanguageDetection"}, 2);
+			List<CAS> output = client.processCollection(collectionPath,IOFormat.TXT,Language.unknown,new String[]{"LanguageIdentification"}, 2);
 			JSONArray json = new JSONArray();
 			for (CAS cas : output) {
 				json.put(cas.getDocumentLanguage());
@@ -132,28 +134,29 @@ public class REST implements SparkApplication{
 	})
 	public JSONArray process(
 			@QueryParam("document") @ApiParam(name = "document", value = "Input documents", required = true)String[] document,
-			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Pipeline", required = true)String[] pipeline,
+			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Annotators inside pipeline. List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml", required = true)String[] pipeline,
 			@QueryParam("language") @ApiParam(name = "language", value = "Language", required = true, allowableValues="en,de,la")String language,
 			@QueryParam("outputFormat") @ApiParam(name = "outputFormat", value = "Output Format", defaultValue="XMI", required = false,allowableValues="TCF,XMI,CONLL2000,CONLL2002,CONLL2006,CONLL2009,CONLL2012,CONLLU,TEI")String outputFormat, 
 			@ApiParam(hidden = true)Response res) throws ResourceInitializationException, Exception{
 		java.nio.file.Path tmpFolder = Files.createTempDirectory("textImager");
 
 		JSONArray json = new JSONArray();
-		
+
 		TextImagerClient client = new TextImagerClient();
+		client.setConfigFile(REST.class.getClassLoader().getResource("services.xml").getFile().toString());
 		
 		ExceptionCollectorListener listener = new ExceptionCollectorListener();
-		
+
 		try {
 			client.processCollection(
-				CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document,StringReader.PARAM_LANGUAGE,language),
-				TextImagerOptions.Language.valueOf(language), 
-				pipeline, 
-				2,
-				TextImagerOptions.getWriter(IOFormat.valueOf(outputFormat), tmpFolder.toFile().toString()),
-				listener
-			);
-		
+					CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document,StringReader.PARAM_LANGUAGE,language),
+					TextImagerOptions.Language.valueOf(language), 
+					pipeline, 
+					2,
+					TextImagerOptions.getWriter(IOFormat.valueOf(outputFormat), tmpFolder.toFile().toString()),
+					listener
+					);
+
 			for (File file: tmpFolder.toFile().listFiles()) {
 				if(file.getName().toLowerCase().startsWith("typesystem"))
 					continue;
@@ -173,7 +176,7 @@ public class REST implements SparkApplication{
 						jsonST.put(stacktrace.getKey(), stacktrace.getValue());
 					}
 					jsonError.put("exceptions", jsonST);
-					
+
 					json.put(jsonError);
 				}
 				res.status(400);
@@ -186,9 +189,9 @@ public class REST implements SparkApplication{
 			JSONObject jsonST = new JSONObject();
 
 			String fullst = ExceptionUtils.getFullStackTrace(ex);
-			
+
 			ex.printStackTrace();
-			
+
 			if (fullst.contains("could not find service")) {
 				jsonST.put("Service Not Defined Error", fullst);
 			}
@@ -199,17 +202,17 @@ public class REST implements SparkApplication{
 				jsonST.put("Unknown Error", fullst);
 			}
 			jsonError.put("exceptions", jsonST);
-			
+
 			json.put(jsonError);
-			
+
 			res.status(400);
 		}
-		
+
 		FileUtils.deleteDirectory(tmpFolder.toFile());
 		return json;
 	}
 
-	
+
 	@POST
 	@Path("/process")
 	@Consumes({"multipart/form-data"})
@@ -218,7 +221,7 @@ public class REST implements SparkApplication{
 			@ApiImplicitParam(dataType = "file", name = "file", required = true,paramType = "form",allowMultiple=true, type= "file", format= "binary")})
 	public JSONArray processFile(
 			@ApiParam(hidden = true,name = "upload_file") File collectionPath,
-			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Pipeline", required = true)String[] pipeline,
+			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Annotators inside pipeline. List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml", required = true)String[] pipeline,
 			@QueryParam("language") @ApiParam(name = "language", value = "Language", required = true,allowableValues="en,de,la")String language,
 			@QueryParam("outputFormat") @ApiParam(name = "outputFormat", value = "Output Format", defaultValue="XMI", required = false,allowableValues="TCF,XMI,CONLL2000,CONLL2002,CONLL2006,CONLL2009,CONLL2012,CONLLU,TEI")String outputFormat) throws ResourceInitializationException, Exception{
 		try {
@@ -247,7 +250,7 @@ public class REST implements SparkApplication{
 			//			return "error"+"\n"//+ExceptionUtils.getStackTrace(e);
 		}  	
 	};
-	
+
 	private java.nio.file.Path saveRequestFiles(Request req) throws Exception{
 		int maxFileSize = 100000000;  // the maximum size allowed for uploaded files
 		java.nio.file.Path tmpFolder = Files.createTempDirectory("textImager");
@@ -272,27 +275,20 @@ public class REST implements SparkApplication{
 		}
 		return tmpFolder;
 	}
-	
-	
+
+
 	static String jobFilename(long duccId) {
 		return "/home/ducc/ducc/ducctest/logs/" + Long.toString(duccId) + ".job";
 	}
-	
+
 	/**
 	 * 
 	 * @param args
 	 */
 	@Override
 	public void init() {
-		System.setProperty("DUCC_HOME", "/home/ducc/ducc");
-		try {
-			DocumentMetaData meta = DocumentMetaData.create(JCasFactory.createJCas());
-			System.out.println(meta);
-			
-		} catch (IllegalStateException | UIMAException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		Spark.port(4568);
+		DUCCAPI duccapi = new DUCCAPI();
 		Spark.staticFileLocation("html");
 		try {
 			// Build swagger json description
@@ -305,6 +301,26 @@ public class REST implements SparkApplication{
 			System.err.println(e);
 			e.printStackTrace();
 		}
+
+		Spark.options("/*", (request, response) -> {
+			String accessControlRequestHeaders = request
+					.headers("Access-Control-Request-Headers");
+			if (accessControlRequestHeaders != null) {
+				response.header("Access-Control-Allow-Headers",
+						accessControlRequestHeaders);
+			}
+
+			String accessControlRequestMethod = request
+					.headers("Access-Control-Request-Method");
+			if (accessControlRequestMethod != null) {
+				response.header("Access-Control-Allow-Methods",
+						accessControlRequestMethod);
+			}
+			return "OK";
+		});
+
+
+		Spark.before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
 		get("doku", (req, res) -> {
 			res.redirect("doku/"); return null;
@@ -338,6 +354,51 @@ public class REST implements SparkApplication{
 			res.status(200);
 			res.type("application/json");
 			return output;
+		});
+
+		post("big-data/analyse", (req, res) -> {
+			res.status(200);
+			res.type("application/json");
+			return duccapi.analyse(req);
+		});
+
+		get("big-data/cancel", (req, res) -> {
+			res.status(200);
+			res.type("application/json");
+			return duccapi.cancel(Integer.parseInt(req.queryParams("jobId")));
+		});
+
+		get("big-data/jobInfo", (req, res) -> {
+			res.status(200);
+			res.type("application/json");
+			return duccapi.getJobInfos(Integer.parseInt(req.queryParams("jobId")));
+		});
+
+		get("big-data/listJobs", (req, response) -> {
+			response.status(200);
+			response.type("application/json");
+			return duccapi.getAllJobs();
+		});
+
+		get("big-data/listDocuments", (req, response) -> {
+			response.status(200);
+			response.type("application/json");
+
+			int limit = -1;
+			int page = 0;
+			if(req.queryParams().contains("limit"))
+			{
+				limit = Integer.parseInt(req.queryParams("limit"));
+				if(req.queryParams().contains("page"))
+					page = Integer.parseInt(req.queryParams("page"));
+			}
+			return duccapi.listDocuments(Long.parseLong((String) req.queryParams("jobId")),limit,page,req.queryParams().contains("search")?req.queryParams("search"):null);
+		});
+
+		get("big-data/document", (req, response) -> {
+			response.status(200);
+			response.type("application/xml");
+			return duccapi.getDocument(Long.parseLong((String) req.queryParams("jobId")),req.queryParams("_id"));
 		});
 	}
 }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
 	<webserviceGroups>
 		<webserviceGroup name="parser">
@@ -74,12 +75,13 @@
 				<pipeline>
 					<item>tokenizer</item>
 					<item>pos</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>de</language>
 					<language>fr</language>
 					<language>es</language>
-					<language>en</language>
+					<language>en</language>					
 					<language>zh</language>
 				</supportedLanguages>
 				<parallel>false</parallel>
@@ -95,15 +97,16 @@
 					<item>tokenizer</item>
 					<item>lemmatizer</item>
 					<item>pos</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>es</language>
 					<language>en</language>
-					<!-- <language>bn</language> -->
-					<!-- <language>fa</language> -->
-					<!-- <language>fr</language> -->
-					<!-- <language>pl</language> -->
-					<!-- <language>sv</language> -->
+<!-- 					<language>bn</language> -->
+<!-- 					<language>fa</language> -->
+<!-- 					<language>fr</language> -->
+<!-- 					<language>pl</language> -->
+<!-- 					<language>sv</language> -->
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
@@ -116,6 +119,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -132,19 +136,6 @@
 				<pipeline>
 					<item>tokenizer</item>
 				</pipeline>
-				<supportedLanguages>
-					<language>en</language>
-					<language>de</language>
-				</supportedLanguages>
-				<parallel>false</parallel>
-			</webservice>
-			<webservice name="SpaCyMultiTagger" group="parser">
-				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
-					<timeout>500000</timeout>
-					<getmetatimeout>500000</getmetatimeout>
-					<cpctimeout>500000</cpctimeout>
-				</remoteDeployInfo>
 				<supportedLanguages>
 					<language>en</language>
 					<language>de</language>
@@ -168,6 +159,7 @@
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
+
 			<webservice name="UDPipeParser" group="parser">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
@@ -187,6 +179,7 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="ner">
 			<webservice name="CoreNlpNamedEntityRecognizer" group="ner">
 				<remoteDeployInfo>
@@ -197,6 +190,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -209,8 +203,7 @@
 				<parallel>false</parallel>
 				<hp>http://nlp.stanford.edu/</hp>
 			</webservice>
-			<webservice name="BioGproStanfordNamedEntityRecognizer"
-				group="ner" visible="false">
+			<webservice name="BioGproStanfordNamedEntityRecognizer" group="ner" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -219,6 +212,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -229,8 +223,7 @@
 				<parallel>false</parallel>
 				<hp>http://nlp.stanford.edu/</hp>
 			</webservice>
-			<webservice name="BioCempStanfordNamedEntityRecognizer"
-				group="ner" visible="false">
+			<webservice name="BioCempStanfordNamedEntityRecognizer" group="ner" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -239,6 +232,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -249,7 +243,8 @@
 				<parallel>false</parallel>
 				<hp>http://nlp.stanford.edu/</hp>
 			</webservice>
-			<webservice name="BioCempMarMot" group="ner" visible="false">
+
+<webservice name="BioCempMarMot" group="ner" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -258,6 +253,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -268,7 +264,7 @@
 				<parallel>false</parallel>
 				<hp>http://nlp.stanford.edu/</hp>
 			</webservice>
-			<webservice name="BioGproMarMot" group="ner" visible="false">
+<webservice name="BioGproMarMot" group="ner" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -277,6 +273,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -287,26 +284,27 @@
 				<parallel>false</parallel>
 				<hp>http://nlp.stanford.edu/</hp>
 			</webservice>
-			<webservice name="BIOfidGazetteer" group="ner" visible="true">
-				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
-					<timeout>500000</timeout>
-					<getmetatimeout>500000</getmetatimeout>
-					<cpctimeout>500000</cpctimeout>
-				</remoteDeployInfo>
-				<pipeline>
-					<item>tokenizer</item>
-				</pipeline>
-				<supportedLanguages>
-					<language>de</language>
-				</supportedLanguages>
-				<output>
-					<item>Entity</item>
-				</output>
-			</webservice>
+                        <webservice name="BIOfidTreeGazetteer" group="ner" visible="false">
+                                <remoteDeployInfo>
+                                        <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+                                        <timeout>500000</timeout>
+                                        <getmetatimeout>500000</getmetatimeout>
+                                        <cpctimeout>500000</cpctimeout>
+                                </remoteDeployInfo>
+                                <pipeline>
+                                        <item>tokenizer</item>
+                                </pipeline>
+                                <supportedLanguages>
+                                        <language>de</language>
+                                </supportedLanguages>
+                                <output>
+                                        <item>Entity</item>
+                                </output>
+                        </webservice>
+
 			<webservice name="NeuralNER" group="ner" visible="false">
 				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<brokerURL>tcp://sirao.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -321,6 +319,7 @@
 					<item>Entity</item>
 				</output>
 			</webservice>
+
 			<webservice name="SpaCyNER" group="ner">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
@@ -340,6 +339,7 @@
 				</output>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="time">
 			<webservice name="HeidelTime" group="time">
 				<remoteDeployInfo>
@@ -350,6 +350,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 					<item>pos</item>
 				</pipeline>
 				<supportedLanguages>
@@ -360,11 +361,12 @@
 					<item>Time</item>
 				</output>
 				<hp>http://dbs.ifi.uni-heidelberg.de/index.php?id=129</hp>
-				<bibtex>
-					http://dbs.ifi.uni-heidelberg.de/fileadmin/Team/jannik/publications/stroetgen_bib.html#SEMEVAL2010
+				<bibtex>http://dbs.ifi.uni-heidelberg.de/fileadmin/Team/jannik/publications/stroetgen_bib.html#SEMEVAL2010
 				</bibtex>
 			</webservice>
 		</webserviceGroup>
+
+
 		<webserviceGroup name="lemmatizer">
 			<webservice name="MateLemmatizer" group="lemmatizer">
 				<remoteDeployInfo>
@@ -375,6 +377,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>de</language>
@@ -415,6 +418,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>en</language>
@@ -436,7 +440,7 @@
 					<cpctimeout>500000</cpctimeout>
 				</remoteDeployInfo>
 				<pipeline>
-					<item>tokenizer</item>
+					<item>tokenizer</item>					
 					<item>pos</item>
 				</pipeline>
 				<supportedLanguages>
@@ -487,6 +491,7 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="pos">
 			<webservice name="CoreNlpPosTagger" group="pos">
 				<remoteDeployInfo>
@@ -505,7 +510,7 @@
 					<language>de</language>
 					<language>fr</language>
 					<language>zh</language>
-					<!-- <language>es</language> -->
+<!-- 					<language>es</language> -->
 				</supportedLanguages>
 				<output>
 					<item>Pos</item>
@@ -543,6 +548,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>de</language>
@@ -563,6 +569,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>da</language>
@@ -588,6 +595,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>cz</language>
@@ -629,6 +637,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>da</language>
@@ -656,6 +665,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>da</language>
@@ -728,9 +738,9 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="tokenizerModified" visible="false">
-			<webservice name="BreakIteratorSegmenterModified" group="tokenizer"
-				visible="false">
+			<webservice name="BreakIteratorSegmenterModified" group="tokenizer" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -739,20 +749,24 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>languageDetection</item>
-					<item>paragraphSplitter</item>
-					<item>tokenizer</item>
+					<item>paragraphSplitter</item>					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>all</language>
-					<!-- <language>en</language> <language>de</language> <language>la</language> 
-						<language>fr</language> <language>es</language> <language>zh</language> -->
+					<!-- <language>en</language>
+					<language>de</language>
+					<language>la</language>
+					<language>fr</language>
+					<language>es</language>
+					<language>zh</language>-->
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
 		<webserviceGroup name="tokenizer">
 			<webservice name="BreakIteratorSegmenter" group="tokenizer">
 				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					<brokerURL>tcp://localhost:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -763,8 +777,12 @@
 				</pipeline>
 				<supportedLanguages>
 					<language>all</language>
-					<!-- <language>en</language> <language>de</language> <language>la</language> 
-						<language>fr</language> <language>es</language> <language>zh</language> -->
+					<!--<language>en</language>
+					<language>de</language>
+					<language>la</language>
+					<language>fr</language>
+					<language>es</language>
+					<language>zh</language>-->
 				</supportedLanguages>
 			</webservice>
 			<webservice name="LanguageToolSegmenter" group="tokenizer">
@@ -778,12 +796,11 @@
 					<item>languageDetection</item>
 					<item>paragraphSplitter</item>
 				</pipeline>
-				<supportedLanguages>
-					<!-- Supported language codes are: ast-ES, be-BY, br-FR, ca, ca-ES, 
-						ca-ES-valencia, da-DK, de, de-AT, de-CH, de-DE, de-DE-x-simple-language, 
-						el-GR, en, en-AU, en-CA, en-GB, en-NZ, en-US, en-ZA, eo, es, fa, fr, gl-ES, 
-						is-IS, it, ja-JP, km-KH, lt-LT, ml-IN, nl, pl-PL, pt, pt-BR, pt-PT, ro-RO, 
-						ru-RU, sk-SK, sl-SI, sv, ta-IN, tl-PH, uk-UA, zh-CN. -->
+				<supportedLanguages>	<!-- Supported language codes are: ast-ES, be-BY, br-FR, ca, ca-ES, ca-ES-valencia, 
+						da-DK, de, de-AT, de-CH, de-DE, de-DE-x-simple-language, el-GR, en, en-AU, 
+						en-CA, en-GB, en-NZ, en-US, en-ZA, eo, es, fa, fr, gl-ES, is-IS, it, ja-JP, 
+						km-KH, lt-LT, ml-IN, nl, pl-PL, pt, pt-BR, pt-PT, ro-RO, ru-RU, sk-SK, sl-SI, 
+						sv, ta-IN, tl-PH, uk-UA, zh-CN. -->
 					<language>en</language>
 					<language>de</language>
 					<language>fr</language>
@@ -791,7 +808,7 @@
 			</webservice>
 			<webservice name="CoreNlpSegmenter" group="tokenizer">
 				<remoteDeployInfo>
-					<brokerURL>tcp://localhost:61617</brokerURL>
+					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
 					<getmetatimeout>500000</getmetatimeout>
 					<cpctimeout>500000</cpctimeout>
@@ -828,8 +845,7 @@
 					<item>Token</item>
 				</output>
 			</webservice>
-			<webservice name="UDPipeSegmenter" group="tokenizer"
-				visible="false">
+			<webservice name="UDPipeSegmenter" group="tokenizer" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -845,8 +861,7 @@
 			</webservice>
 		</webserviceGroup>
 		<webserviceGroup name="similarity" visible="false">
-			<webservice name="CosineSimilarity" group="similarity"
-				visible="false">
+			<webservice name="CosineSimilarity" group="similarity" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -862,6 +877,8 @@
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
+
+
 		<webserviceGroup name="languageDetection" visible="false">
 			<webservice name="LanguageIdentification" group="languageDetection">
 				<remoteDeployInfo>
@@ -886,6 +903,7 @@
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="paragraphSplitter">
 			<webservice name="ParagraphSplitter" group="paragraphSplitter">
 				<remoteDeployInfo>
@@ -905,9 +923,11 @@
 				</output>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="advancedLanguageDetection"
 			visible="false">
-			<webservice name="LanguageIdentificationPercentage" group="advancedLanguageDetection">
+		<webservice name="LanguageIdentificationPercentage"
+				group="advancedLanguageDetection" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -939,9 +959,9 @@
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="semanticRelation" visible="false">
-			<webservice name="MateSemanticRoleLabeler" group="semanticRelation"
-				visible="false">
+			<webservice name="MateSemanticRoleLabeler" group="semanticRelation" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -949,6 +969,7 @@
 					<cpctimeout>500000</cpctimeout>
 				</remoteDeployInfo>
 				<pipeline>
+
 					<item>tokenizer</item>
 					<item>lemmatizer</item>
 					<item>pos</item>
@@ -959,8 +980,7 @@
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
-			<webservice name="ClearNlpSemanticRoleLabeler" group="semanticRelation"
-				visible="false">
+			<webservice name="ClearNlpSemanticRoleLabeler" group="semanticRelation" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -979,6 +999,7 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="coreference">
 			<webservice name="CoreNlpCoreferenceResolver" group="coreference">
 				<remoteDeployInfo>
@@ -988,6 +1009,7 @@
 					<cpctimeout>500000</cpctimeout>
 				</remoteDeployInfo>
 				<pipeline>
+
 					<item>tokenizer</item>
 					<item>lemmatizer</item>
 					<item>pos</item>
@@ -1000,6 +1022,7 @@
 				<parallel>true</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="wikify">
 			<webservice name="TagMeLocalAnnotator" group="wikify">
 				<remoteDeployInfo>
@@ -1032,6 +1055,7 @@
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="advancedNER">
 			<webservice name="EuroWordNetTagger" group="advancedNER">
 				<remoteDeployInfo>
@@ -1056,6 +1080,7 @@
 				</output>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="wikidata">
 			<webservice name="WikidataHyponyms" group="wikidata">
 				<remoteDeployInfo>
@@ -1071,11 +1096,12 @@
 					<language>en</language>
 					<language>de</language>
 				</supportedLanguages>
-				<parallel>false</parallel>
+                                <parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="languageSplitter" visible="false">
-			<webservice name="LanguageSplitter" group="languageSplitter">
+			<webservice name="LanguageSplitter" group="languageSplitter" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://service.hucompute.org:61616</brokerURL>
 					<timeout>500000</timeout>
@@ -1092,9 +1118,9 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="languageMerger" visible="false">
-			<webservice name="LanguageMerger" group="languageMerger"
-				visible="false">
+			<webservice name="LanguageMerger" group="languageMerger" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://service.hucompute.org:61616</brokerURL>
 					<timeout>500000</timeout>
@@ -1102,6 +1128,7 @@
 					<cpctimeout>500000</cpctimeout>
 				</remoteDeployInfo>
 				<pipeline>
+
 				</pipeline>
 				<casMultiplierPoolsize>5</casMultiplierPoolsize>
 				<supportedLanguages>
@@ -1110,6 +1137,7 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+
 		<webserviceGroup name="morphology" visible="true">
 			<webservice name="UDPipePosTagger" group="morphology">
 				<remoteDeployInfo>
@@ -1135,13 +1163,13 @@
 				<pipeline>
 					<item>tokenizer</item>
 					<item>lemmatizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>de</language>
 				</supportedLanguages>
 			</webservice>
-			<webservice name="MarMoTTaggerMorph" group="morphology"
-				visible="false">
+			<webservice name="MarMoTTaggerMorph" group="morphology" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1150,6 +1178,7 @@
 				</remoteDeployInfo>
 				<pipeline>
 					<item>tokenizer</item>
+
 				</pipeline>
 				<supportedLanguages>
 					<language>de</language>
@@ -1157,44 +1186,48 @@
 				<parallel>false</parallel>
 			</webservice>
 		</webserviceGroup>
+		
+
+
 		<webserviceGroup name="disambiguation">
 			<webservice name="FastTextWikipediaDisambigService" group="disambiguation">
-				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
-					<timeout>500000</timeout>
-					<getmetatimeout>500000</getmetatimeout>
-					<cpctimeout>500000</cpctimeout>
-				</remoteDeployInfo>
-				<pipeline>
-					<item>tokenizer</item>
-					<item>pos</item>
-					<item>lemmatizer</item>
-				</pipeline>
-				<supportedLanguages>
-					<language>de</language>
-				</supportedLanguages>
-			</webservice>
-			<webservice name="FastTextWikipediaDisambigMWEService"
-				group="disambiguation" visible="false">
-				<remoteDeployInfo>
-					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
-					<timeout>500000</timeout>
-					<getmetatimeout>500000</getmetatimeout>
-					<cpctimeout>500000</cpctimeout>
-				</remoteDeployInfo>
-				<pipeline>
-					<item>tokenizer</item>
-					<item>pos</item>
-					<item>lemmatizer</item>
-				</pipeline>
-				<supportedLanguages>
-					<language>de</language>
-					<language>en</language>
-				</supportedLanguages>
-			</webservice>
+                                <remoteDeployInfo>
+                                        <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+                                        <timeout>500000</timeout>
+                                        <getmetatimeout>500000</getmetatimeout>
+                                        <cpctimeout>500000</cpctimeout>
+                                </remoteDeployInfo>
+                                <pipeline>
+                                        <item>tokenizer</item>
+                                        <item>pos</item>
+                                        <item>lemmatizer</item>
+                                </pipeline>
+                                <supportedLanguages>
+                                        <language>de</language>
+                                </supportedLanguages>
+                        </webservice>
+			<webservice name="FastTextWikipediaDisambigMWEService" group="disambiguation" visible="false">
+                                <remoteDeployInfo>
+                                        <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+                                        <timeout>500000</timeout>
+                                        <getmetatimeout>500000</getmetatimeout>
+                                        <cpctimeout>500000</cpctimeout>
+                                </remoteDeployInfo>
+                                <pipeline>
+                                        <item>tokenizer</item>
+                                        <item>pos</item>
+                                        <item>lemmatizer</item>
+                                </pipeline>
+                                <supportedLanguages>
+                                        <language>de</language>
+                                        <language>en</language>
+                                </supportedLanguages>
+                        </webservice>
+
 		</webserviceGroup>
+
 		<webserviceGroup name="ddc">
-			<webservice name="FastTextDDC2" group="ddc" visible="false">
+			<webservice name="text2ddc2" group="ddc" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1209,7 +1242,7 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
-			<webservice name="FastTextDDC3" group="ddc" visible="false">
+			<webservice name="text2ddc3" group="ddc" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1224,10 +1257,24 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
+			<webservice name="FastTextDDC2LemmaNoPunctTextImagerService" group="ddc2">
+					<remoteDeployInfo>
+					    <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+					    <timeout>500000</timeout>
+					    <getmetatimeout>500000</getmetatimeout>
+					    <cpctimeout>500000</cpctimeout>
+					</remoteDeployInfo>
+					<pipeline>
+					    <item>tokenizer</item>
+					    <item>lemmatizer</item>
+					</pipeline>
+					<supportedLanguages>
+					    <language>all</language>
+					</supportedLanguages>
+				    </webservice>
 		</webserviceGroup>
 		<webserviceGroup name="ddcmul" visible="false">
-			<webservice name="FastTextDDCMulService" group="ddcmul"
-				visible="false">
+			<webservice name="FastTextDDCMulService" group="ddcmul" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1245,9 +1292,7 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
-			<webservice
-				name="FastTextDDCMulLemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService"
-				group="ddcmul" visible="false">
+			<webservice name="FastTextDDCMulLemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService" group="ddcmul" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1265,9 +1310,7 @@
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
-			<webservice
-				name="FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService"
-				group="ddcmul" visible="false">
+			<webservice name="FastTextDDC2LemmaNoPunctPOSNoFunctionwordsWithCategoriesTextImagerService" group="ddcmul" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1285,10 +1328,10 @@
 				</supportedLanguages>
 				<parallel>false</parallel>
 			</webservice>
+
 		</webserviceGroup>
 		<webserviceGroup name="text2cwc" visible="false">
-			<webservice name="text2cwcSplitThemaDynWebservice" group="text2cwc"
-				visible="false">
+			<webservice name="text2cwcSplitThemaDynWebservice" group="text2cwc" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1305,8 +1348,7 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
-			<webservice name="text2cwcSplitThemaNoDDCWebservice"
-				group="text2cwc" visible="false">
+			<webservice name="text2cwcSplitThemaNoDDCWebservice" group="text2cwc" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1323,8 +1365,7 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
-			<webservice name="text2cwcSplitRaumWebservice" group="text2cwc"
-				visible="false">
+<webservice name="text2cwcSplitRaumWebservice" group="text2cwc" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1341,8 +1382,7 @@
 					<language>en</language>
 				</supportedLanguages>
 			</webservice>
-			<webservice name="text2cwcSplitZeitWebservice" group="text2cwc"
-				visible="false">
+<webservice name="text2cwcSplitZeitWebservice" group="text2cwc" visible="false">
 				<remoteDeployInfo>
 					<brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
 					<timeout>500000</timeout>
@@ -1360,5 +1400,51 @@
 				</supportedLanguages>
 			</webservice>
 		</webserviceGroup>
+<webserviceGroup name="text2cwc_thema"> 
+        <webservice name="text2cwcENSplitThemaWebservice" group="text2cwc_thema">
+            <remoteDeployInfo>
+                <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+                <timeout>500000</timeout>
+                <getmetatimeout>500000</getmetatimeout>
+                <cpctimeout>500000</cpctimeout>
+            </remoteDeployInfo>
+            <pipeline>
+            </pipeline>
+            <supportedLanguages>
+                <language>en</language>
+            </supportedLanguages>
+        </webservice>
+        </webserviceGroup>
+        <webserviceGroup name="text2cwc_raum">  
+        <webservice name="text2cwcENSplitRaumWebservice" group="text2cwc_raum">
+            <remoteDeployInfo>
+                <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+                <timeout>500000</timeout>
+                <getmetatimeout>500000</getmetatimeout>
+                <cpctimeout>500000</cpctimeout>
+            </remoteDeployInfo>
+            <pipeline>
+            </pipeline>
+            <supportedLanguages>
+                <language>en</language>
+            </supportedLanguages>
+        </webservice>
+        </webserviceGroup>
+        <webserviceGroup name="text2cwc_zeit">  
+        <webservice name="text2cwcENSplitZeitWebservice" group="text2cwc_zeit">
+            <remoteDeployInfo>
+                <brokerURL>tcp://alba.hucompute.org:61617</brokerURL>
+                <timeout>500000</timeout>
+                <getmetatimeout>500000</getmetatimeout>
+                <cpctimeout>500000</cpctimeout>
+            </remoteDeployInfo>
+            <pipeline>
+            </pipeline>
+            <supportedLanguages>
+                <language>en</language>
+            </supportedLanguages>
+        </webservice>
+        </webserviceGroup>
+
 	</webserviceGroups>
 </config>

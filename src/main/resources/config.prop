@@ -1,5 +1,5 @@
-DUCC_LOCAL		/home/ducc/ducc/apache-uima-ducc
-SSH_KEY				/home/ducc/.ssh/id_rsa
-SSH_SERVER_URL		textimager-server
-SSH_SERVER_SSH_PORT	22
-SSH_USER 			root
+DUCC_LOCAL		/home/ducc/ducc_swarm_shared/apache-uima-ducc
+SSH_KEY				/home/ducc/id_rsa
+SSH_SERVER_URL		alba
+SSH_SERVER_SSH_PORT	2222
+SSH_USER 			ducc

@@ -76,7 +76,7 @@ import spark.Request;
 @Api(value = "Big Data API")
 @Path("/big-data")
 public class DUCCAPI {
-	public static String configFile = "config_local.prop";
+	public static String configFile = "config.prop";
 	
 
 	public static String DUCC_HOME_HOST = "/home/ducc/ducc/apache-uima-ducc";
@@ -283,21 +283,21 @@ public class DUCCAPI {
 	@POST
 	@Path("/analyse")
 	@Consumes({"multipart/form-data"})
-	@ApiOperation(value = "Get language per document. (Upload function not supported by Swagger. Please use another REST-Client!)")
+	@ApiOperation(value = "Create a DUCC Job.")
 	@ApiImplicitParams (value = {
-			@ApiImplicitParam(dataType = "java.io.File", name = "file", required = false,paramType = "form",allowMultiple=true,type="file", format= "binary"),
-			@ApiImplicitParam(dataType = "string", name = "url", required = false, paramType = "query",value="This resource will be downloaded and processed. Can be a document or ZIP."),
+			@ApiImplicitParam(dataType = "java.io.File", name = "file", required = false,paramType = "form",allowMultiple=true,type="file", format= "binary", value = "Upload function not supported by Swagger. Please use another REST-Client!"),
+			@ApiImplicitParam(dataType = "string", name = "url", required = false, paramType = "query",value="This resource will be downloaded and processed. Can be a document or ZIP. Can also be a URI on the server, which must be accesable by ducc user"),
 			@ApiImplicitParam(dataType = "string", name = "language", required = true,paramType = "query",value="Language of the corpus", allowableValues="en,de,la"),
 			@ApiImplicitParam(dataType = "string", name = "inputFormat", required = true,paramType = "query",value="Inputformat of documents in the corpus.", allowableValues="TXT,TEI,TCF,XMI,WIKIDRAGON,HTML,TEI_TTLAB"),
 			@ApiImplicitParam(dataType = "string", name = "fileSuffix", required = true,paramType = "query",value="Filesuffix of documents in corpus."),
 			@ApiImplicitParam(dataType = "boolean", name = "sortBySize", required = false,paramType = "query",defaultValue="false",value="Sort files to be processed by filesize."),
-			@ApiImplicitParam(dataType = "string", name = "pipeline", required = false,paramType = "query", value="Tools inside pipeline. ",allowMultiple=true),
-			@ApiImplicitParam(dataType = "integer", name = "process_memory_size", required = false,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "integer", name = "process_deployments_max", required = false,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "integer", name = "process_per_item_time_max", required = false,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "string", name = "outputFormat", required = false,paramType = "query",value="Description",defaultValue="XMI", allowableValues="XMI,MONGO"),
-			@ApiImplicitParam(dataType = "string", name = "outputLocation", required = false,paramType = "query",value="Description"),
-			@ApiImplicitParam(dataType = "string", name = "outputCompression", required = false,paramType = "query",defaultValue="GZIP",value="Compression method. Only capable if outputFormat is XMI.", allowableValues="NONE, GZIP, BZIP2, XZ"),
+			@ApiImplicitParam(dataType = "string", name = "pipeline", required = true,paramType = "query", value="Tools inside pipeline. Predefined pipelines are \"textimager\",\"biofid\". List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml",allowMultiple=true),
+			@ApiImplicitParam(dataType = "integer", name = "process_memory_size", required = false,paramType = "query",value="Minimum memory usage per deployment"),
+			@ApiImplicitParam(dataType = "integer", name = "process_deployments_max", required = false,paramType = "query",value="Maximum number of deployments"),
+			@ApiImplicitParam(dataType = "integer", name = "process_per_item_time_max", required = false,paramType = "query",value="Maximum time (in seconds) to wait, till processing of item will receive a timeout."),
+			@ApiImplicitParam(dataType = "string", name = "outputFormat", required = false,paramType = "query",value="Output format",defaultValue="XMI", allowableValues="XMI,MONGO"),
+			@ApiImplicitParam(dataType = "string", name = "outputLocation", required = false,paramType = "query",value="Output location. Only considered if outputFormat != MONGO"),
+			@ApiImplicitParam(dataType = "string", name = "outputCompression", required = false,paramType = "query",defaultValue="GZIP",value="Compression method. Only capable if outputFormat != MONGO.", allowableValues="NONE, GZIP, BZIP2, XZ"),
 			@ApiImplicitParam(dataType = "string", name = "outputMongoConnectionString", required = false, paramType = "query", value="Simplified MongoDB connection string like \"mongodb://username:password@host:port/db?authSource=admin\". Leave empty to use TextImager default database"),
 			@ApiImplicitParam(dataType = "string", name = "session", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "description", required = false, paramType = "query", value="Short description, visible in the DUCC UI"),
@@ -527,7 +527,7 @@ public class DUCCAPI {
 
 	@Path("/cancel")
 	@GET
-	@ApiOperation(value = "Get status of running job.")
+	@ApiOperation(value = "Cancel running job.")
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
@@ -672,7 +672,7 @@ public class DUCCAPI {
 
 	@Path("/listJobs")
 	@GET
-	@ApiOperation(value = "Get status of running job.")
+	@ApiOperation(value = "List all jobs.")
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})

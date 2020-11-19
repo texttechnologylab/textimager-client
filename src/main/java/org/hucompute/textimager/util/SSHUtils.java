@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Map.Entry;
 
@@ -35,13 +37,19 @@ public class SSHUtils {
 	        // handle error
 	    }
 
-		RSA_KEY_PATH = properties.getProperty("SSH_KEY"); 
+		RSA_KEY_PATH = Paths.get(properties.getProperty("DUCC_LOCAL"),"id_rsa").toAbsolutePath().toString(); 
 		SERVER_URL = properties.getProperty("SSH_SERVER_URL");
 		SERVER_SSH_PORT = Integer.parseInt(properties.getProperty("SSH_SERVER_SSH_PORT"));
 		SSH_USER = properties.getProperty("SSH_USER");
+		
 	}
 
 	public static String runRemoteCommand(String ... cmds) throws IOException{
+		System.out.println(Arrays.toString(cmds));
+		System.out.println(SERVER_URL + "\t" + SERVER_SSH_PORT);
+		System.out.println(SSH_USER);
+		System.out.println(RSA_KEY_PATH);
+		
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new PromiscuousVerifier());
 		File privateKey = new File(RSA_KEY_PATH);
@@ -49,6 +57,10 @@ public class SSHUtils {
 		ssh.connect(SERVER_URL, SERVER_SSH_PORT);
 		ssh.authPublickey(SSH_USER, keys);
 		String command = Strings.join(cmds, "; ");
+		
+		
+
+		
 		Session session = null;
 		try {
 			session = ssh.startSession();
@@ -56,6 +68,8 @@ public class SSHUtils {
 			System.out.println(command);
 			System.out.println("======");
 			final Command cmd = session.exec(command);
+			
+			
 			return (IOUtils.toString(cmd.getInputStream(),Charset.defaultCharset()));
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +96,8 @@ public class SSHUtils {
 		String command = ("cd /home/ducc/ducc/apache-uima-ducc/bin && ./ducc_submit "+ params.toString()+"").replace(System.lineSeparator(), " ").replace("\n", " ");
 		String output = runRemoteCommand(command);
 		System.out.println(command);
-		return Long.parseLong(output.replaceAll(".*?Job (.*?) submitted.*", "$1"));
+		System.out.println(output);
+		return Long.parseLong(output.replaceAll(".*?Job (.*?) submitted.*", "$1").trim());
 	}
 	
 	//TODO: Fehler abfangen

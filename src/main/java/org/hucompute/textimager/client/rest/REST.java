@@ -48,23 +48,23 @@ import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
 
-//@SwaggerDefinition(host = "localhost:4567", //
-@SwaggerDefinition(host = "141.2.108.201:4567", //
-//@SwaggerDefinition(host = "alba.hucompute.org:4567", //
-info = @Info(description = "TextImager API", //
-version = "v0.3 Beta", //
-title = "TextImager API", //
-contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
-schemes = { SwaggerDefinition.Scheme.HTTP } //
-		)
-
-//@SwaggerDefinition(host = "textimager.hucompute.org/rest", //
+////@SwaggerDefinition(host = "localhost:4567", //
+//@SwaggerDefinition(host = "141.2.108.201:4568", //
+////@SwaggerDefinition(host = "alba.hucompute.org:4567", //
 //info = @Info(description = "TextImager API", //
-//version = "v0.2.1 Beta", //
+//version = "v0.3 Beta", //
 //title = "TextImager API", //
 //contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
-//schemes = { SwaggerDefinition.Scheme.HTTPS } //
+//schemes = { SwaggerDefinition.Scheme.HTTP } //
 //		)
+
+@SwaggerDefinition(host = "textimager.hucompute.org/rest", //
+info = @Info(description = "TextImager API", //
+version = "v0.3.0", //
+title = "TextImager API", //
+contact = @Contact(name = "Wahed Hemati", url = "https://www.texttechnologylab.org/team/wahed-hemati/") ) , //
+schemes = { SwaggerDefinition.Scheme.HTTPS } //
+		)
 
 @Api(value = "Small Data API")
 @Path("/")
@@ -87,7 +87,7 @@ public class REST implements SparkApplication{
 	public JSONArray getLanguageMulti(@QueryParam("document") @ApiParam(name = "document", value = "Input documents", required = true)String[] document) throws Exception{
 		try {
 			TextImagerClient client = new TextImagerClient();
-			List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document),TextImagerOptions.Language.unknown, new String[]{"HucomputeLanguageDetection"}, 2);
+			List<CAS> output = client.processCollection(CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document),TextImagerOptions.Language.unknown, new String[]{"LanguageIdentification"}, 2);
 			JSONArray json = new JSONArray();
 			for (CAS cas : output) {
 				json.put(cas.getDocumentLanguage());
@@ -111,7 +111,7 @@ public class REST implements SparkApplication{
 	public JSONArray getLanguageMultiFile(@ApiParam(hidden = true,name = "upload_file") File collectionPath) throws Exception{
 		try {
 			TextImagerClient client = new TextImagerClient();
-			List<CAS> output = client.processCollection(collectionPath,IOFormat.TXT,Language.unknown,new String[]{"HucomputeLanguageDetection"}, 2);
+			List<CAS> output = client.processCollection(collectionPath,IOFormat.TXT,Language.unknown,new String[]{"LanguageIdentification"}, 2);
 			JSONArray json = new JSONArray();
 			for (CAS cas : output) {
 				json.put(cas.getDocumentLanguage());
@@ -134,7 +134,7 @@ public class REST implements SparkApplication{
 	})
 	public JSONArray process(
 			@QueryParam("document") @ApiParam(name = "document", value = "Input documents", required = true)String[] document,
-			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Pipeline", required = true)String[] pipeline,
+			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Annotators inside pipeline. List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml", required = true)String[] pipeline,
 			@QueryParam("language") @ApiParam(name = "language", value = "Language", required = true, allowableValues="en,de,la")String language,
 			@QueryParam("outputFormat") @ApiParam(name = "outputFormat", value = "Output Format", defaultValue="XMI", required = false,allowableValues="TCF,XMI,CONLL2000,CONLL2002,CONLL2006,CONLL2009,CONLL2012,CONLLU,TEI")String outputFormat, 
 			@ApiParam(hidden = true)Response res) throws ResourceInitializationException, Exception{
@@ -221,7 +221,7 @@ public class REST implements SparkApplication{
 			@ApiImplicitParam(dataType = "file", name = "file", required = true,paramType = "form",allowMultiple=true, type= "file", format= "binary")})
 	public JSONArray processFile(
 			@ApiParam(hidden = true,name = "upload_file") File collectionPath,
-			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Pipeline", required = true)String[] pipeline,
+			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Annotators inside pipeline. List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml", required = true)String[] pipeline,
 			@QueryParam("language") @ApiParam(name = "language", value = "Language", required = true,allowableValues="en,de,la")String language,
 			@QueryParam("outputFormat") @ApiParam(name = "outputFormat", value = "Output Format", defaultValue="XMI", required = false,allowableValues="TCF,XMI,CONLL2000,CONLL2002,CONLL2006,CONLL2009,CONLL2012,CONLLU,TEI")String outputFormat) throws ResourceInitializationException, Exception{
 		try {
@@ -287,6 +287,7 @@ public class REST implements SparkApplication{
 	 */
 	@Override
 	public void init() {
+		Spark.port(4568);
 		DUCCAPI duccapi = new DUCCAPI();
 		Spark.staticFileLocation("html");
 		try {

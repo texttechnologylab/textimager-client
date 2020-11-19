@@ -4,7 +4,7 @@
   <groupId>org.hucompute</groupId>
   <artifactId>textimager-client</artifactId>
   <packaging>${packaging.type}</packaging>
-  <version>0.2.6</version>
+  <version>0.2.5</version>
   <profiles>
     <profile>
       <id>source</id>
@@ -43,7 +43,102 @@
     <profile>
       <id>CLI</id>
       <build>
-        <finalName>textimager-CLI</finalName>
+        <plugins>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.2</version>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+              <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.15</version>
+            <configuration>
+              <argLine>-Dfile.encoding=UTF-8</argLine>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+              <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.4.1</version>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <finalName>textimager-CLI</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <archive>
+                <manifest>
+                  <mainClass>org.hucompute.textimager.client.TextImagerClientCLI</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <packaging.type>jar</packaging.type>
+      </properties>
+    </profile>
+    <profile>
+      <id>war</id>
+      <build>
+        <finalName>rest</finalName>
+        <plugins>
+          <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.1</version>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.15</version>
+            <configuration>
+              <argLine>-Dfile.encoding=UTF-8</argLine>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+              <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <packaging.type>war</packaging.type>
+      </properties>
+    </profile>
+    <profile>
+      <id>restjar</id>
+      <build>
         <plugins>
           <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -140,7 +235,7 @@
                 <configuration>
                   <transformers>
                     <transformer>
-                      <mainClass>org.hucompute.textimager.client.TextImagerClientCLI</mainClass>
+                      <mainClass>org.hucompute.textimager.client.rest.REST</mainClass>
                     </transformer>
                   </transformers>
                   <filters>
@@ -177,43 +272,6 @@
         <packaging.type>jar</packaging.type>
       </properties>
     </profile>
-    <profile>
-      <id>war</id>
-      <build>
-        <finalName>rest</finalName>
-        <plugins>
-          <plugin>
-            <artifactId>maven-war-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.6.1</version>
-            <configuration>
-              <source>1.8</source>
-              <target>1.8</target>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.15</version>
-            <configuration>
-              <argLine>-Dfile.encoding=UTF-8</argLine>
-            </configuration>
-          </plugin>
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <configuration>
-              <encoding>${project.build.sourceEncoding}</encoding>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-      <properties>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <packaging.type>war</packaging.type>
-      </properties>
-    </profile>
   </profiles>
   <repositories>
     <repository>
@@ -233,12 +291,4 @@
       <url>https://jitpack.io</url>
     </repository>
   </repositories>
-  <dependencies>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
 </project>

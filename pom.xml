@@ -338,18 +338,18 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-types</artifactId>
-			<version>0.3.0.1</version>
+			<version>0.3.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io</artifactId>
-			<version>0.3.0.1</version>
+			<version>0.3.0.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
-			<version>0.3.0.1</version>
+			<version>0.3.0.2</version>
 		</dependency>
 
 

@@ -20,7 +20,6 @@ import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
 import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 
 public class SSHUtils {
-    public static Properties properties;
     public static String RSA_KEY_PATH; 
     public static String SERVER_URL;
     public static int SERVER_SSH_PORT;
@@ -28,19 +27,11 @@ public class SSHUtils {
     
 	
 	static {
-	    properties = new Properties();
-	    try {
-	        try (InputStream stream = DUCCAPI.class.getClassLoader().getResourceAsStream(DUCCAPI.configFile)) {
-	            properties.load(stream);
-	        }
-	    } catch (IOException ex) {
-	        // handle error
-	    }
 
-		RSA_KEY_PATH = Paths.get(properties.getProperty("DUCC_LOCAL"),"id_rsa").toAbsolutePath().toString(); 
-		SERVER_URL = properties.getProperty("SSH_SERVER_URL");
-		SERVER_SSH_PORT = Integer.parseInt(properties.getProperty("SSH_SERVER_SSH_PORT"));
-		SSH_USER = properties.getProperty("SSH_USER");
+		RSA_KEY_PATH = Paths.get(DUCCAPI.properties.getProperty("DUCC_LOCAL"),"id_rsa").toAbsolutePath().toString(); 
+		SERVER_URL = DUCCAPI.properties.getProperty("SSH_SERVER_URL");
+		SERVER_SSH_PORT = Integer.parseInt(DUCCAPI.properties.getProperty("SSH_SERVER_SSH_PORT"));
+		SSH_USER = DUCCAPI.properties.getProperty("SSH_USER");
 		
 	}
 

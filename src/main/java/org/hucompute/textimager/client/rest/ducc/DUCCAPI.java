@@ -77,16 +77,31 @@ import spark.Request;
 @Path("/big-data")
 public class DUCCAPI {
 	public static String configFile = "config.prop";
-	
-
 	public static String DUCC_HOME_HOST = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_HOME_CONTAINER = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/ducc/serviceScripts/";
 	
+	public static String MONGO_CONNECTION_HOST = "textimager-database";
+	public static String MONGO_CONNECTION_DBNAME = "lab";
+	public static String MONGO_CONNECTION_USER = "root";
+	public static String MONGO_CONNECTION_PW = "rootpassword";
+	public static Properties properties = new Properties();
+
+	
 	static {
-	    Properties properties = new Properties();
+		loadPropertiesFile(DUCCAPI.class.getClassLoader().getResourceAsStream(configFile));
+	}
+	
+	public DUCCAPI() {
+	}
+	
+	public DUCCAPI(String configFilePath) throws FileNotFoundException{
+		loadPropertiesFile(new FileInputStream(new File(configFilePath)));
+	}
+
+	public static void loadPropertiesFile(InputStream configFile){
 	    try {
-	        try (InputStream stream = DUCCAPI.class.getClassLoader().getResourceAsStream(configFile)) {
+	        try (InputStream stream = configFile) {
 	            properties.load(stream);
 	        }
 	    } catch (IOException ex) {
@@ -95,11 +110,6 @@ public class DUCCAPI {
 	    DUCC_HOME_HOST = properties.getProperty("DUCC_LOCAL");
 	}
 	
-	public static String MONGO_CONNECTION_HOST = "textimager-database";
-	public static String MONGO_CONNECTION_DBNAME = "lab";
-	public static String MONGO_CONNECTION_USER = "root";
-	public static String MONGO_CONNECTION_PW = "rootpassword";
-
 	private File getTempFile() throws IOException {
 		File tmpDir = Paths.get(DUCC_HOME_HOST,"ducctest/tmp/").toFile();
 		tmpDir.mkdirs();

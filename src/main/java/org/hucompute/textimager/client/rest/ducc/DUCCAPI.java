@@ -282,7 +282,7 @@ public class DUCCAPI {
 //				+ "/home/ducc/ducc/jars/sub2/*"
 				+ "/home/ducc/ducc/jarsTagMe/*:"
 				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.0.2-models.jar:"
-				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.3.0-source.jar:"
+				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.3.0-source.jar"
 //				+ "/home/ducc/ducc/jars/textimager-uima-deploy-0.3.2-source.jar"
 				.replace("$DUCC_HOME", DUCC_HOME_CONTAINER));
 //				prop.setProperty("debug", "");

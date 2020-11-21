@@ -143,7 +143,7 @@ public class REST implements SparkApplication{
 		JSONArray json = new JSONArray();
 
 		TextImagerClient client = new TextImagerClient();
-		client.setConfigFile(REST.class.getClassLoader().getResource("services.xml").getFile().toString());
+//		client.setConfigFile(REST.class.getClassLoader().getResource("services.xml").getFile().toString());
 		
 		ExceptionCollectorListener listener = new ExceptionCollectorListener();
 

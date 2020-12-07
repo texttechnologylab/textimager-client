@@ -311,6 +311,8 @@ public class DUCCAPI {
 			@ApiImplicitParam(dataType = "string", name = "outputMongoConnectionString", required = false, paramType = "query", value="Simplified MongoDB connection string like \"mongodb://username:password@host:port/db?authSource=admin\". Leave empty to use TextImager default database"),
 			@ApiImplicitParam(dataType = "string", name = "session", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "description", required = false, paramType = "query", value="Short description, visible in the DUCC UI"),
+			@ApiImplicitParam(dataType = "string", name = "modificationUser", required = false, paramType = "query", value="Name of the user that started this modification."),
+			@ApiImplicitParam(dataType = "string", name = "modificationComment", required = false, paramType = "query", value="Short comment with details about this modification."),
 	}
 			)
 	public JSONObject analyse(@ApiParam(hidden=true)Request request) throws XPathExpressionException, NullPointerException, UIMAException, JAXBException, IOException, SAXException, ParserConfigurationException{
@@ -319,6 +321,14 @@ public class DUCCAPI {
 		String inputFormat = request.queryParams("inputFormat");
 		String language = request.queryParams("language");
 		String fileSuffix = request.queryParams("fileSuffix");
+		
+		String modificationUser = "";
+		if(request.queryParams().contains("modificationUser"))
+			modificationUser = request.queryParams("modificationUser");
+		
+		String modificationComment = "";
+		if(request.queryParams().contains("modificationComment"))
+			modificationComment = request.queryParams("modificationComment");
 
 		if(request.queryParams().contains("process_deployments_max"))
 			prop.setProperty("process_deployments_max", request.queryParams("process_deployments_max"));
@@ -371,6 +381,14 @@ public class DUCCAPI {
 				String overrides = "\"overwrite=true targetLocation="+request.queryParams("outputLocation");
 				if(request.queryParams().contains("outputCompression") && !request.queryParams("outputCompression").equals("NONE"))
 					overrides+=" compression=\"" + request.queryParams("outputCompression") + "\"";
+				
+				// modification meta data
+				if (!modificationUser.isEmpty()) {
+					overrides+=" docModificationUser=\"" + modificationUser + "\"";
+				}
+				if (!modificationComment.isEmpty()) {
+					overrides+=" docModificationComment=\"" + modificationComment + "\"";
+				}
 				
 				overrides +="\"";
 				prop.setProperty("process_descriptor_CC_overrides", overrides);

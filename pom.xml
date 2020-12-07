@@ -351,7 +351,12 @@
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
 			<version>0.3.0.2</version>
 		</dependency>
-
+		
+        <dependency>
+            <groupId>com.github.texttechnologylab</groupId>
+            <artifactId>UIMATypeSystem</artifactId>
+            <version>6dd2c2f6e3bfca77e2ad896daf8b3dac37ff0888</version>
+        </dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

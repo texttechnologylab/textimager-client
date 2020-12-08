@@ -338,24 +338,24 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-types</artifactId>
-			<version>0.3.0.2</version>
+			<version>449342eb750573d73a015d1b1b077f2b57f36fa6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io</artifactId>
-			<version>0.3.0.2</version>
+			<version>449342eb750573d73a015d1b1b077f2b57f36fa6</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
-			<version>0.3.0.2</version>
+			<version>449342eb750573d73a015d1b1b077f2b57f36fa6</version>
 		</dependency>
 		
         <dependency>
             <groupId>com.github.texttechnologylab</groupId>
             <artifactId>UIMATypeSystem</artifactId>
-            <version>6dd2c2f6e3bfca77e2ad896daf8b3dac37ff0888</version>
+            <version>2666daff1ea25bd508facbff734e303d77c12b33</version>
         </dependency>
 
 		<dependency>

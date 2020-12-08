@@ -374,6 +374,14 @@ public class DUCCAPI {
 				driver_descriptor_CR_overrides+=" addDocumentMetadata=false";
 			
 			driver_descriptor_CR_overrides+=" targetLocation=" + request.queryParams("outputLocation");
+
+			// modification meta data
+			if (!modificationUser.isEmpty()) {
+				driver_descriptor_CR_overrides +=" docModificationUser='" + modificationUser + "'";
+			}
+			if (!modificationComment.isEmpty()) {
+				driver_descriptor_CR_overrides +=" docModificationComment='" + modificationComment + "'";
+			}
 			
 			prop.setProperty("driver_descriptor_CR_overrides", "\""+driver_descriptor_CR_overrides+"\"");
 
@@ -381,14 +389,6 @@ public class DUCCAPI {
 				String overrides = "\"overwrite=true targetLocation="+request.queryParams("outputLocation");
 				if(request.queryParams().contains("outputCompression") && !request.queryParams("outputCompression").equals("NONE"))
 					overrides+=" compression=\"" + request.queryParams("outputCompression") + "\"";
-				
-				// modification meta data
-				if (!modificationUser.isEmpty()) {
-					overrides+=" docModificationUser=\"" + modificationUser + "\"";
-				}
-				if (!modificationComment.isEmpty()) {
-					overrides+=" docModificationComment=\"" + modificationComment + "\"";
-				}
 				
 				overrides +="\"";
 				prop.setProperty("process_descriptor_CC_overrides", overrides);

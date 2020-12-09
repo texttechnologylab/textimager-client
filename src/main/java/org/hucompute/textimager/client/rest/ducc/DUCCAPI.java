@@ -311,6 +311,8 @@ public class DUCCAPI {
 			@ApiImplicitParam(dataType = "string", name = "outputMongoConnectionString", required = false, paramType = "query", value="Simplified MongoDB connection string like \"mongodb://username:password@host:port/db?authSource=admin\". Leave empty to use TextImager default database"),
 			@ApiImplicitParam(dataType = "string", name = "session", required = false,paramType = "query",value="Description"),
 			@ApiImplicitParam(dataType = "string", name = "description", required = false, paramType = "query", value="Short description, visible in the DUCC UI"),
+			@ApiImplicitParam(dataType = "string", name = "modificationUser", required = false, paramType = "query", value="Name of the user that started this modification."),
+			@ApiImplicitParam(dataType = "string", name = "modificationComment", required = false, paramType = "query", value="Short comment with details about this modification."),
 	}
 			)
 	public JSONObject analyse(@ApiParam(hidden=true)Request request) throws XPathExpressionException, NullPointerException, UIMAException, JAXBException, IOException, SAXException, ParserConfigurationException{
@@ -319,6 +321,14 @@ public class DUCCAPI {
 		String inputFormat = request.queryParams("inputFormat");
 		String language = request.queryParams("language");
 		String fileSuffix = request.queryParams("fileSuffix");
+		
+		String modificationUser = "";
+		if(request.queryParams().contains("modificationUser"))
+			modificationUser = request.queryParams("modificationUser");
+		
+		String modificationComment = "";
+		if(request.queryParams().contains("modificationComment"))
+			modificationComment = request.queryParams("modificationComment");
 
 		if(request.queryParams().contains("process_deployments_max"))
 			prop.setProperty("process_deployments_max", request.queryParams("process_deployments_max"));
@@ -364,6 +374,14 @@ public class DUCCAPI {
 				driver_descriptor_CR_overrides+=" addDocumentMetadata=false";
 			
 			driver_descriptor_CR_overrides+=" targetLocation=" + request.queryParams("outputLocation");
+
+			// modification meta data
+			if (!modificationUser.isEmpty()) {
+				driver_descriptor_CR_overrides +=" docModificationUser='" + modificationUser + "'";
+			}
+			if (!modificationComment.isEmpty()) {
+				driver_descriptor_CR_overrides +=" docModificationComment='" + modificationComment + "'";
+			}
 			
 			prop.setProperty("driver_descriptor_CR_overrides", "\""+driver_descriptor_CR_overrides+"\"");
 

@@ -5,6 +5,11 @@
 	<artifactId>textimager-client</artifactId>
 	<version>0.3.0</version>
 	<packaging>${packaging.type}</packaging>
+	
+	<properties>
+		<textimager.version>f451bc694d8f2db6fe0f8d947fe87b322632d1d8</textimager.version>
+		<ttlab.typesystem.version>711359fd04024b5adf6c6c2a769ef97783bd64ee</ttlab.typesystem.version>
+	</properties>
 
 	<repositories>
 		<repository>
@@ -338,24 +343,34 @@
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-types</artifactId>
-			<version>449342eb750573d73a015d1b1b077f2b57f36fa6</version>
+			<version>${textimager.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io</artifactId>
-			<version>449342eb750573d73a015d1b1b077f2b57f36fa6</version>
+			<version>${textimager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
+			<artifactId>textimager-uima-wiki</artifactId>
+			<version>${textimager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
+			<artifactId>textimager-uima-heideltime</artifactId>
+			<version>${textimager.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
-			<version>449342eb750573d73a015d1b1b077f2b57f36fa6</version>
+			<version>${textimager.version}</version>
 		</dependency>
 		
         <dependency>
             <groupId>com.github.texttechnologylab</groupId>
             <artifactId>UIMATypeSystem</artifactId>
-            <version>2666daff1ea25bd508facbff734e303d77c12b33</version>
+	    <version>${ttlab.typesystem.version}</version>
         </dependency>
 
 		<dependency>

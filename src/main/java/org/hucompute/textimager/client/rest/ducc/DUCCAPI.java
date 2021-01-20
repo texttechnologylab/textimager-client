@@ -80,21 +80,21 @@ public class DUCCAPI {
 	public static String DUCC_HOME_HOST = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_HOME_CONTAINER = "/home/ducc/ducc/apache-uima-ducc";
 	public static String DUCC_SERVICE_SCRIPTS = "/home/ducc/ducc/serviceScripts/";
-	
+
 	public static String MONGO_CONNECTION_HOST = "textimager-database";
 	public static String MONGO_CONNECTION_DBNAME = "lab";
 	public static String MONGO_CONNECTION_USER = "root";
 	public static String MONGO_CONNECTION_PW = "rootpassword";
 	public static Properties properties = new Properties();
 
-	
+
 	static {
 		loadPropertiesFile(DUCCAPI.class.getClassLoader().getResourceAsStream(configFile));
 	}
-	
+
 	public DUCCAPI() {
 	}
-	
+
 	public DUCCAPI(String configFilePath) throws FileNotFoundException{
 		loadPropertiesFile(new FileInputStream(new File(configFilePath)));
 	}
@@ -109,7 +109,7 @@ public class DUCCAPI {
 	    }
 	    DUCC_HOME_HOST = properties.getProperty("DUCC_LOCAL");
 	}
-	
+
 	private File getTempFile() throws IOException {
 		File tmpDir = Paths.get(DUCC_HOME_HOST,"ducctest/tmp/").toFile();
 		tmpDir.mkdirs();
@@ -139,19 +139,19 @@ public class DUCCAPI {
 	}
 
 	/* Returns true if url is valid */
-	private static boolean isValidURL(String url) 
-	{ 
+	private static boolean isValidURL(String url)
+	{
 		/* Try creating a valid URL */
-		try { 
-			new URL(url).toURI(); 
-			return true; 
-		} 
-		// If there was an Exception 
-		// while creating URL object 
-		catch (Exception e) { 
-			return false; 
-		} 
-	} 
+		try {
+			new URL(url).toURI();
+			return true;
+		}
+		// If there was an Exception
+		// while creating URL object
+		catch (Exception e) {
+			return false;
+		}
+	}
 
 	private boolean checkIfRemoteDirectoryExists(String path) throws IOException{
 		final SSHClient ssh = new SSHClient();
@@ -174,7 +174,7 @@ public class DUCCAPI {
 					session.close();
 				}
 			} catch (IOException e) {
-				// Do Nothing   
+				// Do Nothing
 			}
 			ssh.disconnect();
 		}
@@ -268,10 +268,10 @@ public class DUCCAPI {
 
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
-		
+
 		prop.setProperty("driver_jvm_args", "\"-Xmx20g -Dfile.encoding=utf-8\"");
 		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
-		
+
 		prop.setProperty("process_error_window_threshold", "20");
 		prop.setProperty("process_error_window_size", "100");
 
@@ -321,11 +321,11 @@ public class DUCCAPI {
 		String inputFormat = request.queryParams("inputFormat");
 		String language = request.queryParams("language");
 		String fileSuffix = request.queryParams("fileSuffix");
-		
+
 		String modificationUser = "";
 		if(request.queryParams().contains("modificationUser"))
 			modificationUser = request.queryParams("modificationUser");
-		
+
 		String modificationComment = "";
 		if(request.queryParams().contains("modificationComment"))
 			modificationComment = request.queryParams("modificationComment");
@@ -341,7 +341,7 @@ public class DUCCAPI {
 
 
 		prop.setProperty("driver_descriptor_CR", getInputReader(inputFormat));
-		
+
 		if (request.queryParams().contains("description")) {
 			prop.setProperty("description", "\"" + request.queryParams("description") + "\"");
 		}
@@ -359,7 +359,7 @@ public class DUCCAPI {
 			try {
 				filename = handleFiles(request);
 			} catch (Exception ex) {
-				System.out.println("Error handeling files.");  
+				System.out.println("Error handeling files.");
 				ex.printStackTrace();
 				return new JSONObject()
 						.put("status", "error")
@@ -369,10 +369,10 @@ public class DUCCAPI {
 			String driver_descriptor_CR_overrides = "sourceLocation=" + filename + " patterns=[+]**/*."+fileSuffix+" language="+language;
 			if(request.queryParams().contains("sortBySize") && request.queryParams("sortBySize").equals("true"))
 				driver_descriptor_CR_overrides+=" sortBySize=true";
-			
+
 			if(inputFormat.equals("XMI"))
 				driver_descriptor_CR_overrides+=" addDocumentMetadata=false";
-			
+
 			driver_descriptor_CR_overrides+=" targetLocation=" + request.queryParams("outputLocation");
 
 			// modification meta data
@@ -382,14 +382,14 @@ public class DUCCAPI {
 			if (!modificationComment.isEmpty()) {
 				driver_descriptor_CR_overrides +=" docModificationComment='" + modificationComment + "'";
 			}
-			
+
 			prop.setProperty("driver_descriptor_CR_overrides", "\""+driver_descriptor_CR_overrides+"\"");
 
 			if(request.queryParams().contains("outputFormat") && request.queryParams("outputFormat").trim().equals("XMI")){
 				String overrides = "\"overwrite=true targetLocation="+request.queryParams("outputLocation");
 				if(request.queryParams().contains("outputCompression") && !request.queryParams("outputCompression").equals("NONE"))
 					overrides+=" compression=\"" + request.queryParams("outputCompression") + "\"";
-				
+
 				overrides +="\"";
 				prop.setProperty("process_descriptor_CC_overrides", overrides);
 				prop.setProperty("process_descriptor_CC", Paths.get(DUCC_SERVICE_SCRIPTS,"io/XmiWriter.xml").toString());
@@ -400,7 +400,7 @@ public class DUCCAPI {
 				String mongoDB = MONGO_CONNECTION_DBNAME;
 				String mongoUser = MONGO_CONNECTION_USER;
 				String mongoPass = MONGO_CONNECTION_PW;
-				
+
 				// Use connection string
 				if (request.queryParams().contains("outputMongoConnectionString")) {
 					String outputMongoConnectionString = request.queryParams("outputMongoConnectionString");
@@ -412,7 +412,7 @@ public class DUCCAPI {
 						mongoPass = String.valueOf(mongoConnectionString.getPassword());
 					}
 				}
-				
+
 				prop.setProperty("process_descriptor_CC_overrides", String.format("\""
 						+ "mongo_connection_collectionname=%s "
 						+ "mongo_connection_host=%s "
@@ -487,7 +487,24 @@ public class DUCCAPI {
 							"EuroWordNetTagger"};
 				}
 			}
+			else if(string.equals("VerbDisambiguator")){
+				if(language.equals("de")){
+					pipeline = new String[]{
+							"LanguageToolSegmenter",
+							"ParagraphSplitter",
+							"MatePosTagger",
+							"MateLemmatizer",
+							"MateMorphTagger",
+							"MateParser",
+							"VerbSVPOptimizer",
+							"CoreNlpParser",
+							"FrameEvaluator",
+							"VerbsDisambiguation",
+							"VerbsDisambiguationReduced"};
+				}
+			}
 		}
+
 
 		HashMap<String, String>options = new HashMap<>();
 		for (String annotator : pipeline) {
@@ -516,14 +533,14 @@ public class DUCCAPI {
 
 		System.out.println(prop);
 		prop.entrySet().stream().map(x->x.getKey()+"\t"+x.getValue()).forEach(System.out::println);
-		//			
+		//
 		long duccId = -1;
-		try {  
+		try {
 			duccId = SSHUtils.sshDuccJobSubmit(prop);
-			//			DuccJobSubmit ds = new DuccJobSubmit(prop, null);  
-			//			boolean rc = ds.execute();  
-			// If the return is ’true’ then as best the API can tell, the submit worked  
-			if ( duccId > -1 ) {  
+			//			DuccJobSubmit ds = new DuccJobSubmit(prop, null);
+			//			boolean rc = ds.execute();
+			// If the return is ’true’ then as best the API can tell, the submit worked
+			if ( duccId > -1 ) {
 				//				duccId = ds.getDuccId();
 
 				// Startzeitpunkt des Jobs merken
@@ -538,12 +555,12 @@ public class DUCCAPI {
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-			} else {  
-				System.out.println("Could not submit job");  
-			}  
-		}  
-		catch(Exception e) {  
-			System.out.println("Cannot initialize: " + e);  
+			} else {
+				System.out.println("Could not submit job");
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Cannot initialize: " + e);
 		}
 		JSONObject output = new JSONObject();
 		output.put("jobId", duccId);
@@ -556,7 +573,7 @@ public class DUCCAPI {
 	@Path("/cancel")
 	@GET
 	@ApiOperation(value = "Cancel running job.")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
 	public JSONObject cancel(@ApiParam(example = "22246") @QueryParam("jobId") long jobId) throws IOException{
@@ -583,7 +600,7 @@ public class DUCCAPI {
 	@Path("/jobInfo")
 	@GET
 	@ApiOperation(value = "Get status of running job.")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
 	public JSONObject getJobInfos(@ApiParam(example = "22246") @QueryParam("jobId")  long duccId) {
@@ -640,12 +657,12 @@ public class DUCCAPI {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				if(line.contains("resources to be read")){
-					total = Integer.parseInt(line.replaceAll(".*?\\[(.*?)\\].*", "$1"));	
+					total = Integer.parseInt(line.replaceAll(".*?\\[(.*?)\\].*", "$1"));
 				}
 			}
-		} catch(FileNotFoundException e) { 
+		} catch(FileNotFoundException e) {
 			//handle this
-		}		
+		}
 
 		String status =null;
 		try {
@@ -701,7 +718,7 @@ public class DUCCAPI {
 	@Path("/listJobs")
 	@GET
 	@ApiOperation(value = "List all jobs.")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
 	public JSONArray getAllJobs() throws FileNotFoundException, IOException{
@@ -728,7 +745,7 @@ public class DUCCAPI {
 		}
 		return output;
 	}
-	
+
 	private String getCollectionnameFromJobId(long jobId) throws IOException{
 		List<String> job_specification = FileUtils.readLines(Paths.get(DUCC_HOME_HOST,"ducctest/logs/",Long.toString(jobId),"job-specification.properties").toFile());
 		for (String string : job_specification) {
@@ -743,16 +760,16 @@ public class DUCCAPI {
 		}
 		return null;
 	}
-	
+
 	@Path("/listDocuments")
 	@GET
 	@ApiOperation(value = "List documents from job.")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
 	public Object listDocuments(
 			@ApiParam(example = "22246") @QueryParam("jobId") long duccId,
-			@ApiParam(example = "100") @QueryParam("limit")int limit, 
+			@ApiParam(example = "100") @QueryParam("limit")int limit,
 			@ApiParam(example = "0") @QueryParam("page")int page,
 			@ApiParam(example = "test1.txt") @QueryParam("search")String search) throws IOException {
 		MongoClient client = getMongoClient();
@@ -787,7 +804,7 @@ public class DUCCAPI {
 		else
 			return outputObject;
 	}
-	
+
 	private MongoClient getMongoClient(){
 		int port = 27017;
 		String authDB = "admin";
@@ -802,7 +819,7 @@ public class DUCCAPI {
 	@Path("/document")
 	@GET
 	@ApiOperation(value = "Get document from job. ")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=String.class)
 	})
 	public String getDocument(@ApiParam(example = "35") @QueryParam("jobId") long duccId,@ApiParam(example = "5ef2042cda6ad56b750a728d") @QueryParam(value="_id") String _id) throws IOException, UIMAException {

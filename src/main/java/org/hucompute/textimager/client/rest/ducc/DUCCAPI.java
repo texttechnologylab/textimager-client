@@ -299,6 +299,7 @@ public class DUCCAPI {
 			@ApiImplicitParam(dataType = "string", name = "url", required = false, paramType = "query",value="This resource will be downloaded and processed. Can be a document or ZIP. Can also be a URI on the server, which must be accesable by ducc user"),
 			@ApiImplicitParam(dataType = "string", name = "language", required = true,paramType = "query",value="Language of the corpus", allowableValues="en,de,la"),
 			@ApiImplicitParam(dataType = "string", name = "inputFormat", required = true,paramType = "query",value="Inputformat of documents in the corpus.", allowableValues="TXT,TEI,TCF,XMI,WIKIDRAGON,HTML,TEI_TTLAB"),
+			@ApiImplicitParam(dataType = "string", name = "nodepool", required = true,paramType = "query",value="Running in Nodepool:", allowableValues="default,GPU"),
 			@ApiImplicitParam(dataType = "string", name = "fileSuffix", required = true,paramType = "query",value="Filesuffix of documents in corpus."),
 			@ApiImplicitParam(dataType = "boolean", name = "sortBySize", required = false,paramType = "query",defaultValue="false",value="Sort files to be processed by filesize."),
 			@ApiImplicitParam(dataType = "string", name = "pipeline", required = true,paramType = "query", value="Tools inside pipeline. Predefined pipelines are \"textimager\",\"biofid\". List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml",allowMultiple=true),
@@ -338,6 +339,16 @@ public class DUCCAPI {
 
 		if(request.queryParams().contains("process_per_item_time_max"))
 			prop.setProperty("process_per_item_time_max", request.queryParams("process_per_item_time_max"));
+
+		if(request.queryParams().contains("nodepool")) {
+
+				switch (request.queryParams("nodepool")){
+					case "GPU":
+						prop.setProperty("scheduling_class", "gpu-fixed");
+						break;
+				}
+
+		}
 
 
 		prop.setProperty("driver_descriptor_CR", getInputReader(inputFormat));

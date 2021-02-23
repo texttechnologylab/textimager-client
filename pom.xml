@@ -5,10 +5,10 @@
 	<artifactId>textimager-client</artifactId>
 	<version>0.3.0</version>
 	<packaging>${packaging.type}</packaging>
-	
+
 	<properties>
-		<textimager.version>f451bc694d8f2db6fe0f8d947fe87b322632d1d8</textimager.version>
-		<ttlab.typesystem.version>711359fd04024b5adf6c6c2a769ef97783bd64ee</ttlab.typesystem.version>
+		<textimager.version>c098878274ba7b7a586b8aadf3f344081b0a4f1d</textimager.version>
+		<ttlab.typesystem.version>1.8.9.1</ttlab.typesystem.version>
 	</properties>
 
 	<repositories>
@@ -366,7 +366,7 @@
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
 			<version>${textimager.version}</version>
 		</dependency>
-		
+
         <dependency>
             <groupId>com.github.texttechnologylab</groupId>
             <artifactId>UIMATypeSystem</artifactId>

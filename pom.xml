@@ -7,7 +7,7 @@
 	<packaging>${packaging.type}</packaging>
 
 	<properties>
-		<textimager.version>a88b2e3cb20b027a26903770e61ad52a7be03e1c</textimager.version>
+		<textimager.version>920b9dfe9c191c8e19adbf77a20c990aa77ba69f</textimager.version>
 		<ttlab.typesystem.version>1.8.9.4</ttlab.typesystem.version>
 	</properties>
 

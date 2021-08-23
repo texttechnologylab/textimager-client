@@ -1,30 +1,8 @@
 package org.hucompute.textimager.client;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsAnalysisEngineDescription;
+import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsDeploymentDescription;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -56,9 +34,21 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsAnalysisEngineDescription;
-import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsDeploymentDescription;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 
 /**
@@ -80,7 +70,7 @@ public class TextImagerClient {
 
 	public TextImagerClient(){
 		System.setProperty("org.apache.uima.logger.class","org.apache.uima.util.impl.Log4jLogger_impl");
-		System.setProperty("dontKill", "true"); 
+		System.setProperty("dontKill", "true");
 	}
 
 	public void setConfigFile(String configFile){
@@ -88,8 +78,8 @@ public class TextImagerClient {
 	}
 
 	/**
-	 * Process CAS with defined annotatores in a pipeline. 
-	 * @param inputCAS 
+	 * Process CAS with defined annotatores in a pipeline.
+	 * @param inputCAS
 	 * @param annotators
 	 * @return
 	 * @throws Exception
@@ -112,8 +102,8 @@ public class TextImagerClient {
 	}
 
 	/**
-	 * Process inputString with defined annotatores in a simple pipeline. The language is detected automaticully. 
-	 * The inputString is handled as single-language. 
+	 * Process inputString with defined annotatores in a simple pipeline. The language is detected automaticully.
+	 * The inputString is handled as single-language.
 	 * @param inputString String to be processed
 	 * @param annotators The processing pipeline
 	 * @return Processed CAS object.
@@ -182,7 +172,7 @@ public class TextImagerClient {
 		ArrayList<String> pipeline = new ArrayList<String>(Arrays.asList(annotators.split(",")).stream().map(x->x.trim()).collect(Collectors.toSet()));
 		return process(inputFile,pipeline.toArray(new String[pipeline.size()]));
 	}
-	
+
 	private BaseUIMAAsynchronousEngine_impl getUimaAsEngine(HashMap<String, String> options,boolean forceLanguage) throws Exception{
 		return getUimaAsEngine(options, 1,null,null,null,forceLanguage,false);
 	}
@@ -210,7 +200,7 @@ public class TextImagerClient {
 		if(forcePipeline){
 			// TODO Mehr testen, und schönere Lösung?
 			pipelineAPI.configDataholder = new ConfigDataholder(configFile);
-			
+
 			ArrayList<ArrayList<ServiceDataholder>> top = new ArrayList<>();
 			ArrayList<ServiceDataholder> annotators = new ArrayList<>();
 			for (Entry<String, String> option : options.entrySet()) {
@@ -223,7 +213,7 @@ public class TextImagerClient {
 		else{
 			pipeline = pipelineAPI.constructPipeline(options,null, configFile,languageDefined);
 		}
-		
+
 		System.out.println(pipeline);
 		Map<String, Object> clientCtx = new HashMap<String, Object>();
 		//		System.out.println(pipeline);
@@ -466,11 +456,11 @@ public class TextImagerClient {
 	/**
 	 * Process collection
 	 * @param collectionPath Path to the Collection
-	 * @param inputFormant 
+	 * @param inputFormant
 	 * @param inputLanguage
 	 * @param annotators
 	 * @param numberOfCases
-	 * @return List of CASes of processed input collection 
+	 * @return List of CASes of processed input collection
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */
@@ -550,7 +540,7 @@ public class TextImagerClient {
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
-	
+
 	/**
 	 * Process collection with into outputformat
 	 * @param collectionPath Collection base directory
@@ -656,7 +646,7 @@ public class TextImagerClient {
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
-	
+
 	/**
 	 * Process collection with cas consumer and custom collection reader.
 	 * @param reader
@@ -682,7 +672,7 @@ public class TextImagerClient {
 		uimaAsEngine.process();
 		uimaAsEngine.stop();
 	}
-	
+
 	/**
 	 * Process collection with cas consumer and custom collection reader.
 	 * @param reader
@@ -738,7 +728,7 @@ public class TextImagerClient {
 	 * @param inputLanguage
 	 * @param annotators
 	 * @param numberOfCases
-	 * @return List of CASes of processed input collection 
+	 * @return List of CASes of processed input collection
 	 * @throws ResourceInitializationException
 	 * @throws Exception
 	 */

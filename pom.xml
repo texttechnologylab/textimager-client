@@ -8,7 +8,7 @@
 
 	<properties>
 		<textimager.version>920b9dfe9c191c8e19adbf77a20c990aa77ba69f</textimager.version>
-		<ttlab.typesystem.version>1.8.9.4</ttlab.typesystem.version>
+		<ttlab.typesystem.version>1.8.9.9</ttlab.typesystem.version>
 	</properties>
 
 	<repositories>

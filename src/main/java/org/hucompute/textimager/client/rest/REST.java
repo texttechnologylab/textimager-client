@@ -1,27 +1,12 @@
 package org.hucompute.textimager.client.rest;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.util.List;
-import java.util.Map;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-
+import io.swagger.annotations.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
-import org.apache.uima.UIMAException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
-import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.hucompute.textimager.client.TextImagerClient;
@@ -32,21 +17,19 @@ import org.hucompute.textimager.client.rest.ducc.DUCCAPI;
 import org.hucompute.textimager.uima.io.StringReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Contact;
-import io.swagger.annotations.Info;
-import io.swagger.annotations.SwaggerDefinition;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
 import spark.servlet.SparkApplication;
+
+import javax.ws.rs.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
+
+import static spark.Spark.get;
+import static spark.Spark.post;
 
 ////@SwaggerDefinition(host = "localhost:4567", //
 //@SwaggerDefinition(host = "141.2.108.201:4568", //
@@ -81,7 +64,7 @@ public class REST implements SparkApplication{
 	@Path("/language")
 	@GET
 	@ApiOperation(value = "Get language per document.")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
 	public JSONArray getLanguageMulti(@QueryParam("document") @ApiParam(name = "document", value = "Input documents", required = true)String[] document) throws Exception{
@@ -91,7 +74,7 @@ public class REST implements SparkApplication{
 			JSONArray json = new JSONArray();
 			for (CAS cas : output) {
 				json.put(cas.getDocumentLanguage());
-				cas.release();	
+				cas.release();
 			}
 			return json;
 		} catch (Exception e) {
@@ -99,7 +82,7 @@ public class REST implements SparkApplication{
 			e.printStackTrace();
 			return null;
 			//			return "error"+"\n"//+ExceptionUtils.getStackTrace(e);
-		}  	
+		}
 	};
 
 	@POST
@@ -115,7 +98,7 @@ public class REST implements SparkApplication{
 			JSONArray json = new JSONArray();
 			for (CAS cas : output) {
 				json.put(cas.getDocumentLanguage());
-				cas.release();	
+				cas.release();
 			}
 			return json;
 		} catch (Exception e) {
@@ -123,20 +106,20 @@ public class REST implements SparkApplication{
 			e.printStackTrace();
 			return null;
 			//			return "error"+"\n"//+ExceptionUtils.getStackTrace(e);
-		}  	
+		}
 	};
 
 	@Path("/process")
 	@GET
 	@ApiOperation(value = "Process documents with given pipeline.")
-	@ApiResponses(value = { 
+	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Success", response=JSONObject.class)
 	})
 	public JSONArray process(
 			@QueryParam("document") @ApiParam(name = "document", value = "Input documents", required = true)String[] document,
 			@QueryParam("pipeline") @ApiParam(name = "pipeline", value = "Annotators inside pipeline. List of available annotators can be found here: http://service.hucompute.org/urls_v2.xml", required = true)String[] pipeline,
 			@QueryParam("language") @ApiParam(name = "language", value = "Language", required = true, allowableValues="en,de,la")String language,
-			@QueryParam("outputFormat") @ApiParam(name = "outputFormat", value = "Output Format", defaultValue="XMI", required = false,allowableValues="TCF,XMI,CONLL2000,CONLL2002,CONLL2006,CONLL2009,CONLL2012,CONLLU,TEI")String outputFormat, 
+			@QueryParam("outputFormat") @ApiParam(name = "outputFormat", value = "Output Format", defaultValue="XMI", required = false,allowableValues="TCF,XMI,CONLL2000,CONLL2002,CONLL2006,CONLL2009,CONLL2012,CONLLU,TEI")String outputFormat,
 			@ApiParam(hidden = true)Response res) throws ResourceInitializationException, Exception{
 		java.nio.file.Path tmpFolder = Files.createTempDirectory("textImager");
 
@@ -144,14 +127,14 @@ public class REST implements SparkApplication{
 
 		TextImagerClient client = new TextImagerClient();
 //		client.setConfigFile(REST.class.getClassLoader().getResource("services.xml").getFile().toString());
-		
+
 		ExceptionCollectorListener listener = new ExceptionCollectorListener();
 
 		try {
 			client.processCollection(
 					CollectionReaderFactory.createCollectionReader(StringReader.class, StringReader.PARAM_DOCUMENT_TEXT,document,StringReader.PARAM_LANGUAGE,language),
-					TextImagerOptions.Language.valueOf(language), 
-					pipeline, 
+					TextImagerOptions.Language.valueOf(language),
+					pipeline,
 					2,
 					TextImagerOptions.getWriter(IOFormat.valueOf(outputFormat), tmpFolder.toFile().toString()),
 					listener
@@ -248,7 +231,7 @@ public class REST implements SparkApplication{
 			e.printStackTrace();
 			return null;
 			//			return "error"+"\n"//+ExceptionUtils.getStackTrace(e);
-		}  	
+		}
 	};
 
 	private java.nio.file.Path saveRequestFiles(Request req) throws Exception{
@@ -282,8 +265,7 @@ public class REST implements SparkApplication{
 	}
 
 	/**
-	 * 
-	 * @param args
+	 *
 	 */
 	@Override
 	public void init() {

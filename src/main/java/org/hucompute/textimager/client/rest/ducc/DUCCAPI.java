@@ -297,7 +297,7 @@ public class DUCCAPI {
 	@ApiImplicitParams (value = {
 			@ApiImplicitParam(dataType = "java.io.File", name = "file", required = false,paramType = "form",allowMultiple=true,type="file", format= "binary", value = "Upload function not supported by Swagger. Please use another REST-Client!"),
 			@ApiImplicitParam(dataType = "string", name = "url", required = false, paramType = "query",value="This resource will be downloaded and processed. Can be a document or ZIP. Can also be a URI on the server, which must be accesable by ducc user"),
-			@ApiImplicitParam(dataType = "string", name = "language", required = true,paramType = "query",value="Language of the corpus", allowableValues="en,de,la"),
+			@ApiImplicitParam(dataType = "string", name = "language", required = true,paramType = "query",value="Language of the corpus", allowableValues="de,la,en,fr,es,zh,da,nl,el,it,ja,lt,nb,pl,pt,ro,ru,ca,mk,af,grc,ar,hy,eu,be,bg,bxr,zh_hans,zh_hant,lzh,cop,hr,cs,et,fi,gl,got,he,hi,hu,id,ga,kk,ko,kmr,lv,olo,mt,mr,sme,no,nn,cu,fro,orv,fa,gd,sr,sk,sl,sv,swl,ta,te,tr,uk,hsb,ur,ug,vi,wo"),
 			@ApiImplicitParam(dataType = "string", name = "inputFormat", required = true,paramType = "query",value="Inputformat of documents in the corpus.", allowableValues="TXT,TEI,TCF,XMI,WIKIDRAGON,HTML,TEI_TTLAB"),
 			@ApiImplicitParam(dataType = "string", name = "nodepool", required = true,paramType = "query",value="Running in Nodepool:", allowableValues="default,GPU"),
 			@ApiImplicitParam(dataType = "string", name = "fileSuffix", required = true,paramType = "query",value="Filesuffix of documents in corpus."),

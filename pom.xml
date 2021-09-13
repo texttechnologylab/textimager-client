@@ -7,8 +7,8 @@
 	<packaging>${packaging.type}</packaging>
 
 	<properties>
-		<textimager.version>920b9dfe9c191c8e19adbf77a20c990aa77ba69f</textimager.version>
-		<ttlab.typesystem.version>5b40f1d784</ttlab.typesystem.version>
+		<textimager.version>7a5a18ca0a62539c564253aff37c418a304d9637</textimager.version>
+		<ttlab.typesystem.version>33e5df40deb922f793e0d6c13a9c0f6dc57efd93</ttlab.typesystem.version>
 	</properties>
 
 	<repositories>
@@ -341,36 +341,25 @@
 			<version>2.1.3</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
-			<artifactId>textimager-uima-types</artifactId>
-			<version>${textimager.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
-			<artifactId>textimager-uima-io</artifactId>
-			<version>${textimager.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
-			<artifactId>textimager-uima-wiki</artifactId>
-			<version>${textimager.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
-			<artifactId>textimager-uima-heideltime</artifactId>
-			<version>${textimager.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
-			<artifactId>textimager-uima-io-mediawiki</artifactId>
+			<groupId>com.github.texttechnologylab</groupId>
+			<artifactId>textimager-uima</artifactId>
 			<version>${textimager.version}</version>
 		</dependency>
 
         <dependency>
             <groupId>com.github.texttechnologylab</groupId>
             <artifactId>UIMATypeSystem</artifactId>
-	    <version>${ttlab.typesystem.version}</version>
+	    	<version>${ttlab.typesystem.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.github.texttechnologylab</groupId>
+					<artifactId>textimager-uima</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hucompute.textimager.uima</groupId>
+					<artifactId>textimager-uima</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
 
 		<dependency>

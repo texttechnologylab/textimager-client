@@ -256,14 +256,10 @@ public class TextImagerClient {
 				addAnalysisEngine(deployFile,casConsumer);
 			}
 
-			try {
-                // creating aggregate analysis engine
-                uimaAsEngine.deploy(deployFile.getAbsolutePath(), clientCtx);
-                //System.out.println(FileUtils.readFileToString(deployFile.getAbsoluteFile(),"UTF-8"));
-            }
-			catch (ResourceInitializationException e){
-			    e.printStackTrace();
-            }
+
+            // creating aggregate analysis engine
+            uimaAsEngine.deploy(deployFile.getAbsolutePath(), clientCtx);
+            //System.out.println(FileUtils.readFileToString(deployFile.getAbsoluteFile(),"UTF-8"));
 
 			// preparing map for use in a UIMA client for submitting text to
 			clientCtx.put(UimaAsynchronousEngine.ServerUri, serverUrl);

@@ -8,7 +8,7 @@
 
 	<properties>
 		<textimager.version>32c5003e76f123bd3c69f6b8742b316d577733fd</textimager.version>
-		<ttlab.typesystem.version>33e5df40deb922f793e0d6c13a9c0f6dc57efd93</ttlab.typesystem.version>
+		<ttlab.typesystem.version>1d23e466bc</ttlab.typesystem.version>
 		<jcore.types.version>9df8678666856d87b815e79fe100da26f777fb91</jcore.types.version>
 	</properties>
 

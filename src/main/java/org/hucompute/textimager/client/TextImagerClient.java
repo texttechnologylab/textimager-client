@@ -3,6 +3,7 @@ package org.hucompute.textimager.client;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsAnalysisEngineDescription;
 import de.tudarmstadt.ukp.dkpro.lab.uima.engine.uimaas.AsDeploymentDescription;
+import net.didion.jwnl.data.Exc;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -255,9 +256,14 @@ public class TextImagerClient {
 				addAnalysisEngine(deployFile,casConsumer);
 			}
 
-			// creating aggregate analysis engine
-			uimaAsEngine.deploy(deployFile.getAbsolutePath(), clientCtx);
-			//System.out.println(FileUtils.readFileToString(deployFile.getAbsoluteFile(),"UTF-8"));
+			try {
+                // creating aggregate analysis engine
+                uimaAsEngine.deploy(deployFile.getAbsolutePath(), clientCtx);
+                //System.out.println(FileUtils.readFileToString(deployFile.getAbsoluteFile(),"UTF-8"));
+            }
+			catch (ResourceInitializationException e){
+			    e.printStackTrace();
+            }
 
 			// preparing map for use in a UIMA client for submitting text to
 			clientCtx.put(UimaAsynchronousEngine.ServerUri, serverUrl);

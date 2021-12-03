@@ -256,6 +256,7 @@ public class TextImagerClient {
 			}
 
 
+
             // creating aggregate analysis engine
             uimaAsEngine.deploy(deployFile.getAbsolutePath(), clientCtx);
             //System.out.println(FileUtils.readFileToString(deployFile.getAbsoluteFile(),"UTF-8"));

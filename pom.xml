@@ -385,7 +385,7 @@
 				</exclusion>
 				<exclusion>
 					<groupId>org.hucompute.textimager.uima</groupId>
-					<artifactId>textimager-uima</artifactId>
+					<artifactId>*</artifactId>
 				</exclusion>
 			</exclusions>
         </dependency>

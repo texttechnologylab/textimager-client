@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.hucompute.textimager.client.TextImagerClient;
@@ -129,6 +130,26 @@ public class REST implements SparkApplication{
 //		client.setConfigFile(REST.class.getClassLoader().getResource("services.xml").getFile().toString());
 
 		ExceptionCollectorListener listener = new ExceptionCollectorListener();
+
+
+
+		for (String s : TypeSystemDescriptionFactory.scanTypeDescriptors()) {
+			System.out.println(s);
+			//			TypeSystemDescription tsd = TypeSystemDescriptionFactory.createTypeSystemDescriptionFromPath(s);
+//			for (TypeDescription type : tsd.getTypes()) {
+//				if(type.getName().equalsIgnoreCase("org.texttechnologylab.annotation.semaf.isobase.Entity")){
+//					for (FeatureDescription feature : type.getFeatures()) {
+//						if(feature.getName().equalsIgnoreCase("object_feature")){
+//							System.out.println(feature.getRangeTypeName());
+//							System.out.println(s);
+//						}
+//					}
+//
+//				}
+//			}
+
+		}
+
 
 		try {
 			client.processCollection(

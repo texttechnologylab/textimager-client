@@ -368,8 +368,8 @@
 	    	<version>${ttlab.typesystem.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>com.github.texttechnologylab</groupId>
-					<artifactId>textimager-uima</artifactId>
+					<groupId>com.github.texttechnologylab.textimager-uima</groupId>
+					<artifactId>*</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.hucompute.textimager.uima</groupId>

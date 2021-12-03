@@ -355,11 +355,23 @@
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 		        <artifactId>textimager-uima-types</artifactId>
 		        <version>${textimager.version}</version>
+			 	<exclusions>
+					<exclusion>
+						<groupId>com.github.texttechnologylab</groupId>
+						<artifactId>*</artifactId>
+					</exclusion>
+				</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.github.texttechnologylab.textimager-uima</groupId>
 			<artifactId>textimager-uima-io-mediawiki</artifactId>
 			<version>${textimager.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.github.texttechnologylab</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
         <dependency>

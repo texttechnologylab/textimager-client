@@ -1,42 +1,17 @@
 package org.hucompute.textimager.client.rest.ducc;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import io.swagger.annotations.*;
+import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.connection.channel.direct.Session;
+import net.schmizz.sshj.connection.channel.direct.Session.Command;
+import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
+import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UIMAException;
@@ -51,27 +26,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xml.sax.SAXException;
-
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.connection.channel.direct.Session;
-import net.schmizz.sshj.connection.channel.direct.Session.Command;
-import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
-import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 import spark.Request;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
+import javax.ws.rs.*;
+import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.*;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 @Api(value = "Big Data API")
 @Path("/big-data")
@@ -269,7 +239,7 @@ public class DUCCAPI {
 		prop.setProperty("working_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest").toString());
 		prop.setProperty("log_directory", Paths.get(DUCC_HOME_CONTAINER,"ducctest/logs").toString());
 
-		prop.setProperty("driver_jvm_args", "\"-Xmx20g -Dfile.encoding=utf-8\"");
+		prop.setProperty("driver_jvm_args", "\"-Xmx20g -Dfile.encoding=utf-8 -Dlog4j2.formatMsgNoLookups=True \"");
 		prop.setProperty("driver_exception_handler_arguments", "\"max_job_errors=99564 max_timeout_retrys_per_workitem=0\"");
 
 		prop.setProperty("process_error_window_threshold", "20");

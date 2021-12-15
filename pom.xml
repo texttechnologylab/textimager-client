@@ -7,7 +7,7 @@
 	<packaging>${packaging.type}</packaging>
 
 	<properties>
-		<textimager.version>32c5003e76f123bd3c69f6b8742b316d577733fd</textimager.version>
+		<textimager.version>f7dcf95aca</textimager.version>
 		<ttlab.typesystem.version>1d23e466bc</ttlab.typesystem.version>
 		<jcore.types.version>9df8678666856d87b815e79fe100da26f777fb91</jcore.types.version>
 	</properties>
@@ -289,7 +289,7 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.15.0</version>
+			<version>2.16.0</version>
 		</dependency>
 
 		<dependency>
